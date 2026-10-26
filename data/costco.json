@@ -62,6 +62,58 @@
   "wh": [
    "Costco.com warehouse locations by state (counted Oct 26, 2026)",
    "https://www.costco.com/warehouse-locations"
+  ],
+  "sdhist": [
+   "Journal of San Diego History: Robert E. Price, \"Sol Price: Retail Revolutionary, The FedMart Years 1954 to 1975\"",
+   "https://www.sandiegohistory.org/journal/v56-4/v56-4price.pdf"
+  ],
+  "cbc85": [
+   "CBC Archives: The dawn of the Costco era in Canada (Burnaby, Oct 1985)",
+   "https://www.cbc.ca/archives/the-dawn-of-the-costco-era-in-canada-1.5328668"
+  ],
+  "wh_thurrock": [
+   "Costco: Thurrock warehouse, opening date 11/30/1993",
+   "https://www.costco.com/warehouse-locations/thurrock-west-thurrock-essex-england-601.html"
+  ],
+  "wh_yangpyung": [
+   "Costco: Yangpyung (Seoul) warehouse, opening date 10/07/1994",
+   "https://www.costco.com/warehouse-locations/yangpyung-yeongdeungpo-gu-seoul-seoul-850.html"
+  ],
+  "tw": [
+   "Costco Taiwan: About Costco (entered Taiwan 1997, first warehouse in Kaohsiung)",
+   "https://www.costco.com.tw/warehouse-Overview"
+  ],
+  "jp": [
+   "Costco Wholesale Japan: company history (first Japan warehouse, Hisayama, 1999)",
+   "https://recruit.costco.co.jp/why_costco/whoweare/"
+  ],
+  "10k06": [
+   "Costco Form 10-K, fiscal 2006 (membership fee +$5 to $50, effective May 1, 2006)",
+   "https://www.sec.gov/Archives/edgar/data/909832/000119312506238399/d10k.htm"
+  ],
+  "pr11": [
+   "Costco press release, Oct 5, 2011 (fees to $55 effective Nov 1, 2011)",
+   "https://www.sec.gov/Archives/edgar/data/909832/000119312511264174/d239711dex991.htm"
+  ],
+  "pr12": [
+   "Costco press release, Nov 28, 2012 ($7.00 special dividend, paid Dec 18, 2012)",
+   "https://www.sec.gov/Archives/edgar/data/909832/000119312512484218/d446082dex991.htm"
+  ],
+  "pr20": [
+   "Costco press release, Nov 16, 2020 ($10 special dividend, paid Dec 11, 2020)",
+   "https://investor.costco.com/news/news-details/2020/Costco-Wholesale-Corporation-Declares-Special-Cash-Dividend-of-10-Per-Share-11-16-2020/default.aspx"
+  ],
+  "wh_villebon": [
+   "Costco: Villebon-sur-Yvette warehouse, opening date 06/22/2017",
+   "https://www.costco.com/warehouse-locations/villebon-villebon-paris--5401.html"
+  ],
+  "is17": [
+   "Iceland Monitor (Morgunblaðið), May 23, 2017: Costco opens in Iceland",
+   "https://icelandmonitor.mbl.is/news/news/2017/05/23/costco_fever_hits_iceland_with_anticipated_store_op/"
+  ],
+  "se22": [
+   "Dagens Handel, Oct 27, 2022: Costco opens its first Swedish warehouse in Arninge",
+   "https://www.dagenshandel.se/article/view/876892/fullt_hus_nar_costco_oppnade_forsta_butiken"
   ]
  },
  "sections": [
@@ -967,12 +1019,11 @@
      "items": [
       {
        "date": "1954",
-       "text": "Sol Price founds FedMart, a membership discount store. Jim Sinegal starts there as a bagger.",
+       "text": "Sol Price founds FedMart, a membership discount store, which opens Dec 3, 1954. Jim Sinegal starts there that year unloading mattresses.",
        "where": "San Diego, CA",
        "src": [
-        "wiki"
-       ],
-       "verify": true
+        "sdhist"
+       ]
       },
       {
        "date": "Jul 12, 1976",
@@ -1005,9 +1056,8 @@
        "text": "Costco enters Canada.",
        "where": "Burnaby, BC",
        "src": [
-        "wiki"
-       ],
-       "verify": true
+        "cbc85"
+       ]
       },
       {
        "date": "Dec 5, 1985",
@@ -1046,8 +1096,9 @@
        "date": "1993",
        "text": "Enters the UK.",
        "where": "Thurrock",
-       "src": [],
-       "verify": true
+       "src": [
+        "wh_thurrock"
+       ]
       },
       {
        "date": "1994",
@@ -1062,9 +1113,8 @@
        "text": "Enters South Korea.",
        "where": "Seoul",
        "src": [
-        "wiki"
-       ],
-       "verify": true
+        "wh_yangpyung"
+       ]
       },
       {
        "date": "Oct 1995",
@@ -1093,9 +1143,10 @@
       {
        "date": "1997",
        "text": "Enters Taiwan.",
-       "where": "",
-       "src": [],
-       "verify": true
+       "where": "Kaohsiung",
+       "src": [
+        "tw"
+       ]
       },
       {
        "date": "1998",
@@ -1108,9 +1159,10 @@
       {
        "date": "1999",
        "text": "Enters Japan.",
-       "where": "",
-       "src": [],
-       "verify": true
+       "where": "Hisayama, Fukuoka",
+       "src": [
+        "jp"
+       ]
       },
       {
        "date": "Aug 30, 1999",
@@ -1125,9 +1177,9 @@
        "text": "Gold Star membership fee rises from $45 to $50.",
        "where": "",
        "src": [
+        "10k06",
         "pr"
-       ],
-       "verify": true
+       ]
       },
       {
        "date": "2009",
@@ -1141,8 +1193,9 @@
        "date": "Nov 2011",
        "text": "Membership fee rises from $50 to $55.",
        "where": "",
-       "src": [],
-       "verify": true
+       "src": [
+        "pr11"
+       ]
       },
       {
        "date": "Jan 1, 2012",
@@ -1157,9 +1210,8 @@
        "text": "Special dividend of $7 a share.",
        "where": "",
        "src": [
-        "pr"
-       ],
-       "verify": true
+        "pr12"
+       ]
       },
       {
        "date": "2014",
@@ -1212,9 +1264,11 @@
       {
        "date": "2017",
        "text": "Enters France and Iceland.",
-       "where": "",
-       "src": [],
-       "verify": true
+       "where": "Villebon-sur-Yvette and Garðabær",
+       "src": [
+        "wh_villebon",
+        "is17"
+       ]
       },
       {
        "date": "Aug 27, 2019",
@@ -1229,9 +1283,8 @@
        "text": "Special dividend of $10 a share.",
        "where": "",
        "src": [
-        "pr"
-       ],
-       "verify": true
+        "pr20"
+       ]
       },
       {
        "date": "Sep 2022",
@@ -1274,11 +1327,12 @@
        ]
       },
       {
-       "date": "2024",
+       "date": "Oct 2022",
        "text": "Enters Sweden.",
-       "where": "Stockholm",
-       "src": [],
-       "verify": true
+       "where": "Arninge, Täby (north of Stockholm)",
+       "src": [
+        "se22"
+       ]
       },
       {
        "date": "FY2026",
