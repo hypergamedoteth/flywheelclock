@@ -121,6 +121,30 @@
   "goldfields": [
    "Gold Fields: history of the Carlin Trend and Grasberg",
    "https://www.goldfields.com/"
+  ],
+  "iau10k": [
+   "iShares Gold Trust, Form 10-K for 2025 (custodian JPMorgan Chase Bank N.A., London Branch; gold held in New York and London)",
+   "https://www.sec.gov/Archives/edgar/data/1278680/000143774926006055/iau20251231_10k.htm"
+  ],
+  "snb": [
+   "Swiss National Bank: Questions and answers on asset management (gold storage)",
+   "https://www.snb.ch/en/services-events/digital-services/faq-overview/qas_assets"
+  ],
+  "bdf": [
+   "Banque de France: 2025 results (129 t held in New York sold and replaced in Europe)",
+   "https://www.banque-france.fr/en/news/banque-de-france-2025-results"
+  ],
+  "rbi": [
+   "Reserve Bank of India: Half Yearly Report on Management of Foreign Exchange Reserves, Oct 2025 to Mar 2026",
+   "https://www.rbi.org.in/Scripts/PublicationsView.aspx?id=23811"
+  ],
+  "polyus_sh": [
+   "Polyus press release: Changes in shareholder structure (May 2022)",
+   "https://polyus.com/en/media/press-releases/changes-in-shareholder-structure/"
+  ],
+  "tass_polyus": [
+   "TASS: Kerimov transfers his stake in Polyus to Foundation for Support of Islamic Organizations",
+   "https://tass.com/economy/1450771"
   ]
  },
  "sections": [
@@ -433,9 +457,8 @@
         "iShares Gold Trust (IAU)",
         "463.05",
         "Oct 23, 2026",
-        "Custodian JPMorgan (London/NY) [[iau]]"
-       ],
-       "verify": true
+        "Custodian JPMorgan (London/NY) [[iau]] [[iau10k]]"
+       ]
       },
       [
        "SPDR Gold MiniShares (GLDM)",
@@ -562,16 +585,13 @@
        "text": "IMF gold sits in depositories in New York, London, Paris and Nagpur; the split isn't public. [[imfgold]]"
       },
       {
-       "text": "Switzerland: about 70% in Switzerland, 20% at the Bank of England and 10% in Canada (SNB statement, 2013).",
-       "verify": true
+       "text": "Switzerland: about 70% in Switzerland, 20% at the Bank of England and 10% in Canada (SNB statement, 2013). [[snb]]"
       },
       {
-       "text": "France: the 129 t once held in New York was sold and replaced in Europe.",
-       "verify": true
+       "text": "France: the 129 t once held in New York was sold and replaced in Europe. [[bdf]]"
       },
       {
-       "text": "India: the majority is now held domestically.",
-       "verify": true
+       "text": "India: the majority is now held domestically. [[rbi]]"
       }
      ]
     }
@@ -682,10 +702,9 @@
        "cells": [
         "Olimpiada",
         "Russia",
-        "Polyus (controlled by the Kerimov family's holding)",
+        "Polyus (largest holder: Fund for Support of Islamic Organizations, 46.35%, after Said Kerimov gave up his stake in 2022) [[polyus_sh]] [[tass_polyus]]",
         "1.44 Moz (2024) [[polyus]]"
-       ],
-       "verify": true
+       ]
       },
       [
        "Sukhoi Log",
