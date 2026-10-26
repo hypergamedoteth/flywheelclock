@@ -8,8 +8,8 @@
   function fmt(v,unit,mode){
     if(unit==='usd') return '$'+Math.floor(v).toLocaleString('en-US');
     if(unit==='gold'){
-      if(mode==='day') return (v/1e6).toLocaleString('en-US',{maximumFractionDigits:2})+' t';
-      return Math.floor(v).toLocaleString('en-US')+' g';
+      if(mode==='open') return (v/1000).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1})+' kg';
+      return Math.floor(v/1000).toLocaleString('en-US')+' kg';
     }
     return Math.floor(v).toLocaleString('en-US');
   }

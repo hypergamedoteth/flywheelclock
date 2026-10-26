@@ -86,7 +86,7 @@ data = {
      "counters": [
        {"id": "g", "label": "Gold mined", "annual": rate_g, "unit": "gold", "hero": True},
        {"id": "v", "label": "Value at the USGS 2025 average price ($3,300/oz)", "annual": 3300 * OZ_PER_T * 3300, "unit": "usd"}],
-     "note": "3,300 tonnes a year (USGS 2025 estimate) ÷ 31,557,600 seconds ≈ 104.6 grams a second. The dollar line uses USGS's 2025 average price of $3,300/oz (Engelhard quotation), not a live price. [[mcs26]]",
+     "note": "3,300 tonnes a year (USGS 2025 estimate) ÷ 31,557,600 seconds ≈ 0.105 kilograms (104.6 grams) a second. The dollar line uses USGS's 2025 average price of $3,300/oz (Engelhard quotation), not a live price. [[mcs26]]",
      "facts": [["Mined in 2025", "~3,300 t"], ["Ever mined (approx.)", f"~{TOTAL:,} t"], ["Left in reserves", "~66,000 t"], ["Years at today's pace", "~20"]]}
   ]},
   {"id": "owners", "title": "Where all the gold is", "lede": "Every tonne ever mined, split into owners that are publicly named and everything else.", "blocks": [

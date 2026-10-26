@@ -67,7 +67,7 @@ def b_ticker(P, b):
     per = lambda c: c["annual"] / b["period_seconds"]
     def rate(c):
         r = per(c)
-        return f"${r:,.0f}" if c["unit"] == "usd" else f"{r:,.1f} g"
+        return f"${r:,.0f}" if c["unit"] == "usd" else f"{r/1000:,.3f} kg"
     tiles = "".join(
         f'<div class="ctile"><div class="l">{esc(c["label"])}</div>'
         f'<div class="num" data-ctr="{esc(c["id"])}" data-mode="year">{rate(c)}/s</div>'
