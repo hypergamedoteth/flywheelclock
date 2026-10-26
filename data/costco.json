@@ -1,0 +1,1297 @@
+{
+ "type": "company",
+ "slug": "costco",
+ "live": true,
+ "name": "Costco",
+ "ticker_symbol": "COST",
+ "legal_name": "Costco Wholesale Corporation",
+ "title": "How Costco makes money, live: revenue, profit and where it goes",
+ "description": "Costco's $303.2B year as a live clock: where the money comes from, where it goes, per employee, by country and state, and the decisions behind it. From the FY2026 10-K.",
+ "tagline": "A warehouse club that earns about half its operating profit from membership fees.",
+ "card_stat": {
+  "label": "Revenue per second",
+  "value": "$9,639",
+  "note": "FY2026 10-K average"
+ },
+ "as_of": "Fiscal year ended Aug 30, 2026 (10-K filed Oct 7, 2026)",
+ "sources": {
+  "10k": [
+   "Costco Wholesale Corp., Form 10-K for the 52 weeks ended Aug 30, 2026 (filed Oct 7, 2026)",
+   "https://www.sec.gov/Archives/edgar/data/909832/000090983226000093/cost-20260830.htm"
+  ],
+  "markup": [
+   "Costco Canada customer service: markup policy",
+   "https://customerservice.costco.ca/app/answers/answer_view/a_id/1017419/"
+  ],
+  "fortune": [
+   "Fortune: Costco promises the hot dog and drink combo will always be $1.50",
+   "https://fortune.com/article/costco-promises-hot-dog-drink-combo-will-always-be-1-50/"
+  ],
+  "wsj_hotdog": [
+   "The Wall Street Journal (2022), on Costco's $1.50 hot dog and in-house hot dog production",
+   null
+  ],
+  "wsj_kirkland": [
+   "The Wall Street Journal, Jul 12, 2025: \"The Pants Cost $20. They Explain $86 Billion of Costco Sales\"",
+   null
+  ],
+  "cfodive": [
+   "CFO Dive: Costco raises minimum hourly wage (2025 earnings call)",
+   "https://www.cfodive.com/news/costco-raises-minimum-hourly-wage-20-compensation/742075/"
+  ],
+  "about": [
+   "Costco: About us",
+   "https://www.costco.com/f/-/about"
+  ],
+  "irfaq": [
+   "Costco Investor Relations: Investor FAQs",
+   "https://investor.costco.com/resources/investor-faqs"
+  ],
+  "pr": [
+   "Costco press releases (investor.costco.com)",
+   "https://investor.costco.com/"
+  ],
+  "wiki": [
+   "Wikipedia: Costco (secondary source)",
+   "https://en.wikipedia.org/wiki/Costco"
+  ],
+  "sn": [
+   "Supermarket News, Oct 9, 1995 (Kirkland Signature launch)",
+   null
+  ],
+  "wh": [
+   "Costco.com warehouse locations by state (counted Oct 26, 2026)",
+   "https://www.costco.com/warehouse-locations"
+  ]
+ },
+ "sections": [
+  {
+   "id": "ticker",
+   "title": "Costco, live",
+   "blocks": [
+    {
+     "type": "ticker",
+     "period_seconds": 31449600,
+     "period_label": "FY2026 (364 days)",
+     "label": "projected from annual 10-K averages",
+     "counters": [
+      {
+       "id": "rev",
+       "label": "Revenue",
+       "annual": 303154000000.0,
+       "unit": "usd",
+       "hero": true
+      },
+      {
+       "id": "ni",
+       "label": "Net income (profit)",
+       "annual": 9226000000.0,
+       "unit": "usd"
+      },
+      {
+       "id": "mem",
+       "label": "Membership fees",
+       "annual": 5907000000.0,
+       "unit": "usd"
+      },
+      {
+       "id": "div",
+       "label": "Dividends paid",
+       "annual": 2458000000.0,
+       "unit": "usd"
+      }
+     ],
+     "note": "Each counter = FY2026 total from the 10-K ÷ 31,449,600 seconds (364 days). These are averages, not real-time sales. [[10k]]",
+     "facts": [
+      [
+       "Warehouses",
+       "939"
+      ],
+      [
+       "Paid members",
+       "84.1M"
+      ],
+      [
+       "Employees",
+       "355,000"
+      ],
+      [
+       "Countries",
+       "14"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "flow",
+   "title": "Money in, money out",
+   "lede": "Every dollar of FY2026 revenue, from where it came to where it went. Values in US$ billions.",
+   "blocks": [
+    {
+     "type": "sankey",
+     "title": "Income statement, FY2026",
+     "unit": "B",
+     "scale": 0.001,
+     "nodes": [
+      {
+       "id": "fs",
+       "label": "Foods & Sundries",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "nf",
+       "label": "Non-Foods",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "ff",
+       "label": "Fresh Foods",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "an",
+       "label": "Gas, pharmacy, optical, travel & other",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "mf",
+       "label": "Membership fees",
+       "col": 0,
+       "kind": "key"
+      },
+      {
+       "id": "rev",
+       "label": "Total revenue",
+       "col": 1,
+       "kind": "mid"
+      },
+      {
+       "id": "mc",
+       "label": "Merchandise costs",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "sga",
+       "label": "Wages, benefits & other SG&A",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "oi",
+       "label": "Operating income",
+       "col": 2,
+       "kind": "profit"
+      },
+      {
+       "id": "int",
+       "label": "Interest & other, net",
+       "col": 2,
+       "kind": "in"
+      },
+      {
+       "id": "pt",
+       "label": "Pre-tax income",
+       "col": 3,
+       "kind": "profit"
+      },
+      {
+       "id": "tax",
+       "label": "Income tax",
+       "col": 4,
+       "kind": "cost"
+      },
+      {
+       "id": "ni",
+       "label": "Net income",
+       "col": 4,
+       "kind": "profit"
+      }
+     ],
+     "links": [
+      [
+       "fs",
+       "rev",
+       116788
+      ],
+      [
+       "nf",
+       "rev",
+       77375
+      ],
+      [
+       "ff",
+       "rev",
+       41715
+      ],
+      [
+       "an",
+       "rev",
+       61369
+      ],
+      [
+       "mf",
+       "rev",
+       5907
+      ],
+      [
+       "rev",
+       "mc",
+       264279
+      ],
+      [
+       "rev",
+       "sga",
+       27190
+      ],
+      [
+       "rev",
+       "oi",
+       11685
+      ],
+      [
+       "oi",
+       "pt",
+       11685
+      ],
+      [
+       "int",
+       "pt",
+       566
+      ],
+      [
+       "pt",
+       "tax",
+       3025
+      ],
+      [
+       "pt",
+       "ni",
+       9226
+      ]
+     ],
+     "note": "Net sales by category and all lines in US$ millions from the 10-K: 116,788 + 77,375 + 41,715 + 61,369 = 297,247 net sales; + 5,907 membership = 303,154. Interest & other, net = 711 interest income & other − 145 interest expense = 566 (derived). [[10k]]"
+    },
+    {
+     "type": "sankey",
+     "title": "Where the cash went, FY2026",
+     "unit": "B",
+     "scale": 0.001,
+     "nodes": [
+      {
+       "id": "ocf",
+       "label": "Operating cash flow",
+       "col": 0,
+       "kind": "mid"
+      },
+      {
+       "id": "capex",
+       "label": "New warehouses & equipment (capex)",
+       "col": 1,
+       "kind": "cost"
+      },
+      {
+       "id": "div",
+       "label": "Dividends",
+       "col": 1,
+       "kind": "key"
+      },
+      {
+       "id": "bb",
+       "label": "Buybacks",
+       "col": 1,
+       "kind": "key"
+      },
+      {
+       "id": "rest",
+       "label": "Left over (mostly kept as cash)",
+       "col": 1,
+       "kind": "profit"
+      }
+     ],
+     "links": [
+      [
+       "ocf",
+       "capex",
+       6435
+      ],
+      [
+       "ocf",
+       "div",
+       2458
+      ],
+      [
+       "ocf",
+       "bb",
+       848
+      ],
+      [
+       "ocf",
+       "rest",
+       6076
+      ]
+     ],
+     "note": "Capex 6,435 (US 5,122 · Canada 673 · Other International 640); dividends 2,458 ($5.54/share); buybacks 848. \"Left over\" = 15,817 − 6,435 − 2,458 − 848 = 6,076 (derived). Cash and short-term investments rose from 15,284 to 21,301. No special dividend in FY2026; the last was $15/share (~$6.7B) in FY2024. [[10k]]"
+    },
+    {
+     "type": "stats",
+     "items": [
+      [
+       "Gross margin on net sales",
+       "11.09%",
+       "[[10k]]"
+      ],
+      [
+       "Operating margin",
+       "3.85%",
+       "[[10k]]"
+      ],
+      [
+       "Effective tax rate",
+       "24.7%",
+       "Cash taxes paid: $2.84B [[10k]]"
+      ],
+      [
+       "Free cash flow",
+       "$9.4B",
+       "15,817 − 6,435 (derived) [[10k]]"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "employees",
+   "title": "Per employee",
+   "lede": "355,000 employees at fiscal year-end; 95% work in warehouses and distribution. [[10k]]",
+   "blocks": [
+    {
+     "type": "stats",
+     "items": [
+      [
+       "Revenue per employee",
+       "$853,955",
+       "303,154M ÷ 355,000 [[10k]]"
+      ],
+      [
+       "Profit per employee",
+       "$25,989",
+       "Net income ÷ employees [[10k]]"
+      ],
+      [
+       "Operating income per employee",
+       "$32,915",
+       "[[10k]]"
+      ],
+      [
+       "Average hourly wage, US/Canada",
+       "~$31",
+       "\"a little more than $31\" incl. bonuses; top of scale $31.90 [[cfodive]]"
+      ],
+      [
+       "Retention, 1+ year employees",
+       "~94%",
+       "US and Canada [[10k]]"
+      ],
+      [
+       "Full-time share",
+       "Not disclosed",
+       "The 10-K only states a target of at least 50% full-time [[10k]]"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "geography",
+   "title": "Where the money comes from",
+   "lede": "Costco reports three segments. Revenue inside \"Other International\" and by US state is not disclosed.",
+   "blocks": [
+    {
+     "type": "bars",
+     "title": "Total revenue by segment, FY2026",
+     "unit": "usd",
+     "items": [
+      [
+       "United States (incl. Puerto Rico)",
+       219823000000.0
+      ],
+      [
+       "Canada",
+       40561000000.0
+      ],
+      [
+       "Other International",
+       42770000000.0
+      ]
+     ],
+     "src": [
+      "10k"
+     ]
+    },
+    {
+     "type": "table",
+     "title": "Segments",
+     "cols": [
+      "Segment",
+      "Revenue",
+      "Op. income",
+      "Warehouses",
+      "Employees",
+      "Floor space"
+     ],
+     "align": "lrrrrr",
+     "rows": [
+      [
+       "United States",
+       "$219.8B",
+       "$7.65B",
+       "647",
+       "232,000",
+       "96.6M sq ft"
+      ],
+      [
+       "Canada",
+       "$40.6B",
+       "$2.11B",
+       "115",
+       "58,000",
+       "16.6M sq ft"
+      ],
+      [
+       "Other International",
+       "$42.8B",
+       "$1.93B",
+       "177",
+       "65,000",
+       "25.5M sq ft"
+      ],
+      [
+       "Total",
+       "$303.2B",
+       "$11.69B",
+       "939",
+       "355,000",
+       "138.7M sq ft"
+      ]
+     ],
+     "src": [
+      "10k"
+     ]
+    },
+    {
+     "type": "table",
+     "title": "Other International warehouses by country",
+     "cols": [
+      "Country",
+      "Warehouses"
+     ],
+     "align": "lr",
+     "compact": true,
+     "rows": [
+      [
+       "Mexico",
+       "43"
+      ],
+      [
+       "Japan",
+       "37"
+      ],
+      [
+       "United Kingdom",
+       "29"
+      ],
+      [
+       "South Korea",
+       "20"
+      ],
+      [
+       "Australia",
+       "15"
+      ],
+      [
+       "Taiwan",
+       "14"
+      ],
+      [
+       "China",
+       "7"
+      ],
+      [
+       "Spain",
+       "5"
+      ],
+      [
+       "France",
+       "3"
+      ],
+      [
+       "Sweden",
+       "2"
+      ],
+      [
+       "Iceland",
+       "1"
+      ],
+      [
+       "New Zealand",
+       "1"
+      ]
+     ],
+     "note": "Revenue per country is not disclosed, so none is shown. [[10k]]"
+    },
+    {
+     "type": "statemap",
+     "title": "US revenue by state, FY2026",
+     "estimate": true,
+     "items": [
+      {
+       "name": "California",
+       "abbr": "CA",
+       "warehouses": 137,
+       "value": 57154000000.0,
+       "anchored": true
+      },
+      {
+       "name": "Texas",
+       "abbr": "TX",
+       "warehouses": 49,
+       "value": 15974000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Florida",
+       "abbr": "FL",
+       "warehouses": 35,
+       "value": 11410000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Washington",
+       "abbr": "WA",
+       "warehouses": 33,
+       "value": 10758000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Illinois",
+       "abbr": "IL",
+       "warehouses": 23,
+       "value": 7498000000.0,
+       "anchored": false
+      },
+      {
+       "name": "New York",
+       "abbr": "NY",
+       "warehouses": 21,
+       "value": 6846000000.0,
+       "anchored": false
+      },
+      {
+       "name": "New Jersey",
+       "abbr": "NJ",
+       "warehouses": 20,
+       "value": 6520000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Arizona",
+       "abbr": "AZ",
+       "warehouses": 19,
+       "value": 6194000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Michigan",
+       "abbr": "MI",
+       "warehouses": 18,
+       "value": 5868000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Virginia",
+       "abbr": "VA",
+       "warehouses": 18,
+       "value": 5868000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Georgia",
+       "abbr": "GA",
+       "warehouses": 17,
+       "value": 5542000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Colorado",
+       "abbr": "CO",
+       "warehouses": 16,
+       "value": 5216000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Utah",
+       "abbr": "UT",
+       "warehouses": 16,
+       "value": 5216000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Minnesota",
+       "abbr": "MN",
+       "warehouses": 14,
+       "value": 4564000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Ohio",
+       "abbr": "OH",
+       "warehouses": 13,
+       "value": 4238000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Oregon",
+       "abbr": "OR",
+       "warehouses": 13,
+       "value": 4238000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Wisconsin",
+       "abbr": "WI",
+       "warehouses": 13,
+       "value": 4238000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Pennsylvania",
+       "abbr": "PA",
+       "warehouses": 12,
+       "value": 3912000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Maryland",
+       "abbr": "MD",
+       "warehouses": 11,
+       "value": 3586000000.0,
+       "anchored": false
+      },
+      {
+       "name": "North Carolina",
+       "abbr": "NC",
+       "warehouses": 10,
+       "value": 3260000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Indiana",
+       "abbr": "IN",
+       "warehouses": 9,
+       "value": 2934000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Tennessee",
+       "abbr": "TN",
+       "warehouses": 9,
+       "value": 2934000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Connecticut",
+       "abbr": "CT",
+       "warehouses": 8,
+       "value": 2608000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Hawaii",
+       "abbr": "HI",
+       "warehouses": 8,
+       "value": 2608000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Idaho",
+       "abbr": "ID",
+       "warehouses": 8,
+       "value": 2608000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Missouri",
+       "abbr": "MO",
+       "warehouses": 8,
+       "value": 2608000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Nevada",
+       "abbr": "NV",
+       "warehouses": 8,
+       "value": 2608000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Massachusetts",
+       "abbr": "MA",
+       "warehouses": 7,
+       "value": 2282000000.0,
+       "anchored": false
+      },
+      {
+       "name": "South Carolina",
+       "abbr": "SC",
+       "warehouses": 7,
+       "value": 2282000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Alabama",
+       "abbr": "AL",
+       "warehouses": 5,
+       "value": 1630000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Alaska",
+       "abbr": "AK",
+       "warehouses": 5,
+       "value": 1630000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Montana",
+       "abbr": "MT",
+       "warehouses": 5,
+       "value": 1630000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Puerto Rico",
+       "abbr": "PR",
+       "warehouses": 5,
+       "value": 1630000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Iowa",
+       "abbr": "IA",
+       "warehouses": 4,
+       "value": 1304000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Kansas",
+       "abbr": "KS",
+       "warehouses": 4,
+       "value": 1304000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Kentucky",
+       "abbr": "KY",
+       "warehouses": 4,
+       "value": 1304000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Louisiana",
+       "abbr": "LA",
+       "warehouses": 4,
+       "value": 1304000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Nebraska",
+       "abbr": "NE",
+       "warehouses": 4,
+       "value": 1304000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Oklahoma",
+       "abbr": "OK",
+       "warehouses": 4,
+       "value": 1304000000.0,
+       "anchored": false
+      },
+      {
+       "name": "New Mexico",
+       "abbr": "NM",
+       "warehouses": 3,
+       "value": 978000000.0,
+       "anchored": false
+      },
+      {
+       "name": "North Dakota",
+       "abbr": "ND",
+       "warehouses": 2,
+       "value": 652000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Arkansas",
+       "abbr": "AR",
+       "warehouses": 1,
+       "value": 326000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Delaware",
+       "abbr": "DE",
+       "warehouses": 1,
+       "value": 326000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Maine",
+       "abbr": "ME",
+       "warehouses": 1,
+       "value": 326000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Mississippi",
+       "abbr": "MS",
+       "warehouses": 1,
+       "value": 326000000.0,
+       "anchored": false
+      },
+      {
+       "name": "New Hampshire",
+       "abbr": "NH",
+       "warehouses": 1,
+       "value": 326000000.0,
+       "anchored": false
+      },
+      {
+       "name": "South Dakota",
+       "abbr": "SD",
+       "warehouses": 1,
+       "value": 326000000.0,
+       "anchored": false
+      },
+      {
+       "name": "Vermont",
+       "abbr": "VT",
+       "warehouses": 1,
+       "value": 326000000.0,
+       "anchored": false
+      }
+     ],
+     "banner": "ESTIMATE, not reported by Costco. Only California's share is disclosed.",
+     "method": [
+      "California = 26% of US segment revenue ($219.8B) = $57.2B. The 10-K says California was 26% of US net sales. [[10k]]",
+      "Every other state = (US revenue − California) × its share of the 499 non-California warehouses ≈ $326M per warehouse. [[wh]]",
+      "Ignores e-commerce, mid-year openings and differences in gas and business-center sales. Warehouse counts are from costco.com (636 listed vs 647 in the 10-K; DC not listed)."
+     ],
+     "note": "California's implied ~$417M per warehouse vs ~$326M elsewhere matches the 10-K's note that California has more high-volume warehouses. California was also 39% of Costco's US state/local cash income tax ($209M of $531M). [[10k]]"
+    }
+   ]
+  },
+  {
+   "id": "decisions",
+   "title": "The decisions behind the numbers",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "kicker": "Membership model",
+       "big": "~51%",
+       "title": "of operating income from 1.9% of revenue",
+       "text": "Membership fees were $5.9B, under 2% of revenue but about half of operating income (5,907 ÷ 11,685, derived). 84.1M paid members renew at 92.3% in the US and Canada and 89.8% worldwide. Executive members drove ~75.2% of net sales.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "kicker": "Markup cap",
+       "big": "14% / 15%",
+       "title": "max markup on branded / Kirkland items",
+       "text": "\"No branded product is marked up by more than 14% and no Kirkland Signature product by more than 15%.\" The result: an 11.09% gross margin on net sales in FY2026.",
+       "src": [
+        "markup",
+        "10k"
+       ]
+      },
+      {
+       "kicker": "Kirkland Signature",
+       "big": "~$86B",
+       "title": "in 2024 sales",
+       "text": "Launched in October 1995 with about two dozen items. The 10-K gives no dollar figure; the ~$86B estimate is from The Wall Street Journal.",
+       "src": [
+        "sn",
+        "wsj_kirkland"
+       ]
+      },
+      {
+       "kicker": "The $1.50 hot dog",
+       "big": "$1.50",
+       "title": "hot dog + soda since 1985",
+       "text": "The combo price hasn't changed since 1985. To hold it, Costco brought hot dog production in-house.",
+       "src": [
+        "fortune",
+        "wsj_hotdog"
+       ]
+      },
+      {
+       "kicker": "Wages and retention",
+       "big": "~94%",
+       "title": "retention after the first year",
+       "text": "Average hourly pay in the US and Canada is a little over $31 including bonuses. Retention is about 94% for employees with a year or more. All overhead (SG&A, mostly wages and benefits) was 8.97% of revenue (27,190 ÷ 303,154, derived).",
+       "src": [
+        "cfodive",
+        "10k"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "timeline",
+   "title": "Timeline",
+   "lede": "Big events, breakthroughs, people and places.",
+   "blocks": [
+    {
+     "type": "timeline",
+     "items": [
+      {
+       "date": "1954",
+       "text": "Sol Price founds FedMart, a membership discount store. Jim Sinegal starts there as a bagger.",
+       "where": "San Diego, CA",
+       "src": [
+        "wiki"
+       ],
+       "verify": true
+      },
+      {
+       "date": "Jul 12, 1976",
+       "text": "Price Club opens: the first membership warehouse club, in a converted Howard Hughes aircraft hangar. It still operates as Costco #401.",
+       "where": "Sol & Robert Price · San Diego, CA",
+       "src": [
+        "about",
+        "wiki"
+       ]
+      },
+      {
+       "date": "Sep 15, 1983",
+       "text": "The first Costco warehouse opens.",
+       "where": "Jim Sinegal & Jeff Brotman · Seattle, WA",
+       "src": [
+        "about",
+        "10k"
+       ]
+      },
+      {
+       "date": "1985",
+       "text": "The $1.50 hot dog and soda combo starts. The price hasn't changed since.",
+       "where": "",
+       "src": [
+        "fortune"
+       ]
+      },
+      {
+       "date": "1985",
+       "text": "Costco enters Canada.",
+       "where": "Burnaby, BC",
+       "src": [
+        "wiki"
+       ],
+       "verify": true
+      },
+      {
+       "date": "Dec 5, 1985",
+       "text": "IPO on NASDAQ at $10 a share (about $1.67 split-adjusted).",
+       "where": "",
+       "src": [
+        "irfaq"
+       ]
+      },
+      {
+       "date": "1987",
+       "text": "Headquarters moves to Kirkland, WA, later the source of the Kirkland Signature name.",
+       "where": "Kirkland, WA",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "1992",
+       "text": "Price Club enters Mexico in a joint venture with Comercial Mexicana.",
+       "where": "Mexico City",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Oct 21, 1993",
+       "text": "Merges with Price Club to form PriceCostco: 206 locations, $16B in sales.",
+       "where": "",
+       "src": [
+        "irfaq",
+        "about"
+       ]
+      },
+      {
+       "date": "1993",
+       "text": "Enters the UK.",
+       "where": "Thurrock",
+       "src": [],
+       "verify": true
+      },
+      {
+       "date": "1994",
+       "text": "The Price family leaves to form PriceSmart. Rotisserie chicken starts.",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "1994",
+       "text": "Enters South Korea.",
+       "where": "Seoul",
+       "src": [
+        "wiki"
+       ],
+       "verify": true
+      },
+      {
+       "date": "Oct 1995",
+       "text": "Kirkland Signature launches with about two dozen items.",
+       "where": "",
+       "src": [
+        "sn"
+       ]
+      },
+      {
+       "date": "1996",
+       "text": "Headquarters moves to Issaquah, WA.",
+       "where": "Issaquah, WA",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Feb 1997",
+       "text": "Renamed Costco Companies; ticker COST.",
+       "where": "",
+       "src": [
+        "irfaq"
+       ]
+      },
+      {
+       "date": "1997",
+       "text": "Enters Taiwan.",
+       "where": "",
+       "src": [],
+       "verify": true
+      },
+      {
+       "date": "1998",
+       "text": "Costco.com launches.",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "1999",
+       "text": "Enters Japan.",
+       "where": "",
+       "src": [],
+       "verify": true
+      },
+      {
+       "date": "Aug 30, 1999",
+       "text": "Renamed Costco Wholesale Corp. and reincorporated in Washington.",
+       "where": "",
+       "src": [
+        "irfaq"
+       ]
+      },
+      {
+       "date": "May 2006",
+       "text": "Gold Star membership fee rises from $45 to $50.",
+       "where": "",
+       "src": [
+        "pr"
+       ],
+       "verify": true
+      },
+      {
+       "date": "2009",
+       "text": "Enters Australia.",
+       "where": "Melbourne Docklands",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Nov 2011",
+       "text": "Membership fee rises from $50 to $55.",
+       "where": "",
+       "src": [],
+       "verify": true
+      },
+      {
+       "date": "Jan 1, 2012",
+       "text": "Sinegal retires; Craig Jelinek becomes CEO.",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Dec 2012",
+       "text": "Special dividend of $7 a share.",
+       "where": "",
+       "src": [
+        "pr"
+       ],
+       "verify": true
+      },
+      {
+       "date": "2014",
+       "text": "Enters Spain; opens an online store in China on Alibaba's Tmall.",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Jan 30, 2015",
+       "text": "Special dividend of $5 a share.",
+       "where": "",
+       "src": [
+        "pr"
+       ]
+      },
+      {
+       "date": "2016",
+       "text": "US co-branded credit card moves from American Express to Citi/Visa.",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Apr 25, 2017",
+       "text": "Special dividend of $7 a share.",
+       "where": "",
+       "src": [
+        "pr"
+       ]
+      },
+      {
+       "date": "Jun 2017",
+       "text": "Membership fee rises from $55 to $60 (Executive $110 → $120).",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Aug 1, 2017",
+       "text": "Co-founder Jeff Brotman dies; Hamilton James later becomes chairman.",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "2017",
+       "text": "Enters France and Iceland.",
+       "where": "",
+       "src": [],
+       "verify": true
+      },
+      {
+       "date": "Aug 27, 2019",
+       "text": "First mainland China warehouse opens.",
+       "where": "Shanghai",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Dec 2020",
+       "text": "Special dividend of $10 a share.",
+       "where": "",
+       "src": [
+        "pr"
+       ],
+       "verify": true
+      },
+      {
+       "date": "Sep 2022",
+       "text": "Enters New Zealand.",
+       "where": "West Auckland",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Oct 2023",
+       "text": "Starts selling 1-oz gold bars.",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Jan 1, 2024",
+       "text": "Ron Vachris becomes CEO, only the third. He started in 1982 as a Price Club forklift driver.",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "Jan 2024",
+       "text": "Special dividend of $15 a share, about $6.7B.",
+       "where": "",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "date": "Sep 1, 2024",
+       "text": "Membership fee rises from $60 to $65 (Executive $120 → $130).",
+       "where": "",
+       "src": [
+        "wiki"
+       ]
+      },
+      {
+       "date": "2024",
+       "text": "Enters Sweden.",
+       "where": "Stockholm",
+       "src": [],
+       "verify": true
+      },
+      {
+       "date": "FY2026",
+       "text": "939 warehouses in 14 countries, $303.2B revenue, 355,000 employees, 84.1M paid members.",
+       "where": "",
+       "src": [
+        "10k"
+       ]
+      }
+     ],
+     "note": "Several entries currently rest on Wikipedia; they should be checked against Costco's own filings and releases before launch."
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,477 @@
+[
+{
+"code": "USA",
+"tonnes": 8133.5,
+"period": "2026-M07",
+"sector": "S1XS1311"
+},
+{
+"code": "DEU",
+"tonnes": 3349.1,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "ITA",
+"tonnes": 2451.8,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "FRA",
+"tonnes": 2437.0,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "CHN",
+"tonnes": 2386.6,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "RUS",
+"tonnes": 2264.3,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "CHE",
+"tonnes": 1039.9,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "IND",
+"tonnes": 880.5,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "JPN",
+"tonnes": 846.0,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "TUR",
+"tonnes": 791.4,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "POL",
+"tonnes": 672.9,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "NLD",
+"tonnes": 612.5,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "EZB",
+"tonnes": 508.4,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "PRT",
+"tonnes": 382.7,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "KAZ",
+"tonnes": 377.1,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "SAU",
+"tonnes": 323.1,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "GBR",
+"tonnes": 310.3,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "ESP",
+"tonnes": 281.6,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "AUT",
+"tonnes": 280.0,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "THA",
+"tonnes": 234.6,
+"period": "2026-M07",
+"sector": "S1XS1311"
+},
+{
+"code": "BEL",
+"tonnes": 227.4,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "SGP",
+"tonnes": 203.4,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "BRA",
+"tonnes": 172.4,
+"period": "2026-M09",
+"sector": "S1XS1311",
+"note": "IMF value appears to be in thousandths of an ounce; divided by 1,000"
+},
+{
+"code": "PHL",
+"tonnes": 133.5,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "EGY",
+"tonnes": 129.6,
+"period": "2026-M05",
+"sector": "S1XS1311"
+},
+{
+"code": "SWE",
+"tonnes": 125.7,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "ZAF",
+"tonnes": 125.5,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "MEX",
+"tonnes": 120.0,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "GRC",
+"tonnes": 114.8,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "HUN",
+"tonnes": 110.0,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "KOR",
+"tonnes": 104.5,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "ROU",
+"tonnes": 103.6,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "CZE",
+"tonnes": 87.4,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "IDN",
+"tonnes": 87.1,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "AUS",
+"tonnes": 79.9,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "JOR",
+"tonnes": 76.0,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "DNK",
+"tonnes": 66.5,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "ARG",
+"tonnes": 61.7,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "KHM",
+"tonnes": 57.3,
+"period": "2026-M07",
+"sector": "S1XS1311"
+},
+{
+"code": "SRB",
+"tonnes": 55.1,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "BLR",
+"tonnes": 53.9,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "MYS",
+"tonnes": 44.8,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "FIN",
+"tonnes": 43.9,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "BGR",
+"tonnes": 41.0,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "PER",
+"tonnes": 34.7,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "UKR",
+"tonnes": 27.4,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "ECU",
+"tonnes": 26.3,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "MAR",
+"tonnes": 22.1,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "GTM",
+"tonnes": 15.5,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "CYP",
+"tonnes": 13.9,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "MUS",
+"tonnes": 12.4,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "IRL",
+"tonnes": 12.0,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "PRY",
+"tonnes": 8.2,
+"period": "2026-M03",
+"sector": "S1XS1311"
+},
+{
+"code": "MNG",
+"tonnes": 7.9,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "GEO",
+"tonnes": 7.8,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "MKD",
+"tonnes": 6.9,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "LVA",
+"tonnes": 6.7,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "LTU",
+"tonnes": 5.8,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "COL",
+"tonnes": 4.7,
+"period": "2026-M07",
+"sector": "S1XS1311"
+},
+{
+"code": "SVN",
+"tonnes": 4.2,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "ALB",
+"tonnes": 3.7,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "LUX",
+"tonnes": 2.3,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "SLV",
+"tonnes": 2.1,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "HKG",
+"tonnes": 2.1,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "ISL",
+"tonnes": 2.0,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "LKA",
+"tonnes": 1.5,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "URY",
+"tonnes": 1.0,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "HND",
+"tonnes": 0.7,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "MLT",
+"tonnes": 0.6,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "DOM",
+"tonnes": 0.6,
+"period": "2026-M07",
+"sector": "S1XS1311"
+},
+{
+"code": "EST",
+"tonnes": 0.2,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "CHL",
+"tonnes": 0.2,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "MDA",
+"tonnes": 0.1,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "ARM",
+"tonnes": 0.0,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "CRI",
+"tonnes": 0.0,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "JAM",
+"tonnes": 0.0,
+"period": "2026-M08",
+"sector": "S1XS1311"
+},
+{
+"code": "NIC",
+"tonnes": 0.0,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "NOR",
+"tonnes": 0.0,
+"period": "2026-M09",
+"sector": "S1XS1311"
+},
+{
+"code": "WBG",
+"tonnes": 0.0,
+"period": "2026-M07",
+"sector": "S1XS1311"
+}
+]

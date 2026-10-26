@@ -1,0 +1,31 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>{{title}}</title>
+<meta name="description" content="{{description}}">
+<link rel="canonical" href="{{canonical}}">
+{{robots}}<meta property="og:title" content="{{title}}">
+<meta property="og:description" content="{{description}}">
+<meta property="og:type" content="website">
+<meta name="theme-color" content="#0a0c10">
+<link rel="icon" href="{{root}}assets/icon.svg" type="image/svg+xml">
+<link rel="stylesheet" href="{{root}}assets/style.css?v={{css_v}}">
+</head>
+<body class="{{body_class}}">
+{{draft_banner}}<header class="top"><div class="topin">
+<a class="brand" href="{{root}}"><svg class="wheel" viewBox="0 0 32 32" aria-hidden="true"><circle cx="16" cy="16" r="13" fill="none" stroke="currentColor" stroke-width="3"/><circle cx="16" cy="16" r="3.2" fill="currentColor"/><path d="M16 3v26M3 16h26M6.8 6.8l18.4 18.4M25.2 6.8 6.8 25.2" stroke="currentColor" stroke-width="1.6"/></svg><span>FLYWHEEL<b>CLOCK</b></span></a>
+<nav class="plnav">{{nav}}</nav>
+</div>{{jump}}</header>
+<main>
+{{content}}
+</main>
+<footer class="site"><div class="fin">
+<p><b>Flywheel Clock</b> explains how big companies and commodities make, move and hold money, using public filings and government data. Live counters are projections from annual figures, not real-time data. Nothing here is investment advice. Not affiliated with any company shown.</p>
+<p>A Hypergame project. <a href="{{root}}">Home</a> · <a href="{{root}}sitemap.xml">Sitemap</a></p>
+</div></footer>
+<script id="page-data" type="application/json">{{page_json}}</script>
+<script src="{{root}}assets/clock.js?v={{js_v}}" defer></script>
+</body>
+</html>
