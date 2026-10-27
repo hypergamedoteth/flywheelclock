@@ -11,6 +11,8 @@
       if(mode==='open') return (v/1000).toLocaleString('en-US',{minimumFractionDigits:1,maximumFractionDigits:1})+' kg';
       return Math.floor(v/1000).toLocaleString('en-US')+' kg';
     }
+    if(unit==='btc') return v.toLocaleString('en-US',{minimumFractionDigits:2,maximumFractionDigits:2})+' BTC';
+    if(unit==='bbl') return Math.floor(v).toLocaleString('en-US')+' bbl';
     return Math.floor(v).toLocaleString('en-US');
   }
   function tick(){

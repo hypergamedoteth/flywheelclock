@@ -1,0 +1,641 @@
+{
+ "type": "company",
+ "slug": "apple",
+ "order": 10,
+ "live": true,
+ "name": "Apple",
+ "ticker_symbol": "AAPL",
+ "legal_name": "Apple Inc.",
+ "title": "How Apple makes money, live: revenue, profit and where it goes",
+ "description": "Apple's $416.2B year as a live clock: iPhone, Mac, iPad and Services revenue, where the money goes, buybacks and dividends, per employee and by region. From the FY2025 10-K.",
+ "tagline": "The iPhone is half of sales, but Services is 26% of revenue and 42% of gross profit.",
+ "card_stat": {
+  "label": "Revenue per second",
+  "value": "$13,233",
+  "note": "FY2025 10-K average"
+ },
+ "as_of": "Fiscal year ended Sep 27, 2025 (10-K filed Oct 31, 2025)",
+ "sources": {
+  "10k": [
+   "Apple Inc., Form 10-K for the fiscal year ended Sep 27, 2025 (filed Oct 31, 2025)",
+   "https://www.sec.gov/Archives/edgar/data/320193/000032019325000079/aapl-20250927.htm"
+  ],
+  "facts": [
+   "SEC EDGAR XBRL companyfacts, Apple Inc. (CIK 0000320193): annual revenue and net income from each year's 10-K",
+   "https://data.sec.gov/api/xbrl/companyfacts/CIK0000320193.json"
+  ],
+  "filings": [
+   "SEC EDGAR: Apple Inc. filings",
+   "https://www.sec.gov/cgi-bin/browse-edgar?action=getcompany&CIK=0000320193&type=10-K"
+  ]
+ },
+ "sections": [
+  {
+   "id": "ticker",
+   "title": "Apple, live",
+   "blocks": [
+    {
+     "type": "ticker",
+     "period_seconds": 31449600,
+     "period_label": "FY2025 (364 days)",
+     "label": "projected from annual 10-K averages",
+     "counters": [
+      {
+       "id": "rev",
+       "label": "Revenue",
+       "annual": 416161000000.0,
+       "unit": "usd",
+       "hero": true
+      },
+      {
+       "id": "ni",
+       "label": "Net income (profit)",
+       "annual": 112010000000.0,
+       "unit": "usd"
+      },
+      {
+       "id": "bb",
+       "label": "Share buybacks",
+       "annual": 90711000000.0,
+       "unit": "usd"
+      },
+      {
+       "id": "div",
+       "label": "Dividends paid",
+       "annual": 15421000000.0,
+       "unit": "usd"
+      }
+     ],
+     "note": "Each counter = FY2025 total from the 10-K ÷ 31,449,600 seconds (364 days, the 52-week fiscal year). These are averages, not real-time sales. Buybacks and dividends are the cash paid in the cash flow statement. [[10k]]",
+     "facts": [
+      [
+       "Employees",
+       "~166,000"
+      ],
+      [
+       "Quarterly dividend",
+       "$0.26"
+      ],
+      [
+       "Cash & securities",
+       "$132.4B"
+      ],
+      [
+       "Diluted EPS",
+       "$7.46"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "flow",
+   "title": "Money in, money out",
+   "lede": "Every dollar of FY2025 revenue, from where it came to where it went. Values in US$ billions.",
+   "blocks": [
+    {
+     "type": "sankey",
+     "title": "Income statement, FY2025",
+     "unit": "B",
+     "scale": 0.001,
+     "nodes": [
+      {
+       "id": "ip",
+       "label": "iPhone",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "mac",
+       "label": "Mac",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "ipad",
+       "label": "iPad",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "wh",
+       "label": "Wearables, Home & Accessories",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "sv",
+       "label": "Services",
+       "col": 0,
+       "kind": "key"
+      },
+      {
+       "id": "rev",
+       "label": "Total revenue",
+       "col": 1,
+       "kind": "mid"
+      },
+      {
+       "id": "cs",
+       "label": "Cost of sales",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "rd",
+       "label": "Research & development",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "sga",
+       "label": "Selling, general & admin",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "oi",
+       "label": "Operating income",
+       "col": 2,
+       "kind": "profit"
+      },
+      {
+       "id": "pt",
+       "label": "Pre-tax income",
+       "col": 3,
+       "kind": "profit"
+      },
+      {
+       "id": "oth",
+       "label": "Other expense, net",
+       "col": 3,
+       "kind": "cost"
+      },
+      {
+       "id": "tax",
+       "label": "Income tax",
+       "col": 4,
+       "kind": "cost"
+      },
+      {
+       "id": "ni",
+       "label": "Net income",
+       "col": 4,
+       "kind": "profit"
+      }
+     ],
+     "links": [
+      [
+       "ip",
+       "rev",
+       209586
+      ],
+      [
+       "mac",
+       "rev",
+       33708
+      ],
+      [
+       "ipad",
+       "rev",
+       28023
+      ],
+      [
+       "wh",
+       "rev",
+       35686
+      ],
+      [
+       "sv",
+       "rev",
+       109158
+      ],
+      [
+       "rev",
+       "cs",
+       220960
+      ],
+      [
+       "rev",
+       "rd",
+       34550
+      ],
+      [
+       "rev",
+       "sga",
+       27601
+      ],
+      [
+       "rev",
+       "oi",
+       133050
+      ],
+      [
+       "oi",
+       "pt",
+       132729
+      ],
+      [
+       "oi",
+       "oth",
+       321
+      ],
+      [
+       "pt",
+       "tax",
+       20719
+      ],
+      [
+       "pt",
+       "ni",
+       112010
+      ]
+     ],
+     "note": "US$ millions from the 10-K: 209,586 + 33,708 + 28,023 + 35,686 + 109,158 = 416,161 net sales. Cost of sales 220,960 (products 194,116, services 26,844). Operating income 133,050 less other expense, net 321 = pre-tax 132,729 (derived); tax 20,719; net income 112,010. [[10k]]"
+    },
+    {
+     "type": "sankey",
+     "title": "Where the cash went, FY2025",
+     "unit": "B",
+     "scale": 0.001,
+     "nodes": [
+      {
+       "id": "ocf",
+       "label": "Operating cash flow",
+       "col": 0,
+       "kind": "mid"
+      },
+      {
+       "id": "gap",
+       "label": "Drawn from cash, securities & debt",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "capex",
+       "label": "Capex (property, plant & equipment)",
+       "col": 1,
+       "kind": "cost"
+      },
+      {
+       "id": "div",
+       "label": "Dividends",
+       "col": 1,
+       "kind": "key"
+      },
+      {
+       "id": "bb",
+       "label": "Buybacks",
+       "col": 1,
+       "kind": "key"
+      }
+     ],
+     "links": [
+      [
+       "ocf",
+       "capex",
+       12715
+      ],
+      [
+       "ocf",
+       "div",
+       15421
+      ],
+      [
+       "ocf",
+       "bb",
+       83346
+      ],
+      [
+       "gap",
+       "bb",
+       7365
+      ]
+     ],
+     "note": "Operating cash flow 111,482; capex 12,715; dividends and dividend equivalents 15,421; common stock repurchased 90,711 (cash basis; the 10-K MD&A says $89.3B of shares repurchased, 402 million shares). Apple paid out 7,365 more than it generated: 12,715 + 15,421 + 90,711 − 111,482 = 7,365 (derived), funded from cash, marketable securities and net debt activity. [[10k]]"
+    },
+    {
+     "type": "stats",
+     "items": [
+      [
+       "Gross margin",
+       "46.9%",
+       "195,201 ÷ 416,161 [[10k]]"
+      ],
+      [
+       "Operating margin",
+       "32.0%",
+       "133,050 ÷ 416,161 (derived) [[10k]]"
+      ],
+      [
+       "Effective tax rate",
+       "15.6%",
+       "24.1% a year earlier, which included a State Aid charge [[10k]]"
+      ],
+      [
+       "Free cash flow",
+       "$98.8B",
+       "111,482 − 12,715 (derived) [[10k]]"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "employees",
+   "title": "Per employee",
+   "lede": "About 166,000 full-time equivalent employees at fiscal year-end. [[10k]]",
+   "blocks": [
+    {
+     "type": "stats",
+     "items": [
+      [
+       "Revenue per employee",
+       "$2,507K",
+       "416,161M ÷ 166,000 [[10k]]"
+      ],
+      [
+       "Profit per employee",
+       "$675K",
+       "Net income ÷ employees [[10k]]"
+      ],
+      [
+       "Operating income per employee",
+       "$802K",
+       "[[10k]]"
+      ],
+      [
+       "R&D per employee",
+       "$208K",
+       "34,550M ÷ 166,000 [[10k]]"
+      ],
+      [
+       "Avg. hourly wage",
+       "Not disclosed",
+       "The 10-K gives headcount only, no pay data [[10k]]"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "geography",
+   "title": "Where the money comes from",
+   "lede": "Apple reports five geographic segments, and sales by product category. It does not disclose revenue by US state.",
+   "blocks": [
+    {
+     "type": "bars",
+     "title": "Net sales by product category, FY2025",
+     "unit": "usd",
+     "items": [
+      [
+       "iPhone",
+       209586000000.0
+      ],
+      [
+       "Services",
+       109158000000.0
+      ],
+      [
+       "Wearables, Home & Accessories",
+       35686000000.0
+      ],
+      [
+       "Mac",
+       33708000000.0
+      ],
+      [
+       "iPad",
+       28023000000.0
+      ]
+     ],
+     "src": [
+      "10k"
+     ]
+    },
+    {
+     "type": "bars",
+     "title": "Net sales by region, FY2025",
+     "unit": "usd",
+     "items": [
+      [
+       "Americas",
+       178353000000.0
+      ],
+      [
+       "Europe (incl. India, Middle East, Africa)",
+       111032000000.0
+      ],
+      [
+       "Greater China",
+       64377000000.0
+      ],
+      [
+       "Rest of Asia Pacific",
+       33696000000.0
+      ],
+      [
+       "Japan",
+       28703000000.0
+      ]
+     ],
+     "src": [
+      "10k"
+     ]
+    },
+    {
+     "type": "table",
+     "title": "Segments, FY2025",
+     "cols": [
+      "Segment",
+      "Net sales",
+      "Operating income",
+      "Margin"
+     ],
+     "align": "lrrr",
+     "rows": [
+      [
+       "Americas",
+       "$178.4B",
+       "$72.5B",
+       "40.6%"
+      ],
+      [
+       "Europe",
+       "$111.0B",
+       "$47.7B",
+       "43.0%"
+      ],
+      [
+       "Greater China",
+       "$64.4B",
+       "$26.9B",
+       "41.8%"
+      ],
+      [
+       "Japan",
+       "$28.7B",
+       "$14.0B",
+       "48.6%"
+      ],
+      [
+       "Rest of Asia Pacific",
+       "$33.7B",
+       "$14.6B",
+       "43.3%"
+      ]
+     ],
+     "src": [
+      "10k"
+     ],
+     "note": "Segment operating income excludes R&D ($34.6B) and general & administrative ($8.1B), which are held at corporate. Margins are derived. [[10k]]"
+    },
+    {
+     "type": "table",
+     "title": "By country",
+     "cols": [
+      "",
+      "Net sales",
+      "Share",
+      "Long-lived assets"
+     ],
+     "align": "lrrr",
+     "compact": true,
+     "rows": [
+      [
+       "United States",
+       "$151.8B",
+       "36.5%",
+       "$40.3B"
+      ],
+      [
+       "China (incl. Hong Kong, Taiwan)",
+       "$64.4B",
+       "15.5%",
+       "$3.6B"
+      ],
+      [
+       "Other countries",
+       "$200.0B",
+       "48.1%",
+       "$5.9B"
+      ]
+     ],
+     "src": [
+      "10k"
+     ],
+     "note": "Only the US and China are 10% or more of sales, so only they are broken out. Share is derived. [[10k]]"
+    }
+   ]
+  },
+  {
+   "id": "decisions",
+   "title": "The decisions behind the numbers",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "kicker": "Services",
+       "big": "42%",
+       "title": "of gross profit from 26% of revenue",
+       "text": "Services sales were $109.2B (up 14%) with a 75.4% gross margin, against 36.8% for products. That is $82.3B of the $195.2B total gross margin (derived). The 10-K credits advertising, the App Store and cloud services for the growth.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "kicker": "Buybacks",
+       "big": "$89.3B",
+       "title": "of stock repurchased in FY2025",
+       "text": "402 million shares retired. In May 2025 Apple announced a new $100B program and raised the quarterly dividend from $0.25 to $0.26. Cash returned (buybacks 90.7B + dividends 15.4B) was 95% of net income (derived).",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "kicker": "Greater China",
+       "big": "−4%",
+       "title": "sales fell to $64.4B",
+       "text": "Greater China net sales were $72.6B in FY2023, $67.0B in FY2024 and $64.4B in FY2025, now 15% of the total (derived). The 10-K attributes the FY2025 drop mainly to lower iPhone sales.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "kicker": "Research and development",
+       "big": "8.3%",
+       "title": "of revenue goes to R&D",
+       "text": "R&D was $34.6B, up 10%, and R&D plus SG&A ($62.2B) was 14.9% of revenue (derived). Cost of sales alone took 53%.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "kicker": "Taxes",
+       "big": "15.6%",
+       "title": "effective tax rate, versus 24.1% a year earlier",
+       "text": "FY2024's rate included the State Aid Decision charge. The 10-K says the provision fell $10.7B year over year on that item. Cash taxes paid were $43.4B in FY2025.",
+       "src": [
+        "10k"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "timeline",
+   "title": "Five years of results",
+   "lede": "Revenue and net income by fiscal year, from the 10-Ks.",
+   "blocks": [
+    {
+     "type": "timeline",
+     "items": [
+      {
+       "date": "FY2021",
+       "text": "Revenue $365.8B, net income $94.7B.",
+       "where": "",
+       "src": [
+        "facts"
+       ]
+      },
+      {
+       "date": "FY2022",
+       "text": "Revenue $394.3B, net income $99.8B. Buybacks $89.4B, dividends $14.8B.",
+       "where": "",
+       "src": [
+        "facts"
+       ]
+      },
+      {
+       "date": "FY2023",
+       "text": "Revenue $383.3B (down 3%), net income $97.0B. Buybacks $77.6B.",
+       "where": "",
+       "src": [
+        "10k",
+        "facts"
+       ]
+      },
+      {
+       "date": "FY2024",
+       "text": "Revenue $391.0B, net income $93.7B after the State Aid charge. Buybacks $94.9B.",
+       "where": "",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "date": "FY2025",
+       "text": "Revenue $416.2B (up 6%), net income $112.0B, a five-year high. Buybacks $90.7B, dividends $15.4B.",
+       "where": "",
+       "src": [
+        "10k"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

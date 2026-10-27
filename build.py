@@ -32,6 +32,8 @@ def money(v, d=1):
 def qty(v, unit):
     if unit == "usd": return money(v)
     if unit == "t": return f"{v:,.0f} t" if v >= 100 or v == int(v) else f"{v:,.1f} t"
+    if unit == "bbl": return f"{v:,.0f} bbl" if v < 1e9 else f"{v/1e9:,.1f}B bbl"
+    if unit == "btc": return f"{v:,.0f} BTC"
     return f"{v:,.0f}"
 
 class Page:
@@ -67,7 +69,10 @@ def b_ticker(P, b):
     per = lambda c: c["annual"] / b["period_seconds"]
     def rate(c):
         r = per(c)
-        return f"${r:,.0f}" if c["unit"] == "usd" else f"{r/1000:,.3f} kg"
+        if c["unit"] == "usd": return f"${r:,.0f}"
+        if c["unit"] == "bbl": return f"{r:,.0f} bbl"
+        if c["unit"] == "btc": return f"{r:,.4f} BTC"
+        return f"{r/1000:,.3f} kg"
     tiles = "".join(
         f'<div class="ctile"><div class="l">{esc(c["label"])}</div>'
         f'<div class="num" data-ctr="{esc(c["id"])}" data-mode="year">{rate(c)}/s</div>'
@@ -267,7 +272,7 @@ def load_entries():
         assert e.get("type") in TYPES, f"{p}: type must be company or commodity"
         assert re.fullmatch(r"[a-z0-9-]+", e["slug"]), f"{p}: bad slug"
         if e.get("live", True): es.append(e)
-    return es
+    return sorted(es, key=lambda e: (e.get("order", 50), e["name"]))
 
 def url_of(e): return f"/{TYPES[e['type']][0]}/{e['slug']}/"
 
@@ -287,7 +292,7 @@ def page(path, title, desc, content, active=None, jump="", page_json="{}", body_
 
 def entry_page(e):
     P = Page(e)
-    tpl = read(f"templates/{e['type']}.html")
+    tpl = read(f"templates/{e.get('template', e['type'])}.html")
     body = re.sub(r"\{\{section:([\w-]+)\}\}", lambda m: section(P, m.group(1)), tpl)
     body = fill(body, h1=esc(e["title"]), tagline=esc(e.get("tagline", "")), as_of=esc(e.get("as_of", "")),
                 ticker_symbol=esc(e.get("ticker_symbol", "")), symbol=esc(e.get("symbol", "")), sources=sources_html(P))
@@ -295,7 +300,18 @@ def entry_page(e):
     jump = '<nav class="jump">' + "".join(f'<a href="#{i}">{t}</a>' for i, t in ids) + "</nav>"
     tickers = [bl for s in e.get("sections", []) for bl in s["blocks"] if bl["type"] == "ticker"]
     pj = json.dumps({"counters": [dict(id=c["id"], unit=c["unit"], rate=c["annual"] / t["period_seconds"]) for t in tickers for c in t["counters"]]})
-    page(url_of(e), f'{e["title"]} | Flywheel Clock', e["description"], body, active=TYPES[e["type"]][0], jump=jump, page_json=pj)
+    url = BASE_URL + url_of(e); hub = TYPES[e["type"]]
+    about = ({"@type": "Corporation", "name": e.get("legal_name", e["name"]), "tickerSymbol": e["ticker_symbol"]} if e.get("ticker_symbol") else {"@type": "Thing", "name": e["name"]})
+    ld = {"@context": "https://schema.org", "@graph": [
+        {"@type": "WebPage", "@id": url + "#page", "url": url, "name": f'{e["title"]} | Flywheel Clock', "description": e["description"], "inLanguage": "en",
+         "isPartOf": {"@type": "WebSite", "name": "Flywheel Clock", "url": BASE_URL + "/"}, "about": about,
+         "publisher": {"@type": "Organization", "name": "Hypergame", "url": BASE_URL + "/"}, "dateModified": date.today().isoformat()},
+        {"@type": "BreadcrumbList", "itemListElement": [
+            {"@type": "ListItem", "position": 1, "name": "Flywheel Clock", "item": BASE_URL + "/"},
+            {"@type": "ListItem", "position": 2, "name": hub[1], "item": f"{BASE_URL}/{hub[0]}/"},
+            {"@type": "ListItem", "position": 3, "name": e["name"], "item": url}]}]}
+    jl = '<script type="application/ld+json">' + json.dumps(ld).replace("</", "<\\/") + '</script>\n'
+    page(url_of(e), f'{e["title"]} | Flywheel Clock', e["description"], body, active=hub[0], jump=jump, page_json=pj, jsonld=jl)
 
 def card(e):
     cs = e.get("card_stat", {})

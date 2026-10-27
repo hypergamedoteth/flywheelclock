@@ -1,0 +1,634 @@
+{
+ "type": "company",
+ "slug": "amazon",
+ "order": 20,
+ "live": true,
+ "name": "Amazon",
+ "ticker_symbol": "AMZN",
+ "legal_name": "Amazon.com, Inc.",
+ "title": "How Amazon makes money, live: revenue, AWS, ads and where it goes",
+ "description": "Amazon's $716.9B year as a live clock: online stores, third-party sellers, ads, Prime and AWS, where the money goes, capex, and per employee. From the FY2025 10-K.",
+ "tagline": "AWS is 18% of sales but 57% of operating income. Capex hit $131.8B.",
+ "card_stat": {
+  "label": "Revenue per second",
+  "value": "$22,734",
+  "note": "FY2025 10-K average"
+ },
+ "as_of": "Year ended Dec 31, 2025 (10-K filed Feb 6, 2026)",
+ "sources": {
+  "10k": [
+   "Amazon.com, Inc., Form 10-K for the year ended Dec 31, 2025 (filed Feb 6, 2026)",
+   "https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/amzn-20251231.htm"
+  ],
+  "facts": [
+   "SEC EDGAR XBRL companyfacts, Amazon.com, Inc. (CIK 0001018724): annual figures from each year's 10-K",
+   "https://data.sec.gov/api/xbrl/companyfacts/CIK0001018724.json"
+  ]
+ },
+ "sections": [
+  {
+   "id": "ticker",
+   "title": "Amazon, live",
+   "blocks": [
+    {
+     "type": "ticker",
+     "period_seconds": 31536000,
+     "period_label": "2025 (365 days)",
+     "label": "projected from annual 10-K averages",
+     "counters": [
+      {
+       "id": "rev",
+       "label": "Revenue",
+       "annual": 716924000000.0,
+       "unit": "usd",
+       "hero": true
+      },
+      {
+       "id": "ni",
+       "label": "Net income (profit)",
+       "annual": 77670000000.0,
+       "unit": "usd"
+      },
+      {
+       "id": "aws",
+       "label": "AWS revenue",
+       "annual": 128725000000.0,
+       "unit": "usd"
+      },
+      {
+       "id": "capex",
+       "label": "Capital spending",
+       "annual": 131819000000.0,
+       "unit": "usd"
+      }
+     ],
+     "note": "Each counter = 2025 total from the 10-K ÷ 31,536,000 seconds. These are averages, not real-time sales. Capital spending = purchases of property and equipment in the cash flow statement ($131.8B, before $3.5B of proceeds and incentives). [[10k]]",
+     "facts": [
+      [
+       "Employees",
+       "~1,576,000"
+      ],
+      [
+       "Dividends paid",
+       "None"
+      ],
+      [
+       "Buybacks 2023–2025",
+       "None"
+      ],
+      [
+       "Cash & securities",
+       "$123.0B"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "flow",
+   "title": "Money in, money out",
+   "lede": "Every dollar of 2025 revenue, from where it came to where it went. Values in US$ billions.",
+   "blocks": [
+    {
+     "type": "sankey",
+     "title": "Income statement, 2025",
+     "unit": "B",
+     "scale": 0.001,
+     "nodes": [
+      {
+       "id": "on",
+       "label": "Online stores",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "ph",
+       "label": "Physical stores",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "tp",
+       "label": "Third-party seller services",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "ad",
+       "label": "Advertising",
+       "col": 0,
+       "kind": "key"
+      },
+      {
+       "id": "sb",
+       "label": "Subscriptions (Prime etc.)",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "aws",
+       "label": "AWS",
+       "col": 0,
+       "kind": "key"
+      },
+      {
+       "id": "ot",
+       "label": "Other",
+       "col": 0,
+       "kind": "in"
+      },
+      {
+       "id": "rev",
+       "label": "Total revenue",
+       "col": 1,
+       "kind": "mid"
+      },
+      {
+       "id": "cos",
+       "label": "Cost of sales",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "ful",
+       "label": "Fulfillment",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "tech",
+       "label": "Technology & infrastructure",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "sm",
+       "label": "Sales & marketing",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "ga",
+       "label": "G&A and other operating",
+       "col": 2,
+       "kind": "cost"
+      },
+      {
+       "id": "oi",
+       "label": "Operating income",
+       "col": 2,
+       "kind": "profit"
+      },
+      {
+       "id": "no",
+       "label": "Interest & other income, net",
+       "col": 2,
+       "kind": "in"
+      },
+      {
+       "id": "pt",
+       "label": "Pre-tax income",
+       "col": 3,
+       "kind": "profit"
+      },
+      {
+       "id": "tax",
+       "label": "Income tax & equity-method",
+       "col": 4,
+       "kind": "cost"
+      },
+      {
+       "id": "ni",
+       "label": "Net income",
+       "col": 4,
+       "kind": "profit"
+      }
+     ],
+     "links": [
+      [
+       "on",
+       "rev",
+       269287
+      ],
+      [
+       "ph",
+       "rev",
+       22561
+      ],
+      [
+       "tp",
+       "rev",
+       172162
+      ],
+      [
+       "ad",
+       "rev",
+       68635
+      ],
+      [
+       "sb",
+       "rev",
+       49619
+      ],
+      [
+       "aws",
+       "rev",
+       128725
+      ],
+      [
+       "ot",
+       "rev",
+       5935
+      ],
+      [
+       "rev",
+       "cos",
+       356414
+      ],
+      [
+       "rev",
+       "ful",
+       109074
+      ],
+      [
+       "rev",
+       "tech",
+       108521
+      ],
+      [
+       "rev",
+       "sm",
+       47129
+      ],
+      [
+       "rev",
+       "ga",
+       15811
+      ],
+      [
+       "rev",
+       "oi",
+       79975
+      ],
+      [
+       "oi",
+       "pt",
+       79975
+      ],
+      [
+       "no",
+       "pt",
+       17336
+      ],
+      [
+       "pt",
+       "tax",
+       19641
+      ],
+      [
+       "pt",
+       "ni",
+       77670
+      ]
+     ],
+     "note": "US$ millions from the 10-K: 269,287 + 22,561 + 172,162 + 68,635 + 49,619 + 128,725 + 5,935 = 716,924 net sales. \"G&A and other\" = G&A 11,172 + other operating expense 4,639 (includes a $2.5B FTC settlement charge). Non-operating income, net of 17,336 = interest income 4,381 − interest expense 2,274 + other income 15,229, which the 10-K attributes mainly to equity-investment valuation adjustments, not cash from selling goods. \"Income tax & equity-method\" = 19,087 + 554. [[10k]]"
+    },
+    {
+     "type": "sankey",
+     "title": "Where the cash went, 2025",
+     "unit": "B",
+     "scale": 0.001,
+     "nodes": [
+      {
+       "id": "ocf",
+       "label": "Operating cash flow",
+       "col": 0,
+       "kind": "mid"
+      },
+      {
+       "id": "capex",
+       "label": "Capex, net of sale proceeds & incentives",
+       "col": 1,
+       "kind": "cost"
+      },
+      {
+       "id": "fcf",
+       "label": "Free cash flow (what was left)",
+       "col": 1,
+       "kind": "profit"
+      }
+     ],
+     "links": [
+      [
+       "ocf",
+       "capex",
+       128320
+      ],
+      [
+       "ocf",
+       "fcf",
+       11194
+      ]
+     ],
+     "note": "Operating cash flow 139,514 − purchases of property and equipment 131,819 + proceeds from sales and incentives 3,499 = free cash flow 11,194, as the 10-K defines it (it was 38,219 in 2024). Amazon paid no dividends (none in the cash flow statement) and made no buybacks in 2023, 2024 or 2025; $6.1B remains on the 2022 authorization. [[10k]]"
+    },
+    {
+     "type": "stats",
+     "items": [
+      [
+       "Operating margin",
+       "11.2%",
+       "79,975 ÷ 716,924 (derived) [[10k]]"
+      ],
+      [
+       "AWS operating margin",
+       "35.4%",
+       "45,606 ÷ 128,725 (derived) [[10k]]"
+      ],
+      [
+       "Effective tax rate",
+       "19.6%",
+       "19,087 ÷ 97,311 (derived); cash taxes paid $8.3B [[10k]]"
+      ],
+      [
+       "Free cash flow",
+       "$11.2B",
+       "Down from $38.2B in 2024 [[10k]]"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "employees",
+   "title": "Per employee",
+   "lede": "About 1,576,000 full-time and part-time employees at year-end, plus contractors and temporary staff that are not counted. [[10k]]",
+   "blocks": [
+    {
+     "type": "stats",
+     "items": [
+      [
+       "Revenue per employee",
+       "$455K",
+       "716,924M ÷ 1,576,000 [[10k]]"
+      ],
+      [
+       "Profit per employee",
+       "$49K",
+       "Net income ÷ employees; includes $15.2B of investment gains [[10k]]"
+      ],
+      [
+       "Operating income per employee",
+       "$51K",
+       "[[10k]]"
+      ],
+      [
+       "Stock comp per employee",
+       "$12K",
+       "$19.5B stock-based compensation ÷ employees (derived) [[10k]]"
+      ],
+      [
+       "Avg. hourly wage",
+       "Not disclosed",
+       "The 10-K gives headcount only, no pay data [[10k]]"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "geography",
+   "title": "Where the money comes from",
+   "lede": "Amazon reports three segments, revenue by product and service group, and revenue by country. It does not disclose revenue by US state.",
+   "blocks": [
+    {
+     "type": "bars",
+     "title": "Net sales by group, 2025",
+     "unit": "usd",
+     "items": [
+      [
+       "Online stores",
+       269287000000.0
+      ],
+      [
+       "Third-party seller services",
+       172162000000.0
+      ],
+      [
+       "AWS",
+       128725000000.0
+      ],
+      [
+       "Advertising services",
+       68635000000.0
+      ],
+      [
+       "Subscription services",
+       49619000000.0
+      ],
+      [
+       "Physical stores",
+       22561000000.0
+      ],
+      [
+       "Other",
+       5935000000.0
+      ]
+     ],
+     "src": [
+      "10k"
+     ]
+    },
+    {
+     "type": "bars",
+     "title": "Net sales by country, 2025",
+     "unit": "usd",
+     "items": [
+      [
+       "United States",
+       489657000000.0
+      ],
+      [
+       "Germany",
+       45900000000.0
+      ],
+      [
+       "United Kingdom",
+       43212000000.0
+      ],
+      [
+       "Japan",
+       30688000000.0
+      ],
+      [
+       "Rest of world",
+       107467000000.0
+      ]
+     ],
+     "src": [
+      "10k"
+     ]
+    },
+    {
+     "type": "table",
+     "title": "Segments, 2025",
+     "cols": [
+      "Segment",
+      "Net sales",
+      "Operating income",
+      "Margin"
+     ],
+     "align": "lrrr",
+     "rows": [
+      [
+       "North America",
+       "$426.3B",
+       "$29.6B",
+       "6.9%"
+      ],
+      [
+       "International",
+       "$161.9B",
+       "$4.8B",
+       "2.9%"
+      ],
+      [
+       "AWS",
+       "$128.7B",
+       "$45.6B",
+       "35.4%"
+      ],
+      [
+       "Total",
+       "$716.9B",
+       "$80.0B",
+       "11.2%"
+      ]
+     ],
+     "src": [
+      "10k"
+     ],
+     "note": "Margins are derived. AWS earns 57% of operating income (45,606 ÷ 79,975, derived). [[10k]]"
+    }
+   ]
+  },
+  {
+   "id": "decisions",
+   "title": "The decisions behind the numbers",
+   "blocks": [
+    {
+     "type": "cards",
+     "items": [
+      {
+       "kicker": "AWS",
+       "big": "57%",
+       "title": "of operating income from 18% of sales",
+       "text": "AWS sales grew 20% to $128.7B at a 35.4% operating margin (derived). North America earned 7.0% and International 2.9%. Retail and AWS are different businesses in one filing.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "kicker": "Capital spending",
+       "big": "$131.8B",
+       "title": "of capex, up from $83.0B",
+       "text": "Purchases of property and equipment were $52.7B in 2023, $83.0B in 2024 and $131.8B in 2025. Of 2025's $142.4B total net additions, $96.5B went to AWS. Free cash flow fell from $38.2B to $11.2B.",
+       "src": [
+        "10k",
+        "facts"
+       ]
+      },
+      {
+       "kicker": "Advertising",
+       "big": "$68.6B",
+       "title": "of ad revenue, up 22%",
+       "text": "Advertising sales grew from $46.9B in 2023 to $68.6B in 2025 (growth derived), now 9.6% of revenue (derived). The 10-K lists it as its own line.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "kicker": "Third-party sellers",
+       "big": "$172.2B",
+       "title": "in seller services revenue",
+       "text": "Commissions plus fulfillment and shipping fees on sellers' products were 24% of revenue (derived), second only to Amazon's own online stores ($269.3B, 38% of revenue, derived).",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "kicker": "One-time charges",
+       "big": "$5.2B",
+       "title": "of FTC settlement and severance in 2025",
+       "text": "Operating income includes $2.5B for a settlement with the FTC and $2.7B of estimated severance costs, per the 10-K. Both are in the 2025 figures shown here.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "kicker": "No payouts",
+       "big": "$0",
+       "title": "in buybacks 2023–2025, and no dividends",
+       "text": "Amazon keeps its cash for investment. There were no repurchases in 2023, 2024 or 2025, and the cash flow statement has no dividend line.",
+       "src": [
+        "10k"
+       ]
+      }
+     ]
+    }
+   ]
+  },
+  {
+   "id": "timeline",
+   "title": "Five years of results",
+   "lede": "Revenue, operating income and net income by year, from the 10-Ks.",
+   "blocks": [
+    {
+     "type": "timeline",
+     "items": [
+      {
+       "date": "2021",
+       "text": "Revenue $469.8B, operating income $24.9B, net income $33.4B. Capex $61.1B.",
+       "where": "",
+       "src": [
+        "facts"
+       ]
+      },
+      {
+       "date": "2022",
+       "text": "Revenue $514.0B, operating income $12.2B, a net loss of $2.7B, the only loss in the five years.",
+       "where": "",
+       "src": [
+        "facts"
+       ]
+      },
+      {
+       "date": "2023",
+       "text": "Revenue $574.8B, operating income $36.9B, net income $30.4B. Capex $52.7B.",
+       "where": "",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "date": "2024",
+       "text": "Revenue $638.0B, operating income $68.6B, net income $59.2B. Capex $83.0B.",
+       "where": "",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "date": "2025",
+       "text": "Revenue $716.9B (up 12%), operating income $80.0B, net income $77.7B. Capex $131.8B.",
+       "where": "",
+       "src": [
+        "10k"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}
