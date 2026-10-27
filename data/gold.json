@@ -9,7 +9,7 @@
  "tagline": "About 216,000 tonnes mined in all of history. Roughly 1 in 6 has a named owner.",
  "card_stat": {
   "label": "Mined per second",
-  "value": "~105 g",
+  "value": "~0.105 kg",
   "note": "USGS 2025 estimate"
  },
  "as_of": "USGS MCS 2026 (Jan 2026), IMF IRFCL (data to Sep 2026), issuer holdings Oct 23, 2026",
@@ -224,7 +224,7 @@
   ],
   "hansard02": [
    "Hansard, May 20, 2002: UK gold sales (395 t, 17 auctions, average $274.95/oz)",
-   "http://api.parliament.uk/historic-hansard/written_answers/2002/may/20/gold-sales"
+   "https://api.parliament.uk/historic-hansard/written_answers/2002/may/20/gold-sales"
   ],
   "fp11": [
    "Financial Post (Reuters), Sep 6, 2011: gold jumps to record",

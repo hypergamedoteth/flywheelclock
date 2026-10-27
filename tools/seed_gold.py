@@ -76,7 +76,7 @@ data = {
  "title": "Where all the gold is: who owns it, where it's stored, and how much is left",
  "description": "About 216,000 tonnes of gold have been mined. See who owns it (central banks, the IMF, ETFs), where it sits, what's left in the ground, and a live mining clock. USGS and IMF data.",
  "tagline": "About 216,000 tonnes mined in all of history. Roughly 1 in 6 has a named owner.",
- "card_stat": {"label": "Mined per second", "value": "~105 g", "note": "USGS 2025 estimate"},
+ "card_stat": {"label": "Mined per second", "value": "~0.105 kg", "note": "USGS 2025 estimate"},
  "as_of": "USGS MCS 2026 (Jan 2026), IMF IRFCL (data to Sep 2026), issuer holdings Oct 23, 2026",
  "sources": src,
  "sections": [

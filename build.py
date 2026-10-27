@@ -274,13 +274,13 @@ def url_of(e): return f"/{TYPES[e['type']][0]}/{e['slug']}/"
 def nav_html(active=None):
     return "".join(f'<a href="/{d}/" class="{"on" if active == d else ""}">{lab}</a>' for d, lab in TYPES.values())
 
-def page(path, title, desc, content, active=None, jump="", page_json="{}", body_class=""):
+def page(path, title, desc, content, active=None, jump="", page_json="{}", body_class="", jsonld=""):
     base = read("templates/base.html")
     banner = "" if LAUNCH else '<div class="draftbar">DRAFT PREVIEW · not published · for review only</div>\n'
     robots = "" if LAUNCH else '<meta name="robots" content="noindex,nofollow">\n'
     out = fill(base, title=esc(title), description=esc(desc), canonical=BASE_URL + path, robots=robots, root="/",
                css_v=vhash("assets/style.css"), js_v=vhash("assets/clock.js"), nav=nav_html(active), jump=jump,
-               content=content, page_json=page_json.replace("</", "<\\/"), draft_banner=banner, body_class=body_class)
+               content=content, page_json=page_json.replace("</", "<\\/"), draft_banner=banner, body_class=body_class, jsonld=jsonld)
     fp = os.path.join(ROOT, path.lstrip("/"), "index.html") if path.endswith("/") else os.path.join(ROOT, path.lstrip("/"))
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     open(fp, "w", encoding="utf-8").write(out)
@@ -317,9 +317,13 @@ def build():
              f'<h1>{lab}</h1><div class="ecards">{cards}</div>', active=d)
     page("/", "Flywheel Clock: how big companies and commodities really work",
          "Live money clocks for the biggest companies and commodities: where the money comes from, where it goes, and the decisions and history behind it.",
-         fill(read("templates/home.html"), groups=groups), body_class="home")
+         fill(read("templates/home.html"), groups=groups), body_class="home",
+         jsonld='<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": "Flywheel Clock", "url": BASE_URL + "/",
+                "description": "Live money clocks for the biggest companies and commodities, with sourced data.",
+                "publisher": {"@type": "Organization", "name": "Hypergame", "url": BASE_URL + "/"}}) + '</script>\n')
+    page("/privacy/", "Privacy | Flywheel Clock", "What Flywheel Clock collects when you visit: no accounts, no forms, and privacy-focused analytics from Cloudflare.", read("templates/privacy.html"))
     page("/404.html", "Not found | Flywheel Clock", "Page not found.", '<h1>Page not found</h1><p><a href="/">Back to the homepage</a></p>')
-    urls = ["/"] + [f"/{d}/" for t, (d, _) in TYPES.items() if any(e["type"] == t for e in es)] + [url_of(e) for e in es]
+    urls = ["/"] + [f"/{d}/" for t, (d, _) in TYPES.items() if any(e["type"] == t for e in es)] + [url_of(e) for e in es] + ["/privacy/"]
     today = date.today().isoformat()
     sm = "".join(f"<url><loc>{BASE_URL}{u}</loc><lastmod>{today}</lastmod></url>" for u in urls)
     open(os.path.join(ROOT, "sitemap.xml"), "w").write(f'<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">{sm}</urlset>\n')
