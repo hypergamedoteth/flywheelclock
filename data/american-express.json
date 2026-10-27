@@ -121,7 +121,7 @@
       },
       {
        "id": "gross",
-       "label": "Revenue before interest expense",
+       "label": "Gross revenue †",
        "col": 1,
        "kind": "mid"
       },
@@ -133,7 +133,7 @@
       },
       {
        "id": "net",
-       "label": "Revenue net of interest expense",
+       "label": "Net revenue",
        "col": 2,
        "kind": "mid"
       },
@@ -195,6 +195,24 @@
        "id": "ni",
        "label": "Net income",
        "col": 4,
+       "kind": "profit"
+      },
+      {
+       "id": "bb",
+       "label": "Share buybacks",
+       "col": 5,
+       "kind": "key"
+      },
+      {
+       "id": "div",
+       "label": "Common dividends paid",
+       "col": 5,
+       "kind": "key"
+      },
+      {
+       "id": "ret",
+       "label": "Kept in the business †",
+       "col": 5,
        "kind": "profit"
       }
      ],
@@ -278,42 +296,7 @@
        "pt",
        "ni",
        10833
-      ]
-     ],
-     "note": "US$ millions from the 10-K: 37,401 + 9,993 + 7,471 + 25,598 = 80,463 (derived) before interest expense of 8,234, leaving 72,229. Expenses: rewards 18,409 + business development 6,457 + Card Member services 6,057 + marketing 6,252 + salaries 9,016 + other 6,987 = 53,178. 72,229 − 5,256 provisions − 53,178 = 13,795 pre-tax. [[10k]]"
-    },
-    {
-     "type": "sankey",
-     "title": "Where the profit went, 2025",
-     "unit": "B",
-     "scale": 0.001,
-     "nodes": [
-      {
-       "id": "ni",
-       "label": "Net income",
-       "col": 0,
-       "kind": "profit"
-      },
-      {
-       "id": "bb",
-       "label": "Share buybacks",
-       "col": 1,
-       "kind": "key"
-      },
-      {
-       "id": "div",
-       "label": "Common dividends paid",
-       "col": 1,
-       "kind": "key"
-      },
-      {
-       "id": "ret",
-       "label": "Kept in the business (retained)",
-       "col": 1,
-       "kind": "profit"
-      }
-     ],
-     "links": [
+      ],
       [
        "ni",
        "bb",
@@ -330,7 +313,15 @@
        3251
       ]
      ],
-     "note": "Net income 10,833; share repurchases 5,311 (statement of shareholders' equity); common dividends paid 2,271 (cash flow statement). Retained = 10,833 − 5,311 − 2,271 = 3,251 (derived; ignores $58M of preferred dividends and other equity changes). The 10-K says buybacks plus dividends were $7.6B, about 71% of net income available to common shareholders. A bank's cash flow is mostly loans and deposits, so cash flow is not shown. [[10k]]"
+     "note": "US$ millions from the 10-K: 37,401 + 9,993 + 7,471 + 25,598 = 80,463 (derived) before interest expense of 8,234, leaving 72,229. Expenses: rewards 18,409 + business development 6,457 + Card Member services 6,057 + marketing 6,252 + salaries 9,016 + other 6,987 = 53,178. 72,229 − 5,256 provisions − 53,178 = 13,795 pre-tax. [[10k]] Net income 10,833 → buybacks 5,311 (statement of shareholders' equity) + common dividends 2,271 (cash flow statement) + kept 3,251 (10,833 − 5,311 − 2,271, derived; ignores $58M of preferred dividends and other equity changes). The 10-K says buybacks plus dividends were $7.6B, about 71% of net income available to common shareholders. A bank's cash flow is mostly loans and deposits, so cash flow is not shown. [[10k]]",
+     "live": true,
+     "id": "sk",
+     "period_seconds": 31536000,
+     "period_text": "Fiscal-year total ÷ seconds in the year. American Express's fiscal year is the calendar year 2025 = 365 days = 31,536,000 seconds. Each counter shows that per-second rate × seconds since Jan 1 in your time zone.",
+     "derived": [
+      "ret",
+      "gross"
+     ]
     },
     {
      "type": "stats",
@@ -607,6 +598,142 @@
        ]
       }
      ]
+    }
+   ]
+  },
+  {
+   "id": "answer",
+   "title": "The short answer",
+   "lede": "American Express earns **52%** of its revenue from fees merchants pay when cards are used (discount revenue), **24%** from interest on balances (net of its own interest cost) and **14%** from annual card fees (derived). [[10k]]",
+   "blocks": [
+    {
+     "type": "pairs",
+     "groups": [
+      {
+       "title": "Where revenue comes from",
+       "sub": "Total revenues net of interest expense 2025 by reported segment.",
+       "total": 72229,
+       "total_label": "Total revenue (net)",
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "U.S. Consumer Services",
+         "value": 34814,
+         "key": "us"
+        },
+        {
+         "label": "Commercial Services",
+         "value": 16926,
+         "key": "cs"
+        },
+        {
+         "label": "International Card Services",
+         "value": 13000,
+         "key": "ics"
+        },
+        {
+         "label": "Global Merchant & Network Services",
+         "value": 7759,
+         "key": "gm"
+        },
+        {
+         "label": "Corporate & other",
+         "value": -270,
+         "key": "co"
+        }
+       ]
+      },
+      {
+       "title": "Where pre-tax profit comes from",
+       "sub": "Pretax income 2025 by segment, the measure Amex reports for each segment. Shares are of the four operating segments (16,049).",
+       "total": 13795,
+       "total_label": "Pretax income",
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "U.S. Consumer Services",
+         "value": 6810,
+         "key": "us"
+        },
+        {
+         "label": "Commercial Services",
+         "value": 3668,
+         "key": "cs"
+        },
+        {
+         "label": "International Card Services",
+         "value": 1603,
+         "key": "ics"
+        },
+        {
+         "label": "Global Merchant & Network Services",
+         "value": 3968,
+         "key": "gm"
+        },
+        {
+         "label": "Corporate & other",
+         "value": -2254,
+         "key": "co"
+        }
+       ]
+      }
+     ],
+     "callout": "Global Merchant & Network Services: **10.7%** of segment revenue but **24.7%** of segment pretax income (derived, shares of the four operating segments). International Card Services: 18.0% of revenue, 10.0% of pretax income.",
+     "note": "American Express reports segment pretax income, not operating income. Corporate & other (−2,254 pretax, −270 revenue) is not drawn; it brings the four segments' 16,049 down to the consolidated 13,795. US$ millions. [[10k]]"
+    }
+   ]
+  },
+  {
+   "id": "loop",
+   "title": "The flywheel",
+   "lede": "American Express's own description of its model: card spend earns merchant fees, part of which goes back to Card Members as rewards and services to drive more spending. Each step cites the 10-K. These are stated aims and filed results, not measured cause and effect.",
+   "blocks": [
+    {
+     "type": "loop",
+     "title": "American Express's loop, 2025",
+     "steps": [
+      {
+       "title": "Card spend",
+       "figure": "$1,669.8B billed",
+       "edge": "2.24% discount rate",
+       "text": "Billed business was 1,669.8 billion (+8%). The 10-K says the business model focuses on \"generating revenues primarily by driving spending on our cards and secondarily through finance charges and fees\".",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "Discount revenue",
+       "figure": "$37.4B",
+       "edge": "$18.4B rewards",
+       "text": "Discount revenue was 37,401, equal to 2.24% of billed business (2.27% in 2024), the largest of the four revenue lines.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "Rewards & services",
+       "figure": "Rewards $18.4B",
+       "edge": "card fees $10.0B",
+       "text": "Card Member rewards 18,409 and Card Member services 6,057. Amex says it offers \"incentives to drive spending on our various card products and increase customer engagement, including our Membership Rewards and Amex Offers programs\".",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "More cards, more spend",
+       "figure": "86.6M cards (+4%)",
+       "edge": "12.5M new cards",
+       "text": "Proprietary cards-in-force 86.6 million (+4%), average proprietary basic Card Member spending $25,453 (+3%), net card fees 9,993 (average fee per card $117, +14%).",
+       "src": [
+        "10k"
+       ]
+      }
+     ],
+     "note": "Net interest income (17,364) and service fees (7,471) also add to revenue but are outside this spend loop. [[10k]]"
     }
    ]
   }

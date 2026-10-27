@@ -182,6 +182,24 @@
        "label": "Net income",
        "col": 4,
        "kind": "profit"
+      },
+      {
+       "id": "div",
+       "label": "Dividends paid",
+       "col": 5,
+       "kind": "key"
+      },
+      {
+       "id": "bb",
+       "label": "Share buybacks",
+       "col": 5,
+       "kind": "key"
+      },
+      {
+       "id": "ret",
+       "label": "Left after payouts †",
+       "col": 5,
+       "kind": "profit"
       }
      ],
      "links": [
@@ -249,9 +267,31 @@
        "pt",
        "ni",
        112010
+      ],
+      [
+       "ni",
+       "div",
+       15421
+      ],
+      [
+       "ni",
+       "bb",
+       90711
+      ],
+      [
+       "ni",
+       "ret",
+       5878
       ]
      ],
-     "note": "US$ millions from the 10-K: 209,586 + 33,708 + 28,023 + 35,686 + 109,158 = 416,161 net sales. Cost of sales 220,960 (products 194,116, services 26,844). Operating income 133,050 less other expense, net 321 = pre-tax 132,729 (derived); tax 20,719; net income 112,010. [[10k]]"
+     "note": "US$ millions from the 10-K: 209,586 + 33,708 + 28,023 + 35,686 + 109,158 = 416,161 net sales. Cost of sales 220,960 (products 194,116, services 26,844). Operating income 133,050 less other expense, net 321 = pre-tax 132,729 (derived); tax 20,719; net income 112,010. [[10k]] Net income 112,010 → dividends 15,421 + buybacks 90,711 (cash flow statement) + left after payouts 5,878 (112,010 − 15,421 − 90,711, derived). [[10k]]",
+     "live": true,
+     "id": "sk",
+     "period_seconds": 31449600,
+     "period_text": "Fiscal-year total ÷ seconds in the fiscal year. Apple's FY2025 was 52 weeks = 364 days = 31,449,600 seconds (not 365 days). Each counter shows that per-second rate × seconds since Jan 1 in your time zone.",
+     "derived": [
+      "ret"
+     ]
     },
     {
      "type": "sankey",
@@ -634,6 +674,111 @@
        ]
       }
      ]
+    }
+   ]
+  },
+  {
+   "id": "answer",
+   "title": "The short answer",
+   "lede": "Apple sells devices, and sells services that run on them. In fiscal 2025 Services were **26.2%** of net sales but **42.2%** of gross margin, because Services earned a 75.4% margin against 36.8% on products (derived). [[10k]]",
+   "blocks": [
+    {
+     "type": "pairs",
+     "groups": [
+      {
+       "title": "Where revenue comes from",
+       "sub": "Net sales FY2025: products vs. Services.",
+       "total": 416161,
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "Products (iPhone, Mac, iPad, Wearables)",
+         "value": 307003,
+         "key": "p"
+        },
+        {
+         "label": "Services",
+         "value": 109158,
+         "key": "s"
+        }
+       ]
+      },
+      {
+       "title": "Where gross profit comes from",
+       "sub": "Gross margin FY2025 as filed. Apple reports operating income only by geography, so gross margin is the product/services profit view.",
+       "total": 195201,
+       "total_label": "Gross margin",
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "Products",
+         "value": 112887,
+         "key": "p"
+        },
+        {
+         "label": "Services",
+         "value": 82314,
+         "key": "s"
+        }
+       ]
+      }
+     ],
+     "callout": "Services: **26.2%** of net sales, **42.2%** of gross margin (derived). Gross margin percentage: Services 75.4%, Products 36.8% (as filed).",
+     "note": "Apple's 10-K does not allocate R&D (34,550) or SG&A (27,601) to products or Services, so operating profit by product line is not reported and not shown. Reported segment operating income by region is in the Geography section. US$ millions. [[10k]]"
+    }
+   ]
+  },
+  {
+   "id": "loop",
+   "title": "The flywheel",
+   "lede": "How Apple's filed numbers connect hardware, Services and what the money is used for. Apple's 10-K does not report active devices or say Services growth comes from its installed base, so this loop shows the filed dollars and the one link the company states itself.",
+   "blocks": [
+    {
+     "type": "loop",
+     "title": "Apple's loop, FY2025",
+     "steps": [
+      {
+       "title": "Devices sold",
+       "figure": "$307.0B products",
+       "edge": "App Store · cloud · ads",
+       "text": "iPhone 209,586, Mac 33,708, iPad 28,023, Wearables/Home/Accessories 35,686 = 307,003 (derived). Products gross margin was 36.8%.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "Services on them",
+       "figure": "$109.2B (+14%)",
+       "edge": "75.4% margin",
+       "text": "Services (App Store, advertising, cloud services, AppleCare, payments and more) grew 14%, \"primarily due to higher net sales from advertising, the App Store and cloud services\". Apple also says it believes \"decisions by customers to purchase its hardware products depend in part on the availability of third-party software applications and services\".",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "High-margin profit",
+       "figure": "$82.3B services GM",
+       "edge": "$195.2B gross margin",
+       "text": "Services gross margin 82,314 of total 195,201 = 42.2% (derived), at 75.4% against 36.8% for products.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "Reinvest & return",
+       "figure": "$106.1B returned",
+       "edge": "R&D $34.6B",
+       "text": "R&D 34,550 (+10%). Dividends 15,421 plus buybacks 90,711 returned 106,132 (derived). The 10-K says gross margins \"will be subject to volatility and downward pressure\".",
+       "src": [
+        "10k"
+       ]
+      }
+     ],
+     "note": "Buybacks on a cash basis; the MD&A says $89.3B of shares repurchased. [[10k]]"
     }
    ]
   }

@@ -1,0 +1,577 @@
+{
+ "type": "commodity",
+ "template": "bitcoin",
+ "slug": "bitcoin",
+ "order": 30,
+ "live": true,
+ "name": "Bitcoin",
+ "symbol": "BTC",
+ "title": "Where all the bitcoin is: supply, halvings, and who holds it",
+ "description": "Bitcoin's supply is capped at 21 million; about 20.1 million exist. See the halving schedule, the bitcoin held by US spot ETFs and public companies from SEC filings, and an estimate of lost coins.",
+ "tagline": "20.10 million of 21 million created. About 2.2 million are held by ETFs and public companies that publish it.",
+ "card_stat": {
+  "label": "Issued per second (est.)",
+  "value": "~0.0052 BTC",
+  "note": "3.125 BTC a block, 10-minute target"
+ },
+ "as_of": "chain data Oct 27, 2026; holders from SEC filings and issuer pages (dates shown)",
+ "sources": {
+  "bci": [
+   "Blockchain.com public API: total bitcoins in circulation (q/totalbc) and block count (q/getblockcount), read Oct 27, 2026 UTC",
+   "https://www.blockchain.com/explorer/api/q"
+  ],
+  "mempool": [
+   "mempool.space public API: block height, hash and timestamps (blocks 0, 210,000, 420,000, 630,000, 840,000 and the chain tip)",
+   "https://mempool.space/docs/api/rest"
+  ],
+  "core": [
+   "Bitcoin Core source: consensus rules (MAX_MONEY 21,000,000 × COIN; subsidy halves every 210,000 blocks)",
+   "https://github.com/bitcoin/bitcoin/blob/master/src/validation.cpp"
+  ],
+  "ibit": [
+   "iShares Bitcoin Trust ETF (IBIT): holdings table, quantity of bitcoin, as of Oct 26, 2026",
+   "https://www.ishares.com/us/products/333011/ishares-bitcoin-trust-etf"
+  ],
+  "ibit_q": [
+   "iShares Bitcoin Trust ETF Form 10-Q for the quarter ended June 30, 2026: Schedule of Investments (734,261 bitcoin)",
+   "https://www.sec.gov/Archives/edgar/data/1980994/000143774926026004/bit20260630c_10q.htm"
+  ],
+  "fbtc": [
+   "Fidelity Wise Origin Bitcoin Fund (FBTC) Form 10-Q, June 30, 2026: bitcoin held by the custodian 174,383",
+   "https://www.sec.gov/Archives/edgar/data/1852317/000119312526337679/ck0001852317-20260630.htm"
+  ],
+  "gbtc": [
+   "Grayscale Bitcoin Trust ETF (GBTC) Form 10-Q, June 30, 2026: 138,505.75680424 bitcoin",
+   "https://www.sec.gov/Archives/edgar/data/1588489/000158848926000005/gbtc-20260630.htm"
+  ],
+  "arkb": [
+   "ARK 21Shares Bitcoin ETF (ARKB) Form 10-Q, June 30, 2026: 32,178.2280 bitcoin",
+   "https://www.sec.gov/Archives/edgar/data/1869699/000121390026086191/ea0299118-10q_ark21shares.htm"
+  ],
+  "bitb": [
+   "Bitwise Bitcoin ETF (BITB) Form 10-Q, June 30, 2026: 36,207.6919 bitcoin",
+   "https://www.sec.gov/Archives/edgar/data/1763415/000119312526340183/bitb-20260630.htm"
+  ],
+  "hodl": [
+   "VanEck Bitcoin ETF (HODL) Form 10-Q, June 30, 2026: 16,241.00 bitcoin",
+   "https://www.sec.gov/Archives/edgar/data/1838028/000093041326002505/c117299_10q-ixbrl.htm"
+  ],
+  "mstr": [
+   "Strategy Inc Form 8-K filed Oct 26, 2026: holds approximately 848,517 bitcoin as of Oct 25, 2026",
+   "https://www.sec.gov/Archives/edgar/data/1050446/000119312526431146/mstr-20261026.htm"
+  ],
+  "xxi": [
+   "Twenty One Capital, Inc. Form 10-Q, June 30, 2026: held 43,514 Bitcoin",
+   "https://www.sec.gov/Archives/edgar/data/2070457/000121390026087471/ea0299640-10q_twentyone.htm"
+  ],
+  "mara": [
+   "MARA Holdings Form 10-Q, June 30, 2026, Note 5: total bitcoin holdings 35,577 (26,307 held + 9,270 receivable)",
+   "https://www.sec.gov/Archives/edgar/data/1507605/000150760526000022/mara-20260630.htm"
+  ],
+  "tsla": [
+   "Tesla, Inc. Form 10-Q, September 30, 2026: 11,509 units of Bitcoin",
+   "https://www.sec.gov/Archives/edgar/data/1318605/000162828026066775/tsla-20260930.htm"
+  ],
+  "riot": [
+   "Riot Platforms Form 10-Q, June 30, 2026: held 11,380 bitcoin",
+   "https://www.sec.gov/Archives/edgar/data/1167419/000110465926093448/riot-20260630x10q.htm"
+  ],
+  "chain": [
+   "CryptoSlate, June 20, 2020, reporting Chainalysis: 3.7 million of 18.6 million BTC mined had been lost. Chainalysis's own page was not located, so this is a secondary source",
+   "https://cryptoslate.com/this-chainalysis-report-reveals-a-stunningly-optimistic-trend-for-the-crypto-market/"
+  ],
+  "chain2": [
+   "Chainalysis: \"Why Bitcoin is Surging and How This Rally Is Different from 2017\" (defines lost coins as unmoved for five years or longer)",
+   "https://www.chainalysis.com/blog/bitcoin-price-surge-explained-2020/"
+  ],
+  "patoshi": [
+   "Sergio Lerner, Bitslog, Apr 16, 2019: analysis that one early miner (\"Patoshi\") mined close to 1.1 million coins",
+   "https://bitslog.com/2019/04/16/the-return-of-the-deniers-and-the-revenge-of-patoshi/"
+  ]
+ },
+ "sections": [
+  {
+   "id": "ticker",
+   "title": "Bitcoin, live",
+   "blocks": [
+    {
+     "type": "ticker",
+     "period_seconds": 600,
+     "period_label": "a block",
+     "label": "estimate: 3.125 BTC per block at the 10-minute target",
+     "counters": [
+      {
+       "id": "iss",
+       "label": "New bitcoin issued by the protocol (estimate)",
+       "annual": 3.125,
+       "unit": "btc",
+       "hero": true
+      }
+     ],
+     "note": "Each block creates 3.125 BTC (the block subsidy since the April 2024 halving) and blocks arrive about every 10 minutes by design, so 3.125 ÷ 600 s = 0.0052 BTC a second. This is an estimate: blocks actually arrive at random. Since block 840,000 the average gap has been 596 s (derived from the timestamps of blocks 840,000 and 973,464), so real issuance runs a little faster. Transaction fees are extra and not counted here. The counter shows the target rate multiplied by time, not blocks found. [[core]] [[mempool]]",
+     "facts": [
+      [
+       "Circulating supply",
+       "20,104,543 BTC"
+      ],
+      [
+       "Hard cap",
+       "21,000,000 BTC"
+      ],
+      [
+       "Block height",
+       "973,464"
+      ],
+      [
+       "Next halving (est.)",
+       "Apr 2028"
+      ]
+     ]
+    }
+   ]
+  },
+  {
+   "id": "supply",
+   "title": "Supply",
+   "lede": "Bitcoin's rules cap supply at 21 million coins. As of Oct 27, 2026, 20,104,543 had been created, 95.7% of the cap. [[bci]]",
+   "blocks": [
+    {
+     "type": "stats",
+     "items": [
+      [
+       "Created so far",
+       "20,104,543 BTC",
+       "Public API, block 973,464 [[bci]]"
+      ],
+      [
+       "Not yet created",
+       "895,457 BTC",
+       "Cap 20,999,999.9769 less created (derived) [[core]] [[bci]]"
+      ],
+      [
+       "Share created",
+       "95.74%",
+       "Derived"
+      ],
+      [
+       "Annual new supply at current rate",
+       "0.82%",
+       "164,250 BTC a year at 144 blocks a day ÷ supply (derived estimate)"
+      ]
+     ]
+    },
+    {
+     "type": "math",
+     "title": "Checking supply from the rules",
+     "lines": [
+      "Subsidy: 50 BTC per block, halving every 210,000 blocks. [[core]]",
+      "Blocks 0 to 839,999 (four full eras): 210,000 × (50 + 25 + 12.5 + 6.25) = 19,687,500 BTC",
+      "Blocks 840,000 to 973,464 at 3.125 BTC: 133,465 × 3.125 = 417,078.125 BTC",
+      "= **20,104,578.125 BTC** if every subsidy was fully claimed (derived).",
+      "The API reports 20,104,543.0 BTC created. The gap of about 35 BTC is because some miners claimed less than the full subsidy; the API counts coins actually created. [[bci]]",
+      "Adding all 33 eras gives 20,999,999.9769 BTC, the exact cap (the subsidy is rounded down to whole satoshis, so it is just under 21 million)."
+     ]
+    }
+   ]
+  },
+  {
+   "id": "holders",
+   "title": "Who holds it",
+   "lede": "Bitcoin is pseudonymous, so only some holders can be named. Here are the ones with published figures, one square per 100,000 BTC.",
+   "blocks": [
+    {
+     "type": "waffle",
+     "title": "All 21 million bitcoin by holder",
+     "unit": "BTC",
+     "dec": 0,
+     "cell": 100000,
+     "cell_label": "100,000 BTC",
+     "cols": 21,
+     "items": [
+      {
+       "label": "US spot bitcoin ETFs (six funds, table below)",
+       "value": 1208676.4972,
+       "src": [
+        "ibit",
+        "fbtc",
+        "gbtc",
+        "bitb",
+        "arkb",
+        "hodl"
+       ]
+      },
+      {
+       "label": "Strategy Inc",
+       "value": 848517,
+       "src": [
+        "mstr"
+       ]
+      },
+      {
+       "label": "Four other public companies (XXI, MARA, TSLA, RIOT)",
+       "value": 101980,
+       "src": [
+        "xxi",
+        "mara",
+        "tsla",
+        "riot"
+       ]
+      },
+      {
+       "label": "Dormant five years or more: estimated lost (Chainalysis, 2020)",
+       "value": 3700000,
+       "est": true,
+       "est_label": "estimate",
+       "src": [
+        "chain",
+        "chain2"
+       ]
+      },
+      {
+       "label": "Everything else created: owners not public (derived)",
+       "value": 14245369.502799999,
+       "color": "#3a4252",
+       "src": [
+        "bci"
+       ]
+      },
+      {
+       "label": "Not yet created",
+       "value": 895456.9769000001,
+       "color": "#e8edf5",
+       "src": [
+        "core",
+        "bci"
+       ]
+      }
+     ],
+     "total_label": "Hard cap",
+     "note": "Holdings are the latest figures each holder has published, so the dates differ (shown in the tables below). The estimate is Chainalysis's June 2020 count of 3.7 million BTC that had not moved for five years or longer, treated as lost; that was a 2020 figure, and some of those coins may simply be held, so the hatched block is a rough estimate. Wallets of exchanges, governments, funds and individuals are not published and sit in \"everything else\", which is the supply created less the named holders and the lost estimate. Only holdings in SEC filings or issuers' own pages are named; no on-chain \"whale\" or government-wallet estimates are used. [[chain]] [[bci]]"
+    }
+   ]
+  },
+  {
+   "id": "halving",
+   "title": "Issuance and the halving",
+   "lede": "The reward per block halves every 210,000 blocks, about every four years. It is 3.125 BTC now. [[core]]",
+   "blocks": [
+    {
+     "type": "stats",
+     "items": [
+      [
+       "Reward per block now",
+       "3.125 BTC",
+       "Since block 840,000 [[core]]"
+      ],
+      [
+       "Reward per day at 144 blocks",
+       "450 BTC",
+       "Target pace, estimate [[core]]"
+      ],
+      [
+       "Blocks to next halving",
+       "76,536",
+       "Block 1,050,000 is the next halving (derived from height 973,464) [[mempool]]"
+      ],
+      [
+       "Next halving (estimate)",
+       "Apr 2028",
+       "Apr 8, 2028 at the recent 596-second average; Apr 11, 2028 at exactly 10 minutes. Block times vary, so this is an estimate"
+      ]
+     ]
+    },
+    {
+     "type": "table",
+     "title": "Halving schedule",
+     "cols": [
+      "Era",
+      "Blocks",
+      "Reward per block",
+      "BTC issued in era",
+      "Cumulative supply",
+      "Started"
+     ],
+     "align": "lllrrl",
+     "rows": [
+      [
+       "1",
+       "0 – 209,999",
+       "50 BTC",
+       "10,500,000",
+       "10,500,000",
+       "Jan 3, 2009 (actual)"
+      ],
+      [
+       "2",
+       "210,000 – 419,999",
+       "25 BTC",
+       "5,250,000",
+       "15,750,000",
+       "Nov 28, 2012 (actual)"
+      ],
+      [
+       "3",
+       "420,000 – 629,999",
+       "12.5 BTC",
+       "2,625,000",
+       "18,375,000",
+       "Jul 9, 2016 (actual)"
+      ],
+      [
+       "4",
+       "630,000 – 839,999",
+       "6.25 BTC",
+       "1,312,500",
+       "19,687,500",
+       "May 11, 2020 (actual)"
+      ],
+      [
+       "5",
+       "840,000 – 1,049,999",
+       "3.125 BTC",
+       "656,250",
+       "20,343,750",
+       "Apr 20, 2024 (actual)"
+      ],
+      [
+       "6",
+       "1,050,000 – 1,259,999",
+       "1.5625 BTC",
+       "328,125",
+       "20,671,875",
+       "Apr 8, 2028 (estimate)"
+      ],
+      [
+       "7",
+       "1,260,000 – 1,469,999",
+       "0.78125 BTC",
+       "164,062.5",
+       "20,835,937.5",
+       "Apr 8, 2032 (estimate)"
+      ],
+      [
+       "8",
+       "1,470,000 – 1,679,999",
+       "0.390625 BTC",
+       "82,031.2",
+       "20,917,968.8",
+       "Apr 6, 2036 (estimate)"
+      ],
+      [
+       "9",
+       "1,680,000 – 1,889,999",
+       "0.195312 BTC",
+       "41,015.6",
+       "20,958,984.4",
+       "Apr 3, 2040 (estimate)"
+      ],
+      [
+       "10",
+       "1,890,000 – 2,099,999",
+       "0.0976562 BTC",
+       "20,507.8",
+       "20,979,492.2",
+       "Mar 31, 2044 (estimate)"
+      ]
+     ],
+     "src": [
+      "core",
+      "mempool"
+     ],
+     "note": "Actual start dates are the timestamps of the first block of each era (UTC, mempool.space). Future dates assume 10-minute blocks from the chain tip and are estimates. After era 33 (around the year 2140) the reward rounds down to zero. Showing the first ten of 33 eras. [[core]] [[mempool]]"
+    }
+   ]
+  },
+  {
+   "id": "funds",
+   "title": "US spot bitcoin ETFs",
+   "lede": "Each fund reports the bitcoin its custodian holds for it. IBIT's figure is from the issuer's page; the others are from their latest quarterly reports to the SEC (Form 10-Q, June 30, 2026). [[ibit]]",
+   "blocks": [
+    {
+     "type": "table",
+     "cols": [
+      "Fund",
+      "Bitcoin held (BTC)",
+      "As of",
+      "Source"
+     ],
+     "align": "lrll",
+     "rows": [
+      [
+       "iShares Bitcoin Trust (IBIT)",
+       "811,161",
+       "Oct 26, 2026",
+       "[[ibit]]"
+      ],
+      [
+       "Fidelity Wise Origin (FBTC)",
+       "174,383",
+       "Jun 30, 2026",
+       "[[fbtc]]"
+      ],
+      [
+       "Grayscale Bitcoin Trust (GBTC)",
+       "138,506",
+       "Jun 30, 2026",
+       "[[gbtc]]"
+      ],
+      [
+       "Bitwise Bitcoin ETF (BITB)",
+       "36,208",
+       "Jun 30, 2026",
+       "[[bitb]]"
+      ],
+      [
+       "ARK 21Shares Bitcoin ETF (ARKB)",
+       "32,178",
+       "Jun 30, 2026",
+       "[[arkb]]"
+      ],
+      [
+       "VanEck Bitcoin ETF (HODL)",
+       "16,241",
+       "Jun 30, 2026",
+       "[[hodl]]"
+      ],
+      [
+       "Total, six funds",
+       "1,208,676",
+       "mixed dates",
+       "Derived sum"
+      ]
+     ],
+     "note": "IBIT held 734,261 BTC at June 30, 2026 per its 10-Q, against 811,161 BTC on its page for Oct 26, 2026. Other US spot funds (for example the Grayscale Bitcoin Mini Trust, Invesco Galaxy, CoinShares, Franklin and WisdomTree funds) are not in this total. [[ibit]] [[ibit_q]]"
+    }
+   ]
+  },
+  {
+   "id": "companies",
+   "title": "Public companies",
+   "lede": "US-listed companies that state their bitcoin in SEC filings. Figures are the latest filed. [[mstr]]",
+   "blocks": [
+    {
+     "type": "table",
+     "cols": [
+      "Company",
+      "Bitcoin held (BTC)",
+      "As of",
+      "Source"
+     ],
+     "align": "lrll",
+     "rows": [
+      [
+       "Strategy Inc (MSTR)",
+       "848,517",
+       "Oct 25, 2026",
+       "[[mstr]]"
+      ],
+      [
+       "Twenty One Capital (XXI)",
+       "43,514",
+       "Jun 30, 2026",
+       "[[xxi]]"
+      ],
+      [
+       "MARA Holdings (MARA)",
+       "35,577",
+       "Jun 30, 2026",
+       "[[mara]]"
+      ],
+      [
+       "Tesla (TSLA)",
+       "11,509",
+       "Sep 30, 2026",
+       "[[tsla]]"
+      ],
+      [
+       "Riot Platforms (RIOT)",
+       "11,380",
+       "Jun 30, 2026",
+       "[[riot]]"
+      ],
+      [
+       "Total, five companies",
+       "950,497",
+       "mixed dates",
+       "Derived sum"
+      ]
+     ],
+     "note": "Strategy's figure is from its Form 8-K for Oct 25, 2026 (\"approximately\"). MARA's 35,577 includes 9,270 BTC it reports as receivable (lent to counterparties). Tesla's 10-Q says most of its digital assets are 11,509 units of bitcoin. Other public holders, companies outside the SEC system and governments are not listed, because no free official figure was checked for them. [[mara]] [[tsla]]"
+    }
+   ]
+  },
+  {
+   "id": "timeline",
+   "title": "Timeline",
+   "lede": "Protocol milestones, with dates taken from block timestamps (UTC).",
+   "blocks": [
+    {
+     "type": "timeline",
+     "items": [
+      {
+       "date": "Jan 3, 2009",
+       "text": "Genesis block (block 0).",
+       "src": [
+        "mempool"
+       ]
+      },
+      {
+       "date": "Nov 28, 2012",
+       "text": "First halving, at block 210,000: the reward falls from 50 to 25 BTC.",
+       "src": [
+        "mempool",
+        "core"
+       ]
+      },
+      {
+       "date": "Jul 9, 2016",
+       "text": "Second halving, at block 420,000: 25 to 12.5 BTC.",
+       "src": [
+        "mempool",
+        "core"
+       ]
+      },
+      {
+       "date": "May 11, 2020",
+       "text": "Third halving, at block 630,000: 12.5 to 6.25 BTC.",
+       "src": [
+        "mempool",
+        "core"
+       ]
+      },
+      {
+       "date": "Jan 5, 2024",
+       "text": "iShares Bitcoin Trust (IBIT) is incepted, per the issuer's fund page. US spot bitcoin ETFs begin.",
+       "src": [
+        "ibit"
+       ]
+      },
+      {
+       "date": "Apr 20, 2024",
+       "text": "Fourth halving, at block 840,000: 6.25 to 3.125 BTC.",
+       "src": [
+        "mempool",
+        "core"
+       ]
+      },
+      {
+       "date": "Oct 27, 2026",
+       "text": "Block 973,464: 20,104,543 BTC created, 95.7% of the cap.",
+       "src": [
+        "bci",
+        "mempool"
+       ]
+      },
+      {
+       "date": "2028 (estimate)",
+       "text": "Fifth halving, at block 1,050,000: 3.125 to 1.5625 BTC. Timing depends on block times.",
+       "src": [
+        "core"
+       ]
+      }
+     ]
+    }
+   ]
+  }
+ ]
+}

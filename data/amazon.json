@@ -202,6 +202,12 @@
        "label": "Net income",
        "col": 4,
        "kind": "profit"
+      },
+      {
+       "id": "ret",
+       "label": "Kept in the business †",
+       "col": 5,
+       "kind": "profit"
       }
      ],
      "links": [
@@ -289,9 +295,21 @@
        "pt",
        "ni",
        77670
+      ],
+      [
+       "ni",
+       "ret",
+       77670
       ]
      ],
-     "note": "US$ millions from the 10-K: 269,287 + 22,561 + 172,162 + 68,635 + 49,619 + 128,725 + 5,935 = 716,924 net sales. \"G&A and other\" = G&A 11,172 + other operating expense 4,639 (includes a $2.5B FTC settlement charge). Non-operating income, net of 17,336 = interest income 4,381 − interest expense 2,274 + other income 15,229, which the 10-K attributes mainly to equity-investment valuation adjustments, not cash from selling goods. \"Income tax & equity-method\" = 19,087 + 554. [[10k]]"
+     "note": "US$ millions from the 10-K: 269,287 + 22,561 + 172,162 + 68,635 + 49,619 + 128,725 + 5,935 = 716,924 net sales. \"G&A and other\" = G&A 11,172 + other operating expense 4,639 (includes a $2.5B FTC settlement charge). Non-operating income, net of 17,336 = interest income 4,381 − interest expense 2,274 + other income 15,229, which the 10-K attributes mainly to equity-investment valuation adjustments, not cash from selling goods. \"Income tax & equity-method\" = 19,087 + 554. [[10k]] Amazon paid no dividends and made no buybacks in 2025, so all 77,670 of net income stays in the business (derived). [[10k]]",
+     "live": true,
+     "id": "sk",
+     "period_seconds": 31536000,
+     "period_text": "Fiscal-year total ÷ seconds in the year. Amazon's fiscal year is the calendar year 2025 = 365 days = 31,536,000 seconds. Each counter shows that per-second rate × seconds since Jan 1 in your time zone.",
+     "derived": [
+      "ret"
+     ]
     },
     {
      "type": "sankey",
@@ -627,6 +645,121 @@
        ]
       }
      ]
+    }
+   ]
+  },
+  {
+   "id": "answer",
+   "title": "The short answer",
+   "lede": "Amazon is a store and a cloud company in one filing. In 2025 AWS was **18.0%** of sales but **57.0%** of operating income (derived). North America and International retail made the rest. [[10k]]",
+   "blocks": [
+    {
+     "type": "pairs",
+     "groups": [
+      {
+       "title": "Where revenue comes from",
+       "sub": "Net sales 2025 by reported segment.",
+       "total": 716924,
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "North America",
+         "value": 426305,
+         "key": "na"
+        },
+        {
+         "label": "International",
+         "value": 161894,
+         "key": "in"
+        },
+        {
+         "label": "AWS",
+         "value": 128725,
+         "key": "aws"
+        }
+       ]
+      },
+      {
+       "title": "Where operating profit comes from",
+       "sub": "Segment operating income 2025 as filed.",
+       "total": 79975,
+       "total_label": "Operating income",
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "North America",
+         "value": 29619,
+         "key": "na"
+        },
+        {
+         "label": "International",
+         "value": 4750,
+         "key": "in"
+        },
+        {
+         "label": "AWS",
+         "value": 45606,
+         "key": "aws"
+        }
+       ]
+      }
+     ],
+     "callout": "AWS: **18.0%** of sales, **57.0%** of operating income (derived). Operating margin: AWS 35.4%, North America 6.9%, International 2.9% (derived).",
+     "note": "US$ millions. Segment operating income is reported after allocated costs as in the 10-K segment note. [[10k]]"
+    }
+   ]
+  },
+  {
+   "id": "loop",
+   "title": "The flywheel",
+   "lede": "Amazon's own description of its loop: customer experience drives sales, scale lowers costs per unit, cash is reinvested. Each step cites the 10-K. These are Amazon's stated aims and results, not measured cause and effect.",
+   "blocks": [
+    {
+     "type": "loop",
+     "title": "Amazon's loop, 2025",
+     "steps": [
+      {
+       "title": "Price, selection, speed",
+       "figure": "Sales +12%",
+       "edge": "more unit sales",
+       "text": "Net sales rose to 716,924 from 637,959 (+12%). The 10-K says increased unit sales \"were driven largely by our continued focus on price, selection, and convenience for our customers, including from our fast shipping offers\".",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "Sellers, ads, Prime",
+       "figure": "3P $172B · Ads $69B",
+       "edge": "Prime $49.6B",
+       "text": "Sales growth \"primarily reflects increased unit sales, including sales by third-party sellers, advertising sales, and subscription services\": seller services 172,162, advertising 68,635, subscriptions (including Prime) 49,619.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "Lower cost per unit",
+       "figure": "Op. margin 11.2%",
+       "edge": "AWS 57% of profit",
+       "text": "To \"decrease our variable costs on a per unit basis and enable us to lower prices\", Amazon says it seeks to increase direct sourcing, increase supplier discounts and reduce defects. Operating income was 79,975 (11.2% of sales, derived), of which AWS earned 45,606 (57%, derived).",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "Cash reinvested",
+       "figure": "Capex $131.8B",
+       "edge": "customer experience",
+       "text": "Operating cash flow was 139,514 and purchases of property and equipment 131,819. The 10-K says operating income is partly offset by \"investments we make in longer-term strategic initiatives, including capital expenditures focused on improving the customer experience\".",
+       "src": [
+        "10k"
+       ]
+      }
+     ],
+     "note": "Capex covers the whole company, including AWS data centers; the 10-K does not split it by purpose in this sentence. [[10k]]"
     }
    ]
   }

@@ -332,6 +332,57 @@
      "headline": "Only about 16.6% of all gold ever mined has a publicly named owner."
     },
     {
+     "type": "waffle",
+     "title": "Every tonne of gold ever mined, by holder",
+     "unit": "tonnes",
+     "dec": 1,
+     "cell": 1000,
+     "cell_label": "1,000 tonnes (1,000,000 kg)",
+     "cols": 24,
+     "total_label": "Approx. gold ever mined",
+     "items": [
+      {
+       "label": "Central banks & governments (79 IMF reporters)",
+       "value": 31221.9,
+       "src": [
+        "irfcl"
+       ]
+      },
+      {
+       "label": "IMF",
+       "value": 2814.1,
+       "src": [
+        "imfgold"
+       ]
+      },
+      {
+       "label": "Largest US gold ETFs (GLD, IAU, GLDM)",
+       "value": 1739.55,
+       "src": [
+        "gld",
+        "iau",
+        "gldm"
+       ]
+      },
+      {
+       "label": "Tether (disclosed company)",
+       "value": 168.2,
+       "src": [
+        "tether"
+       ]
+      },
+      {
+       "label": "Privately held, owner not public (jewelry, bars, coins)",
+       "value": 180046.2,
+       "est": true,
+       "est_label": "derived estimate",
+       "color": "#3a4252",
+       "src": []
+      }
+     ],
+     "note": "The first four holders are published figures. The hatched block is not reported anywhere: it is the USGS-based estimate of all gold ever mined (215,990 t) minus the named holders, so it carries the uncertainty of that estimate. The IMF, ETF and Tether blocks are small next to one square: Tether rounds to zero squares, so use the table for exact tonnes."
+    },
+    {
      "type": "math",
      "title": "Approx. gold ever mined (USGS cumulative production)",
      "lines": [

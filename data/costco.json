@@ -263,6 +263,24 @@
        "label": "Net income",
        "col": 4,
        "kind": "profit"
+      },
+      {
+       "id": "div",
+       "label": "Dividends paid",
+       "col": 5,
+       "kind": "key"
+      },
+      {
+       "id": "bb",
+       "label": "Share buybacks",
+       "col": 5,
+       "kind": "key"
+      },
+      {
+       "id": "ret",
+       "label": "Kept in the business †",
+       "col": 5,
+       "kind": "profit"
       }
      ],
      "links": [
@@ -325,9 +343,31 @@
        "pt",
        "ni",
        9226
+      ],
+      [
+       "ni",
+       "div",
+       2458
+      ],
+      [
+       "ni",
+       "bb",
+       848
+      ],
+      [
+       "ni",
+       "ret",
+       5920
       ]
      ],
-     "note": "Net sales by category and all lines in US$ millions from the 10-K: 116,788 + 77,375 + 41,715 + 61,369 = 297,247 net sales; + 5,907 membership = 303,154. Interest & other, net = 711 interest income & other − 145 interest expense = 566 (derived). [[10k]]"
+     "note": "Net sales by category and all lines in US$ millions from the 10-K: 116,788 + 77,375 + 41,715 + 61,369 = 297,247 net sales; + 5,907 membership = 303,154. Interest & other, net = 711 interest income & other − 145 interest expense = 566 (derived). [[10k]] Net income 9,226 → dividends 2,458 + buybacks 848 (cash flow statement) + kept in the business 5,920 (9,226 − 2,458 − 848, derived). No special dividend in FY2026. [[10k]]",
+     "live": true,
+     "id": "sk",
+     "period_seconds": 31449600,
+     "period_text": "Fiscal-year total ÷ seconds in the fiscal year. Costco's FY2026 was 52 weeks = 364 days = 31,449,600 seconds (not 365 days). Each counter shows that per-second rate × seconds since Jan 1 in your time zone.",
+     "derived": [
+      "ret"
+     ]
     },
     {
      "type": "sankey",
@@ -1344,6 +1384,168 @@
       }
      ],
      "note": "Several entries currently rest on Wikipedia; they should be checked against Costco's own filings and releases before launch."
+    }
+   ]
+  },
+  {
+   "id": "answer",
+   "title": "The short answer",
+   "lede": "Costco earns money in two ways: a thin markup on goods, and membership fees. In fiscal 2026 membership fees were **1.9%** of revenue but about **51%** of operating income (derived, math below). [[10k]]",
+   "blocks": [
+    {
+     "type": "pairs",
+     "groups": [
+      {
+       "title": "Where revenue comes from",
+       "sub": "Total revenue FY2026, as reported on the income statement.",
+       "total": 303154,
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "Merchandise (net sales)",
+         "value": 297247,
+         "key": "m"
+        },
+        {
+         "label": "Membership fees",
+         "value": 5907,
+         "key": "f"
+        }
+       ]
+      },
+      {
+       "title": "Where operating profit comes from",
+       "sub": "Derived (†): Costco reports operating income by geography only, not by fees vs. merchandise.",
+       "total": 11685,
+       "total_label": "Operating income",
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "Membership fees †",
+         "value": 5907,
+         "key": "f"
+        },
+        {
+         "label": "Merchandise, after all costs †",
+         "value": 5778,
+         "key": "m"
+        }
+       ]
+      }
+     ],
+     "callout": "Membership fees: **1.9%** of revenue, **50.6%** of operating income (5,907 ÷ 11,685, derived). A year earlier: fees 5,323 of 10,383 operating income = 51.3% (derived).",
+     "note": "† Derived. Costco's 10-K reports membership fees as a revenue line but reports operating income only by geographic segment (below). This view assumes every fee dollar falls to operating income (no cost is allocated to fees) and the rest, 11,685 − 5,907 = 5,778, is what merchandise earned after merchandise costs and SG&A. US$ millions. [[10k]]"
+    },
+    {
+     "type": "pairs",
+     "groups": [
+      {
+       "title": "Revenue by reported segment",
+       "sub": "The three segments Costco reports, FY2026.",
+       "total": 303154,
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "United States",
+         "value": 219823,
+         "key": "us"
+        },
+        {
+         "label": "Canada",
+         "value": 40561,
+         "key": "ca"
+        },
+        {
+         "label": "Other International",
+         "value": 42770,
+         "key": "oi"
+        }
+       ]
+      },
+      {
+       "title": "Operating income by reported segment",
+       "sub": "Segment operating income as filed.",
+       "total": 11685,
+       "total_label": "Operating income",
+       "src": [
+        "10k"
+       ],
+       "items": [
+        {
+         "label": "United States",
+         "value": 7647,
+         "key": "us"
+        },
+        {
+         "label": "Canada",
+         "value": 2107,
+         "key": "ca"
+        },
+        {
+         "label": "Other International",
+         "value": 1931,
+         "key": "oi"
+        }
+       ]
+      }
+     ],
+     "note": "Operating margin: US 3.5%, Canada 5.2%, Other International 4.5% (derived). [[10k]]"
+    }
+   ]
+  },
+  {
+   "id": "loop",
+   "title": "The flywheel",
+   "lede": "Costco's own description of how the model feeds itself, with the filed numbers on each step. The 10-K states these links as its business model and beliefs, not as measured cause and effect.",
+   "blocks": [
+    {
+     "type": "loop",
+     "title": "Costco's loop, FY2026",
+     "steps": [
+      {
+       "title": "Low prices",
+       "figure": "11.09% gross margin",
+       "edge": "10.1% sales growth",
+       "text": "Costco says offering low prices on a limited selection of products \"will produce high sales volumes and rapid inventory turnover\". Gross margin was 32,968 on net sales of 297,247 = 11.09%.",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "High volume",
+       "figure": "$297.2B net sales",
+       "edge": "$264.3B bought",
+       "text": "Net sales rose from 269,912 to 297,247 (+10.1%, derived).",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "Lower costs",
+       "figure": "SG&A 9.15% of sales",
+       "edge": "75.2% Exec. sales",
+       "text": "Executive members were about 75.2% of worldwide net sales. The 10-K says volume purchasing, efficient distribution and no-frills warehouses \"enable us to operate profitably at significantly lower gross margins\" than most retailers. SG&A was 27,190 = 9.15% of net sales, versus 9.25% in FY2025 (24,966 ÷ 269,912, both derived).",
+       "src": [
+        "10k"
+       ]
+      },
+      {
+       "title": "Members renew",
+       "figure": "92.3% US & Canada",
+       "edge": "$5.9B fees",
+       "text": "Membership fees were 5,907 (+11%). Renewal rates were 92.3% in the U.S. and Canada and 89.8% worldwide. The 10-K says that sustaining \"high renewal rates materially influences our profitability\". It does not say fees fund lower prices.",
+       "src": [
+        "10k"
+       ]
+      }
+     ],
+     "note": "Renewal rate is Costco's trailing calculation (renewals 7 to 18 months before the reporting date). Derived figures are marked. [[10k]]"
     }
    ]
   }

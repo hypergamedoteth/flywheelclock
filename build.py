@@ -34,6 +34,7 @@ def qty(v, unit):
     if unit == "t": return f"{v:,.0f} t" if v >= 100 or v == int(v) else f"{v:,.1f} t"
     if unit == "bbl": return f"{v:,.0f} bbl" if v < 1e9 else f"{v/1e9:,.1f}B bbl"
     if unit == "btc": return f"{v:,.0f} BTC"
+    if unit == "bpd": return f"{v / 1e6:,.2f}M bbl/d"
     return f"{v:,.0f}"
 
 class Page:
@@ -43,6 +44,7 @@ class Page:
         self.src = entry.get("sources", {})
         self.order = list(self.src)
         self.cited = set()
+        self.live = []      # live counters registered by blocks (sankey nodes)
 
     def cite(self, sid):
         if sid not in self.src: return f'<sup class="cite miss">[{esc(sid)}?]</sup>'
@@ -91,14 +93,22 @@ def b_ticker(P, b):
 
 KIND_COL = {"in": "#3fb8af", "key": "#f2b84b", "mid": "#8aa4c8", "cost": "#e0656f", "profit": "#4cc38a"}
 
+def rate_txt(v):
+    """US$/second text for a US$ annual amount."""
+    a = abs(v)
+    if a >= 1e6: return f"${v/1e6:,.1f}M/s"
+    if a >= 1e3: return f"${v/1e3:,.1f}K/s"
+    return f"${v:,.0f}/s"
+
 def b_sankey(P, b):
+    live = bool(b.get("live")); secs = b.get("period_seconds")
     nodes = {n["id"]: dict(n, ins=0, outs=0) for n in b["nodes"]}
     for s, t, v in b["links"]: nodes[s]["outs"] += v; nodes[t]["ins"] += v
     for n in nodes.values(): n["v"] = max(n["ins"], n["outs"])
     ncol = max(n["col"] for n in nodes.values()) + 1
     cols = [[n for n in b["nodes"] if n["col"] == c] for c in range(ncol)]
     cols = [[nodes[n["id"]] for n in c] for c in cols]
-    W, LM, RM, NW, GAP, HI, SLOT = 1100, 300, 300, 12, 16, 360, 34
+    W, LM, RM, NW, GAP, HI, SLOT = (1320 if live else 1100), 300, (250 if live else 300), 12, 16, 360, (58 if live else 34)
     maxtot = max(sum(n["v"] for n in c) for c in cols)
     k = (HI - GAP * (max(len(c) for c in cols) - 1)) / maxtot
     xs = [LM + i * (W - LM - RM - NW) / max(ncol - 1, 1) for i in range(ncol)]
@@ -129,7 +139,7 @@ def b_sankey(P, b):
             if prev and n["y"] < prev["y"] + max(prev["h"], SLOT) + GAP: n["y"] = prev["y"] + max(prev["h"], SLOT) + GAP
             prev = n
     H = max(n["y"] + max(n["h"], SLOT) for n in nodes.values()) + 14
-    out = []
+    out = []; flows = []
     for l in links:
         s, t = l["s"], l["t"]; h = l["v"] * k
         x1, x0 = xs[s["col"]] + NW, xs[t["col"]]
@@ -137,18 +147,35 @@ def b_sankey(P, b):
         xm = (x1 + x0) / 2
         col = KIND_COL[t["kind"] if t["kind"] != "mid" else s["kind"]]
         out.append(f'<path d="M{x1:.1f},{sy:.1f}C{xm:.1f},{sy:.1f} {xm:.1f},{ty:.1f} {x0:.1f},{ty:.1f}L{x0:.1f},{ty + h:.1f}C{xm:.1f},{ty + h:.1f} {xm:.1f},{sy + h:.1f} {x1:.1f},{sy + h:.1f}Z" fill="{col}" opacity=".32"><title>{esc(s["label"])} → {esc(t["label"])}: {money(l["v"] * 1e6)}</title></path>')
+        if live:
+            flows.append(f'<path class="fl" d="M{x1:.1f},{sy + h / 2:.1f}C{xm:.1f},{sy + h / 2:.1f} {xm:.1f},{ty + h / 2:.1f} {x0:.1f},{ty + h / 2:.1f}" stroke-width="{max(1.4, min(h * .35, 7)):.1f}"/>')
+    out += flows
+    der = set(b.get("derived", []))
+    bid = b.get("id", "sk")
     for n in nodes.values():
         x = xs[n["col"]]; cy = n["y"] + n["h"] / 2
         out.append(f'<rect x="{x:.1f}" y="{n["y"]:.1f}" width="{NW}" height="{n["h"]:.1f}" rx="2" fill="{KIND_COL[n["kind"]]}"/>')
         if n["col"] == 0: tx, anc = x - 8, "end"
         elif n["col"] == ncol - 1: tx, anc = x + NW + 8, "start"
         else: tx, anc = x + NW + 6, "start"
-        val = money(n["v"] * 1e6)
-        out.append(f'<text x="{tx:.1f}" y="{cy - 1:.1f}" text-anchor="{anc}" class="nl">{esc(n["label"])}</text>'
-                   f'<text x="{tx:.1f}" y="{cy + 13:.1f}" text-anchor="{anc}" class="nv">{val}</text>')
+        val = money(n["v"] * 1e6) + (" †" if n["id"] in der else "")
+        t0 = max(cy - (14 if live else 1), 16)
+        out.append(f'<text x="{tx:.1f}" y="{t0:.1f}" text-anchor="{anc}" class="nl">{esc(n["label"])}</text>'
+                   f'<text x="{tx:.1f}" y="{t0 + 14:.1f}" text-anchor="{anc}" class="nv">{val}</text>')
+        if live:
+            cid = f"{bid}-{n['id']}"; r = n["v"] * 1e6 / secs
+            P.live.append(dict(id=cid, unit="usd", rate=r))
+            out.append(f'<text x="{tx:.1f}" y="{t0 + 28:.1f}" text-anchor="{anc}" class="nc"><tspan data-ctr="{cid}" data-mode="year" data-fmt="c">{money(r)}</tspan><tspan class="nr"> · {rate_txt(r)}</tspan></text>')
     svg = f'<svg viewBox="0 0 {W} {H:.0f}" role="img" aria-label="{esc(b.get("title", "Flow"))}">{"".join(out)}</svg>'
-    return (f'<figure class="sk"><figcaption>{esc(b.get("title", ""))}</figcaption><p class="skhint">Scroll sideways to follow the money →</p><div class="skw">{svg}</div>'
-            f'<p class="fine">{P.rich(b.get("note", ""))}</p></figure>')
+    extra = ""
+    if live:
+        rows = "".join(f'<tr><td>{esc(n["label"])}{" †" if n["id"] in der else ""}</td><td class="r num">{money(n["v"] * 1e6, 2)}</td><td class="r num">{rate_txt(n["v"] * 1e6 / secs)}</td></tr>' for n in nodes.values())
+        lrows = "".join(f'<tr><td>{esc(l["s"]["label"])} → {esc(l["t"]["label"])}</td><td class="r num">{money(l["v"] * 1e6, 2)}</td><td class="r num">{rate_txt(l["v"] * 1e6 / secs)}</td></tr>' for l in links)
+        extra = (f'<p class="fine"><b>Per-second basis:</b> {esc(b.get("period_text", ""))} The counters are projections from that average, not live sales. † = derived (calculated from filed figures, math in the note).</p>'
+                 f'<details><summary>Every node and flow as text ({len(nodes)} nodes, {len(links)} flows)</summary><div class="tw"><table class="v"><thead><tr><th>Node</th><th class="r">Fiscal year</th><th class="r">Per second</th></tr></thead><tbody>{rows}</tbody></table></div>'
+                 f'<div class="tw"><table class="v"><thead><tr><th>Flow</th><th class="r">Fiscal year</th><th class="r">Per second</th></tr></thead><tbody>{lrows}</tbody></table></div></details>')
+    return (f'<figure class="sk{" live" if live else ""}"><figcaption>{esc(b.get("title", ""))}{" <span class=\"badge ok\">live flow</span>" if live else ""}</figcaption><p class="skhint">Scroll sideways to follow the money →</p><div class="skw">{svg}</div>'
+            f'<p class="fine">{P.rich(b.get("note", ""))}</p>{extra}</figure>')
 
 def b_stats(P, b):
     items = "".join(f'<div class="stat"><div class="l">{esc(l)}</div><div class="v num">{esc(v)}</div><div class="s">{P.rich(s)}</div></div>'
@@ -245,6 +272,109 @@ def b_list(P, b):
 def b_pending(P, b):
     return f'<div class="pending"><b>Data pending.</b> {esc(b.get("text", "This section will fill in when the sourced data is ready."))}</div>'
 
+
+# ---------------------------------------------------------------- visual 1: paired stacked bars
+PAL = ["#f2b84b", "#3fb8af", "#8aa4c8", "#e0656f", "#4cc38a", "#b48ead", "#d08770", "#7a8699"]
+
+def b_pairs(P, b):
+    """Two stacked bars on the same segments: where revenue comes from vs where profit comes from."""
+    keys = {}
+    def col(k):
+        if k not in keys: keys[k] = PAL[len(keys) % len(PAL)]
+        return keys[k]
+    cols = []
+    for g in b["groups"]:
+        pos = [i for i in g["items"] if i["value"] > 0]; tot = sum(i["value"] for i in pos)
+        segs = "".join(f'<i style="width:{i["value"] / tot * 100:.3f}%;background:{col(i.get("key", i["label"]))}" title="{esc(i["label"])}: {i["value"] / tot * 100:.1f}%"></i>' for i in pos)
+        rows = ""
+        for i in g["items"]:
+            c = col(i.get("key", i["label"]))
+            if i["value"] > 0:
+                rows += f'<li><span class="sw" style="background:{c}"></span><span class="pl">{esc(i["label"])}</span><span class="pv num">{money(i["value"] * 1e6, 2)}</span><span class="pp num">{i["value"] / tot * 100:.1f}%</span></li>'
+            else:
+                rows += f'<li class="neg"><span class="sw" style="background:transparent;border:1px dashed {c}"></span><span class="pl">{esc(i["label"])} (negative, not drawn)</span><span class="pv num">{money(i["value"] * 1e6, 2)}</span><span class="pp num">–</span></li>'
+        cols.append(f'<div class="pcol"><h3>{esc(g["title"])}{P.cites(g.get("src"))}</h3><p class="psub">{esc(g.get("sub", ""))}</p><div class="pbar">{segs}</div>'
+                    f'<ul class="plist">{rows}</ul><p class="ptot num">{esc(g.get("total_label", "Total"))}: {money(g["total"] * 1e6, 2)}</p></div>')
+    call = f'<p class="pcall">{P.rich(b["callout"])}</p>' if b.get("callout") else ""
+    note = f'<p class="fine">{P.rich(b["note"])}</p>' if b.get("note") else ""
+    return f'<div class="card pairs"><div class="pgrid">{"".join(cols)}</div>{call}{note}</div>'
+
+# ---------------------------------------------------------------- visual 3a: flywheel loop
+import math as _m
+def b_loop(P, b):
+    steps = b["steps"]; n = len(steps)
+    CX, CY, RX, RY, BW, BH = 380, 330, 262, 225, 206, 74
+    pos = []
+    for i in range(n):
+        a = -_m.pi / 2 + i * 2 * _m.pi / n
+        pos.append((a, CX + RX * _m.cos(a), CY + RY * _m.sin(a)))
+    out = ['<defs><marker id="ah" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0,0L10,5L0,10z" fill="#f2b84b"/></marker></defs>',
+           f'<ellipse cx="{CX}" cy="{CY}" rx="{RX}" ry="{RY}" fill="none" stroke="#1d2531" stroke-width="2"/>']
+    # arrows: along the ellipse, from the edge of one box to the edge of the next
+    def pt(a): return CX + RX * _m.cos(a), CY + RY * _m.sin(a)
+    def inside(a, i):
+        x, y = pt(a); bx, by = pos[i][1], pos[i][2]
+        return abs(x - bx) < BW / 2 + 8 and abs(y - by) < BH / 2 + 8
+    labels = []
+    for i in range(n):
+        a0, a1 = pos[i][0], pos[i][0] + 2 * _m.pi / n
+        s0 = a0
+        while inside(s0, i): s0 += .01
+        e0 = a1
+        while inside(e0, (i + 1) % n): e0 -= .01
+        (x0, y0), (x1, y1) = pt(s0), pt(e0)
+        out.append(f'<path class="arc" d="M{x0:.1f},{y0:.1f}A{RX},{RY} 0 0 1 {x1:.1f},{y1:.1f}" marker-end="url(#ah)"/>')
+        am = (s0 + e0) / 2; lx, ly = pt(am)
+        labels.append((lx, ly, steps[i].get("edge", "")))
+    for lx, ly, t in labels:
+        if not t: continue
+        w = len(t) * 8.3 + 18
+        out.append(f'<g class="elab"><rect x="{lx - w / 2:.1f}" y="{ly - 13:.1f}" width="{w:.1f}" height="26" rx="13"/><text x="{lx:.1f}" y="{ly + 5:.1f}" text-anchor="middle">{esc(t)}</text></g>')
+    for i, st in enumerate(steps):
+        _, x, y = pos[i]
+        out.append(f'<g class="lnode"><rect x="{x - BW / 2:.1f}" y="{y - BH / 2:.1f}" width="{BW}" height="{BH}" rx="12"/>'
+                   f'<text x="{x:.1f}" y="{y - 10:.1f}" text-anchor="middle" class="lt">{i + 1}. {esc(st["title"])}</text>'
+                   f'<text x="{x:.1f}" y="{y + 18:.1f}" text-anchor="middle" class="lf">{esc(st["figure"])}</text></g>')
+    svg = f'<svg viewBox="0 50 760 560" role="img" aria-label="{esc(b.get("title", "Flywheel"))}">{"".join(out)}</svg>'
+    lis = "".join(f'<li><b>{esc(st["title"])}</b> <span class="num">{esc(st["figure"])}</span>. {P.rich(st["text"])}{P.cites(st.get("src"))}</li>' for st in steps)
+    note = f'<p class="fine">{P.rich(b["note"])}</p>' if b.get("note") else ""
+    return (f'<figure class="loop"><figcaption>{esc(b.get("title", ""))}</figcaption><p class="skhint">Scroll sideways to see the whole loop →</p><div class="loopw">{svg}</div>'
+            f'<ol class="looptxt">{lis}</ol>{note}</figure>')
+
+# ---------------------------------------------------------------- visual 3b: holder waffle grid
+def b_waffle(P, b):
+    cell = b["cell"]; tot = sum(i["value"] for i in b["items"])
+    raw = [i["value"] / cell for i in b["items"]]; cnt = [int(r) for r in raw]
+    left = round(sum(raw)) - sum(cnt)
+    for j in sorted(range(len(raw)), key=lambda j: raw[j] - cnt[j], reverse=True)[:max(left, 0)]: cnt[j] += 1
+    N = sum(cnt); COLS = b.get("cols", 25); S, G = 22, 3
+    ROWS = -(-N // COLS)
+    defs, groups, k = [], [], 0
+    for idx, (it, c) in enumerate(zip(b["items"], cnt)):
+        colr = PAL[idx % len(PAL)] if "color" not in it else it["color"]
+        it["_c"] = colr
+        if it.get("est"):
+            defs.append(f'<pattern id="h{idx}" width="6" height="6" patternUnits="userSpaceOnUse" patternTransform="rotate(45)"><rect width="6" height="6" fill="#161b24"/><rect width="3" height="6" fill="{colr}"/></pattern>')
+            fill = f"url(#h{idx})"
+        else: fill = colr
+        rects = ""
+        for _ in range(c):
+            r, cc = divmod(k, COLS); k += 1
+            rects += f'<rect x="{cc * (S + G)}" y="{r * (S + G)}" width="{S}" height="{S}" rx="3" fill="{fill}"{" stroke=\"" + colr + "\" stroke-width=\"1\"" if it.get("est") else ""}/>'
+        groups.append(f'<g class="wg" style="--d:{idx * .12:.2f}s"><title>{esc(it["label"])}: {c} squares</title>{rects}</g>')
+    W, H = COLS * (S + G) - G, ROWS * (S + G) - G
+    svg = f'<svg viewBox="0 0 {W} {H}" role="img" aria-label="{esc(b.get("title", "Holders"))}"><defs>{"".join(defs)}</defs>{"".join(groups)}</svg>'
+    unit = b["unit"]; fmtv = lambda v: f'{v:,.{b.get("dec", 0)}f} {unit}'
+    rows = ""
+    for it, c in zip(b["items"], cnt):
+        sw = f'<span class="sw{" hatch" if it.get("est") else ""}" style="--c:{it["_c"]}"></span>'
+        est = f' <span class="badge warn">{esc(it.get("est_label", "estimate"))}</span>' if it.get("est") else ""
+        rows += f'<tr><td>{sw}{esc(it["label"])}{est}{P.cites(it.get("src"))}</td><td class="r num">{fmtv(it["value"])}</td><td class="r num">{it["value"] / tot * 100:.1f}%</td><td class="r num">{c}</td></tr>'
+    note = f'<p class="fine">{P.rich(b["note"])}</p>' if b.get("note") else ""
+    return (f'<div class="card waffle"><h3>{esc(b.get("title", ""))}</h3><p class="fine" style="margin:-6px 0 12px"><b>1 square = {b["cell_label"]}</b>. {N} squares in all. Rounded to the nearest square; exact figures in the table. Hatched squares are estimates.</p>'
+            f'<div class="wafw">{svg}</div><div class="tw"><table class="v"><thead><tr><th>Holder</th><th class="r">{esc(unit)}</th><th class="r">Share</th><th class="r">Squares</th></tr></thead><tbody>{rows}'
+            f'<tr class="tot"><td>{esc(b.get("total_label", "Total shown"))}</td><td class="r num">{fmtv(tot)}</td><td class="r num">100%</td><td class="r num">{N}</td></tr></tbody></table></div>{note}</div>')
+
 BLOCKS = {k[2:]: v for k, v in globals().items() if k.startswith("b_")}
 
 def section(P, sid):
@@ -299,7 +429,7 @@ def entry_page(e):
     ids = re.findall(r'<section id="([\w-]+)"><div class="sh"><h2>([^<]+)</h2>', body)
     jump = '<nav class="jump">' + "".join(f'<a href="#{i}">{t}</a>' for i, t in ids) + "</nav>"
     tickers = [bl for s in e.get("sections", []) for bl in s["blocks"] if bl["type"] == "ticker"]
-    pj = json.dumps({"counters": [dict(id=c["id"], unit=c["unit"], rate=c["annual"] / t["period_seconds"]) for t in tickers for c in t["counters"]]})
+    pj = json.dumps({"counters": [dict(id=c["id"], unit=c["unit"], rate=c["annual"] / t["period_seconds"]) for t in tickers for c in t["counters"]] + P.live})
     url = BASE_URL + url_of(e); hub = TYPES[e["type"]]
     about = ({"@type": "Corporation", "name": e.get("legal_name", e["name"]), "tickerSymbol": e["ticker_symbol"]} if e.get("ticker_symbol") else {"@type": "Thing", "name": e["name"]})
     ld = {"@context": "https://schema.org", "@graph": [
