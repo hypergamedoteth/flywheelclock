@@ -420,12 +420,73 @@ def page(path, title, desc, content, active=None, jump="", page_json="{}", body_
     os.makedirs(os.path.dirname(fp), exist_ok=True)
     open(fp, "w", encoding="utf-8").write(out)
 
+def place_ticker_first(body):
+    """Put the live ticker first and the page summary directly after it.
+
+    Templates already use this order. Re-applied here so a future template that
+    still leads with the summary (or the title) cannot publish the old order.
+    """
+    tm = re.search(r'<section id="ticker">.*?</section>', body, re.S)
+    if not tm:
+        return body
+    lm = re.search(r'<p class="lede">.*?</p>', body, re.S)
+    if lm and tm.start() < lm.start() < tm.end():
+        lm = None  # a lede inside the ticker stays part of the ticker
+    ticker_first = body[:tm.start()].strip() == ""
+    lede_next = lm is not None and tm.end() <= lm.start() and body[tm.end():lm.start()].strip() == ""
+    if ticker_first and (lm is None or lede_next):
+        return body
+    ticker = tm.group(0)
+    spans = [(tm.start(), tm.end())]
+    lede = ""
+    if lm:
+        lede = lm.group(0)
+        spans.append((lm.start(), lm.end()))
+    rest = body
+    for a, b in sorted(spans, reverse=True):
+        rest = rest[:a] + rest[b:]
+    rest = rest.lstrip("\n")
+    return ticker + "\n" + (lede + "\n" if lede else "") + rest
+
+def place_summary_after_clocks(body):
+    """Homepage: compact title, then the clock cards, then the summary under the cards.
+
+    No-op when the template is already in that order. A headline left under the
+    cards is moved back above them. A summary left above the cards is moved under them.
+    """
+    hm = re.search(r"<h1>.*?</h1>", body, re.S)
+    lm = re.search(r'<p class="lede">.*?</p>', body, re.S)
+    first = re.search(r'<section><div class="sh">', body)
+    last = None
+    for last in re.finditer(r'<div class="ecards">.*?</div></section>', body, re.S):
+        pass
+    if not first or not last:
+        return body
+    title_ok = hm is not None and body[:hm.start()].strip() == "" and hm.end() <= first.start() and body[hm.end():first.start()].strip() == ""
+    lede_ok = lm is not None and lm.start() >= last.end() and body[last.end():lm.start()].strip() == ""
+    if title_ok and lede_ok:
+        return body
+    title = hm.group(0) if hm else ""
+    lede = lm.group(0) if lm else ""
+    rest = body
+    for a, b in sorted(((m.start(), m.end()) for m in (hm, lm) if m), reverse=True):
+        rest = rest[:a] + rest[b:]
+    first = re.search(r'<section><div class="sh">', rest)
+    last = None
+    for last in re.finditer(r'<div class="ecards">.*?</div></section>', rest, re.S):
+        pass
+    if not first or not last:
+        return body
+    cards = rest[first.start():last.end()].strip("\n")
+    return "\n".join(p for p in (title, cards, lede) if p) + "\n"
+
 def entry_page(e):
     P = Page(e)
     tpl = read(f"templates/{e.get('template', e['type'])}.html")
     body = re.sub(r"\{\{section:([\w-]+)\}\}", lambda m: section(P, m.group(1)), tpl)
     body = fill(body, h1=esc(e["title"]), tagline=esc(e.get("tagline", "")), as_of=esc(e.get("as_of", "")),
                 ticker_symbol=esc(e.get("ticker_symbol", "")), symbol=esc(e.get("symbol", "")), sources=sources_html(P))
+    body = place_ticker_first(body)
     ids = re.findall(r'<section id="([\w-]+)"><div class="sh"><h2>([^<]+)</h2>', body)
     jump = '<nav class="jump">' + "".join(f'<a href="#{i}">{t}</a>' for i, t in ids) + "</nav>"
     tickers = [bl for s in e.get("sections", []) for bl in s["blocks"] if bl["type"] == "ticker"]
@@ -461,9 +522,10 @@ def build():
         groups += f'<section><div class="sh"><h2><a href="/{d}/">{lab}</a></h2></div><div class="ecards">{cards}</div></section>'
         page(f"/{d}/", f"{lab} | Flywheel Clock", f"How the biggest {lab.lower()} make, move and hold money, with live clocks and sourced data.",
              f'<h1>{lab}</h1><div class="ecards">{cards}</div>', active=d)
+    home = place_summary_after_clocks(fill(read("templates/home.html"), groups=groups))
     page("/", "Flywheel Clock: how big companies and commodities really work",
          "Live money clocks for the biggest companies and commodities: where the money comes from, where it goes, and the decisions and history behind it.",
-         fill(read("templates/home.html"), groups=groups), body_class="home",
+         home, body_class="home",
          jsonld='<script type="application/ld+json">' + json.dumps({"@context": "https://schema.org", "@type": "WebSite", "name": "Flywheel Clock", "url": BASE_URL + "/",
                 "description": "Live money clocks for the biggest companies and commodities, with sourced data.",
                 "publisher": {"@type": "Organization", "name": "Hypergame", "url": BASE_URL + "/"}}) + '</script>\n')

@@ -18,6 +18,7 @@ main{max-width:1120px;margin:0 auto;padding:30px 20px 40px}
 h1{font-size:clamp(28px,4.4vw,46px);line-height:1.12;margin:.3em 0 .35em;letter-spacing:-.02em;max-width:900px}
 .lede{color:var(--mut);font-size:clamp(16px,1.6vw,19px);max-width:760px;margin:0 0 26px}
 section{margin:0 0 56px}
+#ticker{margin-bottom:18px}
 .sh{border-top:1px solid var(--line);padding-top:26px;margin-bottom:6px}
 h2{font-size:clamp(22px,2.6vw,30px);margin:0;letter-spacing:-.01em}h2 a{color:inherit}
 .slede{color:var(--mut);max-width:780px;margin:6px 0 20px}
@@ -80,8 +81,10 @@ details{margin-top:14px}summary{cursor:pointer;color:var(--teal);font-size:14px}
 ul.plain{margin:0;padding-left:20px;color:#c5cdd9}ul.plain li{margin:6px 0}
 .pending{border:1px dashed var(--line);color:var(--mut);border-radius:12px;padding:18px;margin:16px 0}
 .sources{font-size:13.5px;color:var(--mut);padding-left:26px;columns:2;column-gap:36px}.sources li{margin:0 0 6px;break-inside:avoid}.sources li:target{color:var(--txt);background:#1b1609}
-/* home */
-.intro{padding:20px 0 10px}.intro h1{font-size:clamp(32px,5.4vw,60px);max-width:900px}
+/* home: compact title above the clock cards; the summary sits under the cards */
+.home h1{font-size:clamp(26px,2.8vw,34px);line-height:1.2;margin:0 0 4px;letter-spacing:-.02em;max-width:none}
+.home h1+section>.sh{border-top:0;padding-top:4px}
+.home main>section:last-of-type{margin-bottom:14px}
 .ecards{display:grid;grid-template-columns:repeat(auto-fill,minmax(300px,1fr));gap:16px;margin-top:18px}
 .ecard{display:flex;flex-direction:column;background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:22px;color:var(--txt);transition:border-color .15s,transform .15s}
 .ecard:hover{border-color:#6b4d12;text-decoration:none;transform:translateY(-2px)}
