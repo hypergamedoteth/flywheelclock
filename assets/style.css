@@ -18,6 +18,7 @@ main{max-width:1120px;margin:0 auto;padding:30px 20px 40px}
 h1{font-size:clamp(28px,4.4vw,46px);line-height:1.12;margin:.3em 0 .35em;letter-spacing:-.02em;max-width:900px}
 .lede{color:var(--mut);font-size:clamp(16px,1.6vw,19px);max-width:760px;margin:0 0 26px}
 section{margin:0 0 56px}
+#ticker{margin-bottom:18px}
 .sh{border-top:1px solid var(--line);padding-top:26px;margin-bottom:6px}
 h2{font-size:clamp(22px,2.6vw,30px);margin:0;letter-spacing:-.01em}h2 a{color:inherit}
 .slede{color:var(--mut);max-width:780px;margin:6px 0 20px}
