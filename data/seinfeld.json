@@ -1,0 +1,392 @@
+{
+  "type": "show",
+  "slug": "seinfeld",
+  "template": "show",
+  "order": 10,
+  "live": true,
+  "name": "Seinfeld",
+  "symbol": "est.",
+  "title": "How much money does Seinfeld make? Reruns, streaming and who gets paid",
+  "description": "How much money does Seinfeld make? Netflix's 2019 deal was reported at more than $500 million. A labeled estimate of rerun money, who gets each dollar, and every deal sourced.",
+  "tagline": "Seinfeld stopped making episodes in 1998. Nearly 60 million Americans still watched it in the first half of 2026, and Netflix's 2019 deal was reported at more than $500 million for five years. Acquired estimates it cost about $250 million to make and has brought in about $5 billion in reruns. NBC did not own those reruns.",
+  "card_text": "Ended in 1998. The 2019 Netflix deal was reported at more than $500 million. The running total is a labeled estimate.",
+  "card_stat": {
+    "label": "Per second, est.",
+    "value": "$3.169",
+    "note": "Model from the 2019 Netflix run rate"
+  },
+  "as_of": "Reruns and streaming · Oct 18, 2026",
+  "sources": {
+    "ep": ["Acquired, \"Seinfeld\" (Fall 2026, Oct 18, 2026)", "https://www.acquired.fm/episodes/seinfeld"],
+    "pdf": ["Acquired companion library (charts and notes; transcript is not republished here)", "https://library.acquired.fm"],
+    "wsj": ["Wall Street Journal op-ed by the Acquired hosts, Oct 2026", "https://www.wsj.com/business/media/seinfeld-acquired-podcast-syndication-9370c0af"],
+    "folha": ["Folha, relaying the hosts' Wall Street Journal op-ed", "https://www1.folha.uol.com.br/ilustrada/2026/10/quase-25-dos-americanos-viram-ao-menos-um-episodio-de-seinfeld-em-2026.shtml"],
+    "thr2019": ["The Hollywood Reporter, Netflix's 2019 Seinfeld deal", "https://www.hollywoodreporter.com/tv/tv-news/netflix-lands-seinfeld-rights-losing-friends-office-1239934/"],
+    "lat2019": ["Los Angeles Times, Sept 16, 2019, Netflix acquires Seinfeld", "https://www.latimes.com/entertainment-arts/business/story/2019-09-16/netflix-acquires-the-global-streaming-rights-to-seinfeld"],
+    "varietyfinale": ["Variety, May 18, 1998, finale rating and ad average", "https://variety.com/1998/tv/news/nothing-works-for-nbc-1117470932/"],
+    "deadline": ["Deadline, Aug 2026, Netflix and Paramount renewals; Sony citing Nielsen", "https://deadline.com/2026/08/netflix-paramount-seinfeld-licensing-deal-extensions-1237031878/"],
+    "variety26": ["Variety, 2026, Netflix Seinfeld renewal", "https://variety.com/2026/tv/news/seinfeld-netflix-streaming-deal-five-years-1236833084/"],
+    "thr2026": ["The Hollywood Reporter, 2026, new five-year Netflix deal", "https://www.hollywoodreporter.com/tv/tv-news/seinfeld-streaming-on-netflix-new-five-year-deal-1236672111/"],
+    "thewrap": ["TheWrap, 2026 renewal and the H1 2026 audience", "https://www.thewrap.com/creative-content/tv-shows/seinfeld-netflix-paramount-renews-licensing-deal/"],
+    "lat1995": ["Los Angeles Times, Sept 11, 1995, first syndication sale", "https://www.latimes.com/archives/la-xpm-1995-09-11-ca-44587-story.html"],
+    "variety98": ["Variety, 1998, TBS Seinfeld deal", "https://variety.com/1998/tv/news/seinbucks-1117480406/"],
+    "mcn": ["Multichannel News, TBS record fee for Seinfeld", "https://www.nexttv.com/news/million-dollar-sitcom-tbs-pays-record-fee-seinfeld-145405"],
+    "vulture": ["Vulture, 2014, the Seinfeld economy", "https://www.vulture.com/2014/06/breaking-down-the-seinfeld-economy.html"],
+    "variety15": ["Variety, 2015, Hulu's Seinfeld license", "https://variety.com/2015/tv/news/hulu-seinfeld-licensing-160-million-1201483537/"],
+    "cnn": ["CNN, Dec 26, 1997, pay, profits and the tenth-season offer", "https://www.cnn.com/SHOWBIZ/9712/26/seinfeld/index.html"],
+    "lat98": ["Los Angeles Times, May 16, 1998, finale rating", "https://www.latimes.com/archives/la-xpm-1998-may-16-ca-50143-story.html"],
+    "latad": ["Los Angeles Times, Feb 18, 1998, finale ad prices", "https://www.latimes.com/archives/la-xpm-1998-feb-18-fi-20263-story.html"],
+    "lat93": ["Los Angeles Times, Aug 18, 1993, Turner buys Castle Rock", "https://www.latimes.com/archives/la-xpm-1993-08-18-fi-25054-story.html"]
+  },
+  "sections": [
+    {
+      "id": "ticker",
+      "title": "Ticker",
+      "blocks": [
+        {
+          "type": "ticker",
+          "period_seconds": 31557600,
+          "kicker": "Rerun and streaming money since 1995",
+          "label": "est.",
+          "counters": [
+            {
+              "id": "total",
+              "label": "Rerun and streaming money",
+              "annual": 100000000,
+              "base": 5000000000,
+              "since": "2026-10-18T05:00:00Z",
+              "unit": "usd",
+              "hero": true
+            }
+          ],
+          "facts": [
+            ["Anchor", "$5.0 billion"],
+            ["Lifetime average", "~$5.09/s"],
+            ["Count starts", "Oct 18, 2026"]
+          ],
+          "note": "Total(t) = $5,000,000,000 + about $3.169 x seconds since Oct 18, 2026, 00:00 Central Time (05:00 UTC; daylight time, UTC−5). About $3.169 a second = $100,000,000 a year / 31,557,600 seconds. That year is the run rate of Netflix's 2019 deal, reported at more than $500 million over five years [[thr2019]][[lat2019]]. Model, not a live feed. The $5.0 billion anchor is Acquired's estimate of syndication, cable, streaming and DVD money to the owners through the episode date (around $5 billion to the cap table) [[ep]]. Their Wall Street Journal op-ed, as relayed by Folha, put the total since the 1998 finale at more than $4.5 billion [[folha]]. Actual receipts are not published. The 2026 renewal price was not disclosed. Deadline reported it as lower than the 2019 deal [[deadline]], so this rate is not the current contract. Lifetime average since Sept 1995: about $5.09 a second, the same $5.0 billion over about 31.1 years."
+        }
+      ]
+    },
+    {
+      "id": "numbers",
+      "title": "By the numbers",
+      "lede": "Reported figures only. The show is 180 episodes, 1989 to 1998. [[lat2019]][[deadline]]",
+      "blocks": [
+        {
+          "type": "cards",
+          "items": [
+            {
+              "kicker": "Finale",
+              "big": "76.3M",
+              "title": "watched the last episode",
+              "text": "May 14, 1998. Nielsen counted 76.3 million viewers. Variety reported a 41.3 rating and a 58 share. Sixth among entertainment broadcasts then, not counting the Super Bowl. The M*A*S*H finale drew 106 million.",
+              "src": ["lat98", "varietyfinale"]
+            },
+            {
+              "kicker": "Finale ads",
+              "big": "$2M",
+              "title": "for 30 seconds, reported",
+              "text": "NBC sold the first 30-second spots for $2 million, 54% above the $1.3 million Super Bowl price. Variety later put the average finale spot at $1.7 million.",
+              "src": ["latad", "varietyfinale"]
+            },
+            {
+              "kicker": "Tenth season",
+              "big": "$5M",
+              "title": "an episode, offered and declined",
+              "text": "CNN reported NBC's offer at $5 million an episode. Vulture put it at $5 million an episode, or $110 million for the year. He said no.",
+              "src": ["cnn", "vulture"]
+            },
+            {
+              "kicker": "Netflix, 2019",
+              "big": ">$500M",
+              "title": "for five years, worldwide",
+              "text": "Reported at more than $500 million. Dividing that floor by five years is about $100 million a year. The 2026 price was not disclosed.",
+              "src": ["thr2019", "lat2019"]
+            },
+            {
+              "kicker": "Still watching",
+              "big": "~60M",
+              "title": "Americans, first half of 2026",
+              "text": "Nearly 60 million Americans, about 20% of the US. Deadline, citing Nielsen via Sony, says that count is at least one minute.",
+              "src": ["deadline", "thewrap"]
+            },
+            {
+              "kicker": "First syndication",
+              "big": "224",
+              "title": "stations, a record, 1995",
+              "text": "The first off-network sale. The dollar total for that cycle was not published.",
+              "src": ["lat1995"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flow",
+      "title": "Who gets each rerun dollar",
+      "lede": "Acquired's estimate of the split. The contracts were never published. In 2019 the LA Times said WarnerMedia, CBS, Seinfeld and Larry David share the revenue after Sony's distribution cut, and it gave no percentages. [[lat2019]]",
+      "blocks": [
+        {
+          "type": "sankey",
+          "estimate": true,
+          "title": "Shares of the $100 million-a-year model",
+          "banner": "Acquired's estimate. Widths are shares of each rerun dollar. The dollar labels apply those shares to Netflix's 2019 run rate, about $100 million a year. Not published receipts.",
+          "nodes": [
+            {"id": "rate", "label": "Run rate", "col": 0, "kind": "in"},
+            {"id": "castle", "label": "Castle Rock / Warner", "col": 1, "kind": "key"},
+            {"id": "sony", "label": "Sony", "col": 1, "kind": "key"},
+            {"id": "jerry", "label": "Jerry Seinfeld", "col": 1, "kind": "key"},
+            {"id": "larry", "label": "Larry David", "col": 1, "kind": "key"},
+            {"id": "mgr", "label": "Shapiro / West", "col": 1, "kind": "key"}
+          ],
+          "links": [
+            ["rate", "castle", 50],
+            ["rate", "sony", 15],
+            ["rate", "jerry", 15],
+            ["rate", "larry", 15],
+            ["rate", "mgr", 5]
+          ],
+          "note": "Out of each rerun dollar: 50 cents Castle Rock / Warner, 15 cents Sony, 15 cents Jerry, 15 cents Larry, 5 cents Shapiro / West. Per second at $3.169: about $1.58, $0.48, $0.48, $0.48 and $0.16. Cents are rounded. 15% of $3.169 is $0.475. The episode describes Larry's piece as a little less than Jerry's after Sony's cut; the drawing uses the rounded split. [[ep]]"
+        },
+        {
+          "type": "table",
+          "title": "The same split as text",
+          "cols": ["Who", "Share of $1", "Of the $100M model", "Per second"],
+          "align": "llll",
+          "rows": [
+            ["Castle Rock / Warner", "50 cents", "$50 million", "about $1.58"],
+            ["Sony", "15 cents", "$15 million", "about $0.48"],
+            ["Jerry Seinfeld", "15 cents", "$15 million", "about $0.48"],
+            ["Larry David", "15 cents", "$15 million", "about $0.48"],
+            ["Shapiro / West", "5 cents", "$5 million", "about $0.16"],
+            ["Each rerun dollar", "$1", "$100 million", "$3.169"]
+          ],
+          "note": "Acquired's estimate, applied to the Netflix 2019 run rate. Terms were never published. [[ep]][[thr2019]]"
+        }
+      ]
+    },
+    {
+      "id": "deals",
+      "title": "The deals, 1995 to 2026",
+      "lede": "Reported contract totals, not a per-year rate. The deals run for different lengths. The dashed line is the estimated cost to make the show. Years without a public price are labeled, not drawn.",
+      "blocks": [
+        {
+          "type": "deals",
+          "scale": 500,
+          "cost": {
+            "value": 250,
+            "title": "About $250 million to make, Acquired estimate",
+            "label": "Dashed line: about $250 million to make the show, Acquired's estimate. Not a reported budget.",
+            "src": ["ep"]
+          },
+          "items": [
+            {
+              "label": "1995 · First syndication",
+              "value_label": "224 stations",
+              "text": "A record 224 local stations. The dollar total for that cycle was not published.",
+              "src": ["lat1995"]
+            },
+            {
+              "label": "1998 · TBS",
+              "value": 180,
+              "value_label": "~$180M",
+              "text": "Four years, starting fall 2002. Variety reported more than $1 million an episode in cash license fees and roughly $180 million. Multichannel News reported $1 million an episode, or $180 million, starting September 2002.",
+              "src": ["variety98", "mcn"]
+            },
+            {
+              "label": "2014 · Syndication to date",
+              "value_label": "$3.1B",
+              "text": "Vulture: $3.1 billion in syndication revenue since 1995. Cumulative, not one contract, so it is not a bar.",
+              "src": ["vulture"]
+            },
+            {
+              "label": "2015 · Hulu",
+              "value_label": "Two reports",
+              "text": "Variety reported nearly $160 million, about $875,000 an episode, for a term it believed was at least five years. In 2019 the LA Times and The Hollywood Reporter described that Hulu pact as about $130 million over six years.",
+              "src": ["variety15", "lat2019", "thr2019"]
+            },
+            {
+              "label": "2019 · Netflix",
+              "value": 500,
+              "value_label": ">$500M",
+              "text": "More than $500 million for five years, worldwide. The bar is drawn at that reported floor, not a published exact price. Friends was reported at $425 million and The Office at $500 million, also five years, and those two deals were domestic.",
+              "src": ["thr2019", "lat2019"]
+            },
+            {
+              "label": "2026 · Renewals",
+              "value_label": "Not disclosed",
+              "text": "Netflix renewed for five years. The show stays on Netflix worldwide. Exclusivity is only in the US and Canada. Deadline said the new price was lower. Variety and The Hollywood Reporter said no price was disclosed. Paramount renewed US basic cable for three years. No cable price was published.",
+              "src": ["deadline", "variety26", "thr2026"]
+            }
+          ]
+        },
+        {
+          "type": "math",
+          "title": "Per episode, from the estimates",
+          "lines": [
+            "Cost: about $250 million / 180 episodes = about $1.4 million to make each one ($250 million / 180 = $1.39 million). Acquired's estimate of the cost. [[ep]]",
+            "Rerun revenue: $5.0 billion / 180 episodes = about $27.8 million of lifetime revenue per episode. The $5.0 billion is Acquired's estimate. [[ep]] The 180 is the reported episode count. [[lat2019]]"
+          ],
+          "note": "Both quotients use an estimate in the numerator. They are not a studio budget or a royalty statement."
+        }
+      ]
+    },
+    {
+      "id": "ownership",
+      "title": "Why the ownership paid off",
+      "lede": "NBC aired the show. NBC did not own the reruns.",
+      "blocks": [
+        {
+          "type": "note",
+          "text": "From 1970, fin-syn rules kept the big networks from owning the syndication of shows they licensed from studios. NBC could broadcast Seinfeld. The reruns stayed with the studio. That is the account in the Acquired episode. [[ep]]"
+        },
+        {
+          "type": "note",
+          "text": "Castle Rock owned the show. In 1993 Turner bought Castle Rock. The LA Times reported about $100 million in cash and about $100 million of debt assumed. Sony owned 44% of Castle Rock and kept the syndication rights in perpetuity, so each renewal was a sale. [[lat93]]"
+        },
+        {
+          "type": "note",
+          "text": "It is reported that Jerry Seinfeld and Larry David each held 15% of the show. The terms were never published. Acquired uses that figure. It is an estimate, not a filing. [[ep]]"
+        },
+        {
+          "type": "steps",
+          "items": [
+            {"title": "NBC", "text": "First run only. Fin-syn left the reruns with the studio.", "src": ["ep"]},
+            {"title": "Castle Rock", "text": "Owned the show. Turner bought it in 1993 for about $100 million in cash and about $100 million of debt, as the LA Times reported it.", "src": ["lat93"]},
+            {"title": "Sony", "text": "44% of Castle Rock, and the syndication rights in perpetuity. Renewals had to be sold.", "src": ["lat93"]},
+            {"title": "Jerry and Larry", "text": "Reported at 15% each. Never confirmed.", "src": ["ep"], "est": true}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "nbc",
+      "title": "NBC's side",
+      "lede": "What the network made on the first run. Separate from the rerun money above.",
+      "blocks": [
+        {
+          "type": "cards",
+          "items": [
+            {
+              "kicker": "NBC profit",
+              "big": "~$200M",
+              "title": "a year, reported, at the end",
+              "text": "CNN: about $200 million a year in profit from the show in the final years.",
+              "src": ["cnn"]
+            },
+            {
+              "kicker": "Final season",
+              "big": "$1M",
+              "title": "an episode for Jerry, reported",
+              "text": "CNN: Jerry at $1 million an episode, and each of the three co-stars at $600,000.",
+              "src": ["cnn"]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "faq",
+      "title": "How much money does Seinfeld make?",
+      "lede": "Short answers to the usual searches. Estimates stay labeled.",
+      "blocks": [
+        {
+          "type": "faq",
+          "items": [
+            {
+              "q": "How much money does Seinfeld make?",
+              "a": "There is no published live total. Acquired estimates about $5 billion in syndication, cable, streaming and DVD money to the owners through Oct 18, 2026. [[ep]] Netflix's 2019 deal was reported at more than $500 million over five years, about $100 million a year. [[thr2019]][[lat2019]] The counter at the top starts from that $5 billion estimate and adds the 2019 run rate after Oct 18, 2026. It is a model, not a live feed. The 2026 price was not disclosed. Deadline reported it as lower. [[deadline]]"
+            },
+            {
+              "q": "How much did Netflix pay for Seinfeld?",
+              "a": "In 2019, more than $500 million for five years, worldwide, as reported by The Hollywood Reporter and the LA Times. [[thr2019]][[lat2019]] In August 2026 Netflix renewed for five years. The show stays on Netflix worldwide, and the new license is exclusive only in the US and Canada. [[deadline]][[thr2026]] Deadline said the new price was lower. Variety and The Hollywood Reporter said no price was disclosed. [[variety26]][[thr2026]]"
+            },
+            {
+              "q": "How much does Jerry Seinfeld make from the show?",
+              "a": "For the final season, CNN reported Jerry at $1 million an episode and each co-star at $600,000. [[cnn]] CNN also reported NBC's offer for another season at $5 million an episode. Vulture put that offer at $110 million for the year. He said no. [[cnn]][[vulture]] His lifetime backend was never published. Acquired estimates about $750 million. [[ep]] A Wall Street Journal op-ed by the hosts, as relayed by Folha, said more than $600 million. [[folha]] Neither figure is a filing."
+            },
+            {
+              "q": "Who gets paid for Seinfeld reruns?",
+              "a": "The contracts were never published. Acquired's estimate of each rerun dollar is about 50 cents to Castle Rock / Warner, 15 cents to Sony, 15 cents to Jerry Seinfeld, 15 cents to Larry David, and 5 cents to managers Shapiro and West. [[ep]] That is an estimate. In 2019 the LA Times named WarnerMedia, CBS, Seinfeld and Larry David as sharing the Netflix revenue after Sony's distribution cut, with no percentages. [[lat2019]] In 1993 the LA Times reported Sony's 44% stake in Castle Rock and its perpetual syndication rights. [[lat93]]"
+            },
+            {
+              "q": "How many people watched Seinfeld?",
+              "a": "The finale, on May 14, 1998, drew 76.3 million viewers. [[lat98]] Variety reported a 41.3 rating and a 58 share. [[varietyfinale]] NBC sold the first 30-second spots for $2 million, against $1.3 million for that year's Super Bowl. Variety later put the average spot at $1.7 million. [[latad]][[varietyfinale]] Nearly 60 million Americans, about 20% of the US, watched at least a minute in the first half of 2026. [[deadline]][[thewrap]]"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "id": "flags",
+      "title": "Sources and flags",
+      "lede": "Every figure on this page. Verified means an independent source. Reported means a news report, not a filing. Estimate means an Acquired figure, marked above. Derived means the math is shown and the inputs are named. Episode: Acquired, Oct 18, 2026 [[ep]]. Companion charts: [[pdf]]. This page does not republish the transcript.",
+      "blocks": [
+        {
+          "type": "table",
+          "title": "Figures on this page",
+          "cols": ["Figure", "Number", "Flag", "Source"],
+          "align": "llll",
+          "rows": [
+            ["Episodes", "180, 1989–1998", "Verified", "LA Times; Deadline [[lat2019]][[deadline]]"],
+            ["Finale audience", "76.3 million viewers on May 14, 1998", "Verified", "LA Times; Variety [[lat98]][[varietyfinale]]"],
+            ["Finale rating and share", "41.3 rating; 58 share", "Verified", "Variety [[varietyfinale]]"],
+            ["Finale rank", "6th entertainment broadcast then, excluding the Super Bowl; M*A*S*H finale 106 million", "Verified", "LA Times; Variety [[lat98]][[varietyfinale]]"],
+            ["Finale ad, opening price", "$2 million for the first 30-second spots; 54% above $1.3 million", "Verified, reported", "LA Times, Feb 18, 1998 [[latad]]"],
+            ["Finale ad, average", "$1.7 million per 30-second spot", "Verified, reported", "Variety, after the finale [[varietyfinale]]"],
+            ["Super Bowl ad, 1998", "$1.3 million", "Verified, reported", "LA Times [[latad]]"],
+            ["Tenth-season offer", "$5 million an episode; Vulture: $110 million for the year; declined", "Verified, reported", "CNN; Vulture [[cnn]][[vulture]]"],
+            ["Netflix 2019", "more than $500 million; 5 years; worldwide", "Verified, reported", "THR; LA Times [[thr2019]][[lat2019]]"],
+            ["2019 run rate", "about $100 million a year", "Verified, arithmetic", "More than $500 million / 5. This is the model rate, not the 2026 contract. [[thr2019]]"],
+            ["Model per second", "about $3.169", "Derived", "$100 million / 31,557,600 seconds, rounded"],
+            ["Seconds in the model year", "31,557,600", "Derived", "365.25 days x 86,400 seconds"],
+            ["Anchor", "$5.0 billion through Oct 18, 2026", "Estimate", "Acquired [[ep]]"],
+            ["Since the finale, op-ed", "more than $4.5 billion", "Estimate", "Hosts' WSJ op-ed, as relayed by Folha [[folha]]"],
+            ["Lifetime average", "about $5.09 a second", "Derived estimate", "$5.0 billion / about 31.1 years (Sept 1995 to Oct 2026)"],
+            ["Anchor instant", "Oct 18, 2026, 00:00 Central (05:00 UTC)", "Verified date", "Episode date [[ep]]"],
+            ["H1 2026 audience", "nearly 60 million; about 20% of the US; at least one minute", "Verified", "Deadline (one minute, via Sony/Nielsen); TheWrap (nearly 60 million, about 20%) [[deadline]][[thewrap]]"],
+            ["First syndication", "224 stations, 1995", "Verified", "LA Times [[lat1995]]"],
+            ["TBS, 1998", "Variety: more than $1 million an episode and roughly $180 million; Multichannel: $1 million an episode, or $180 million; 4 years; fall 2002", "Verified, reported", "Variety; Multichannel News [[variety98]][[mcn]]"],
+            ["Syndication by 2014", "$3.1 billion since 1995", "Verified", "Vulture [[vulture]]"],
+            ["Hulu, 2015, Variety", "nearly $160 million; about $875,000 an episode; term believed to be at least 5 years", "Verified, reported", "Variety [[variety15]]"],
+            ["Hulu pact, as described in 2019", "about $130 million over six years", "Verified, reported", "LA Times; THR. A different reported figure for the same pact. [[lat2019]][[thr2019]]"],
+            ["Friends and The Office", "$425 million and $500 million; 5 years", "Verified, reported", "LA Times [[lat2019]]"],
+            ["Netflix renewal, 2026", "5 years; stays on Netflix worldwide; exclusive only in the US and Canada", "Verified", "Deadline; THR [[deadline]][[thr2026]]"],
+            ["2026 Netflix price", "not disclosed; Deadline said lower", "Verified, reported", "Lower: Deadline only. Undisclosed: Variety; THR [[deadline]][[variety26]][[thr2026]]"],
+            ["Paramount cable, 2026", "3 years; price not published", "Verified", "Deadline [[deadline]]"],
+            ["Rerun split", "50% / 15% / 15% / 15% / 5%", "Estimate", "Acquired. Terms never published. [[ep]]"],
+            ["Split per second", "about $1.58 / $0.48 / $0.48 / $0.48 / $0.16", "Derived estimate", "Shares x $3.169, cents rounded [[ep]]"],
+            ["Split of the $100M model", "$50M / $15M / $15M / $15M / $5M", "Derived estimate", "Shares x $100 million [[ep]]"],
+            ["Cost to make", "about $250 million", "Estimate", "Acquired [[ep]]"],
+            ["Cost per episode", "about $1.4 million", "Derived estimate", "$250 million / 180 [[ep]]"],
+            ["Lifetime revenue per episode", "about $27.8 million", "Derived estimate", "$5.0 billion / 180 [[ep]][[lat2019]]"],
+            ["Castle Rock sale, 1993", "about $100 million cash and about $100 million of debt", "Verified, reported", "LA Times [[lat93]]"],
+            ["Sony at the sale", "44% of Castle Rock; perpetual syndication rights", "Verified, reported", "LA Times [[lat93]]"],
+            ["2019 revenue participants", "WarnerMedia, CBS, Seinfeld and Larry David, after Sony's distribution cut; no percentages published", "Verified, reported", "LA Times. Acquired's percentages are a separate estimate. [[lat2019]]"],
+            ["Jerry and Larry", "15% each, reported, never confirmed", "Estimate", "Acquired [[ep]]"],
+            ["NBC profit, final years", "about $200 million a year", "Verified, reported", "CNN [[cnn]]"],
+            ["Final-season pay", "Jerry $1 million an episode; co-stars $600,000", "Verified, reported", "CNN [[cnn]]"],
+            ["Jerry's backend", "about $750 million", "Estimate", "Acquired [[ep]]"],
+            ["Jerry's backend, op-ed", "more than $600 million", "Estimate", "Hosts' WSJ op-ed, as relayed by Folha [[folha]]"],
+            {"cells": ["H1 vs Jan–Aug 2026 audience", "72 million (22%)", "Partial", "Not used as a fact. Nielsen figure as relayed by the hosts. [[wsj]]"], "verify": true},
+            {"cells": ["First syndication, dollar total", "over $500 million in one cycle", "Partial", "Not used as a fact. No exact total was published. [[lat1995]]"], "verify": true},
+            {"cells": ["Paramount cable price", "about $45 million", "Estimate", "Not used as a fact. Deadline confirms three years and gives no price. [[ep]]"], "verify": true}
+          ]
+        }
+      ]
+    },
+    {
+      "id": "related",
+      "title": "Related clocks",
+      "blocks": [
+        {
+          "type": "list",
+          "items": [
+            {"text": "Same kind of clock, from annual filings: [Costco](/companies/costco/), [Apple](/companies/apple/) and [Amazon](/companies/amazon/)."}
+          ]
+        }
+      ]
+    }
+  ]
+}

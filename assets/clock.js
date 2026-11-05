@@ -20,12 +20,23 @@
     if(unit==='bbl') return Math.floor(v).toLocaleString('en-US')+' bbl';
     return Math.floor(v).toLocaleString('en-US');
   }
+  function elapsed(c, m, now){
+    if(m==='open') return (now-t0)/1000;
+    if(m==='day') return 86400;
+    if(c.since){ var s=(now-Date.parse(c.since))/1000; return s>0?s:0; }
+    if(m==='year') return (now-jan1)/1000;
+    return (now-t0)/1000;
+  }
+  function amount(c, m, now){
+    var base=(m==='year'&&c.base)?c.base:0;
+    return base + c.rate*elapsed(c, m, now);
+  }
   function tick(){
     var now=Date.now();
     for(var i=0;i<nodes.length;i++){
       var n=nodes[i], c=C[n.getAttribute('data-ctr')]; if(!c) continue;
-      var m=n.getAttribute('data-mode'), s=m==='year'?(now-jan1)/1000:m==='day'?86400:(now-t0)/1000;
-      var txt=fmt(c.rate*s,c.unit,m,n.getAttribute('data-fmt')); if(n.textContent!==txt) n.textContent=txt;
+      var m=n.getAttribute('data-mode');
+      var txt=fmt(amount(c, m, now),c.unit,m,n.getAttribute('data-fmt')); if(n.textContent!==txt) n.textContent=txt;
     }
   }
   var last=0;
