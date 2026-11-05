@@ -93,7 +93,7 @@ ul.plain{margin:0;padding-left:20px;color:#c5cdd9}ul.plain li{margin:6px 0}
 .ecard p{color:#c5cdd9;margin:0 0 14px;flex:1;font-size:14.5px}.go{color:var(--gold);font-weight:600;font-size:14px}
 footer.site{border-top:1px solid var(--line);color:var(--mut);font-size:13px}.fin{max-width:1120px;margin:0 auto;padding:22px 20px 40px}.fin p{max-width:780px}
 @media (max-width:640px){
- main{padding:20px 16px 30px}.topin{padding:10px 16px}.jump{padding:0 16px 9px}
+ main{padding:20px 16px 30px}.topin{flex-wrap:wrap;row-gap:8px;padding:10px 16px}.jump{padding:0 16px 9px}
  .brand{font-size:13px}.plnav{gap:12px;font-size:13px}
  .hero{padding:20px 16px}.card,.sk{padding:16px}
  .bar{grid-template-columns:110px 1fr 70px;gap:8px;font-size:13px}
@@ -138,3 +138,23 @@ table.v td.num{white-space:nowrap}
 @media (max-width:640px){.sk.live .skw svg{min-width:1040px}}
 .loopw{overflow-x:auto}
 @media (max-width:640px){.loopw svg{min-width:640px}}
+/* deal chart, ownership steps, FAQ */
+.deals .drow{margin:0 0 16px}.dtop{display:flex;justify-content:space-between;gap:12px;font-size:14px;font-weight:700}
+.dtrack{position:relative;height:16px;margin-top:6px;background:var(--panel2);border-radius:6px}
+.dtrack i{display:block;height:100%;border-radius:6px;background:linear-gradient(90deg,#b8862d,var(--gold))}
+.dtrack i.dash{background:repeating-linear-gradient(90deg,var(--gold) 0 7px,transparent 7px 11px)}
+.dcost{position:absolute;top:-8px;bottom:-8px;width:2px;margin-left:-1px;background:repeating-linear-gradient(#fff 0 4px,transparent 4px 7px);z-index:2}
+.dsub{margin:6px 0 0;color:var(--mut);font-size:13.5px}
+.dkey{display:flex;align-items:flex-start;gap:8px;color:var(--mut);font-size:13px;margin:4px 0 0}
+.dcostkey{flex:none;width:22px;height:0;margin-top:8px;border-top:2px dashed #fff}
+.steps{list-style:none;margin:8px 0 0;padding:0}
+.steps li{display:grid;grid-template-columns:28px 1fr;gap:12px;position:relative;padding:0 0 16px}
+.steps li:before{content:"";position:absolute;left:13px;top:28px;bottom:0;width:2px;background:var(--line)}
+.steps li:last-child:before{display:none}
+.sn{width:28px;height:28px;border-radius:50%;background:#1b1609;border:1px solid #6b4d12;color:var(--gold);font:700 13px/28px var(--mono);text-align:center;position:relative;z-index:1}
+.steps li.est .sn{border-style:dashed}
+.steps p{margin:4px 0 0;color:#c5cdd9;font-size:14.5px}
+.faqs .qa{background:var(--panel);border:1px solid var(--line);border-radius:12px;padding:12px 14px;margin:8px 0}
+.faqs summary{color:var(--txt);font-weight:700}
+.faqs .qa p{margin:8px 0 0;color:#c5cdd9}
+.hero .big{word-break:normal;overflow-wrap:normal}

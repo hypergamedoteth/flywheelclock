@@ -8,12 +8,13 @@ Adding a company or commodity = drop one JSON file in data/ (see README.md). Pag
 homepage cards, nav and sitemap are all generated from data/*.json. Entries with "live": false are skipped.
 """
 import glob, hashlib, html, json, math, os, re, shutil, sys
-from datetime import date
+from datetime import date, datetime, timezone
 
 ROOT = os.path.dirname(os.path.abspath(__file__))
 BASE_URL = "https://flywheelclock.com"
 LAUNCH = "--launch" in sys.argv
-TYPES = {"company": ("companies", "Companies"), "commodity": ("commodities", "Commodities")}
+TYPES = {"company": ("companies", "Companies"), "commodity": ("commodities", "Commodities"), "show": ("shows", "Shows")}
+HUB_DESC = {"Shows": "What long-running shows still earn, with a live clock and a sourced deal history."}
 
 def read(p): return open(os.path.join(ROOT, p), encoding="utf-8").read()
 def esc(s): return html.escape(str(s), quote=True)
@@ -54,6 +55,7 @@ class Page:
     def rich(self, text):
         s = esc(text)
         s = re.sub(r"\*\*(.+?)\*\*", r"<b>\1</b>", s)
+        s = re.sub(r"\[([^\]]+)\]\((/[^)\s]+)\)", lambda m: f'<a href="{m.group(2)}">{m.group(1)}</a>', s)
         return re.sub(r"\[\[([\w-]+)\]\]", lambda m: self.cite(m.group(1)), s)
 
     def cites(self, ids): return "".join(self.cite(i) for i in ids or [])
@@ -65,25 +67,45 @@ class Page:
         return ' <span class="badge warn">verify before launch</span>' if isinstance(item, dict) and item.get("verify") else ""
 
 # ---------------------------------------------------------------- blocks
+def _per(c, b):
+    return c["annual"] / b["period_seconds"]
+
+def _usd_rate(r):
+    if r >= 100: return f"${r:,.0f}"
+    if r >= 1: return f"${r:,.3f}"
+    return f"${r:,.2f}"
+
+def _year_text(c, b):
+    """Server-rendered hero. Anchored counters show base + elapsed; others keep the per-second fallback."""
+    if not c.get("since"):
+        return None
+    since = datetime.fromisoformat(c["since"].replace("Z", "+00:00"))
+    elapsed = max((datetime.now(timezone.utc) - since).total_seconds(), 0)
+    total = c.get("base", 0) + _per(c, b) * elapsed
+    return f"${total:,.0f}"
+
 def b_ticker(P, b):
     hero = next((c for c in b["counters"] if c.get("hero")), b["counters"][0])
     rest = [c for c in b["counters"] if c is not hero]
-    per = lambda c: c["annual"] / b["period_seconds"]
+    per = lambda c: _per(c, b)
     def rate(c):
         r = per(c)
-        if c["unit"] == "usd": return f"${r:,.0f}"
+        if c["unit"] == "usd": return _usd_rate(r)
         if c["unit"] == "bbl": return f"{r:,.0f} bbl"
         if c["unit"] == "btc": return f"{r:,.4f} BTC"
         return f"{r/1000:,.3f} kg"
+    def year_text(c):
+        anchored = _year_text(c, b)
+        return anchored if anchored is not None else f"{rate(c)} a second"
     tiles = "".join(
         f'<div class="ctile"><div class="l">{esc(c["label"])}</div>'
         f'<div class="num" data-ctr="{esc(c["id"])}" data-mode="year">{rate(c)}/s</div>'
         f'<div class="s"><span class="num">{rate(c)}</span> a second · <span class="num" data-ctr="{esc(c["id"])}" data-mode="open">0</span> since you opened this page</div></div>'
         for c in rest)
     facts = "".join(f'<div><span class="l">{esc(k)}</span><span class="num">{esc(v)}</span></div>' for k, v in b.get("facts", []))
-    unit_word = "since Jan 1" 
-    return (f'<div class="hero"><div class="k">{esc(hero["label"])} {unit_word} <span class="tag">{esc(b["label"])}</span></div>'
-            f'<div class="big num" data-ctr="{esc(hero["id"])}" data-mode="year">{rate(hero)} a second</div>'
+    kicker = esc(b["kicker"]) if b.get("kicker") else f'{esc(hero["label"])} since Jan 1'
+    return (f'<div class="hero"><div class="k">{kicker} <span class="tag">{esc(b["label"])}</span></div>'
+            f'<div class="big num" data-ctr="{esc(hero["id"])}" data-mode="year">{year_text(hero)}</div>'
             f'<div class="sub"><span><span class="num" data-ctr="{esc(hero["id"])}" data-mode="open">0</span> since you opened this page</span>'
             f'<span><span class="num">{rate(hero)}</span> a second</span>'
             f'<span><span class="num" data-ctr="{esc(hero["id"])}" data-mode="day">—</span> a day</span></div>'
@@ -167,6 +189,7 @@ def b_sankey(P, b):
             P.live.append(dict(id=cid, unit="usd", rate=r))
             out.append(f'<text x="{tx:.1f}" y="{t0 + 28:.1f}" text-anchor="{anc}" class="nc"><tspan data-ctr="{cid}" data-mode="year" data-fmt="c">{money(r)}</tspan><tspan class="nr"> · {rate_txt(r)}</tspan></text>')
     svg = f'<svg viewBox="0 0 {W} {H:.0f}" role="img" aria-label="{esc(b.get("title", "Flow"))}">{"".join(out)}</svg>'
+    est = bool(b.get("estimate"))
     extra = ""
     if live:
         rows = "".join(f'<tr><td>{esc(n["label"])}{" †" if n["id"] in der else ""}</td><td class="r num">{money(n["v"] * 1e6, 2)}</td><td class="r num">{rate_txt(n["v"] * 1e6 / secs)}</td></tr>' for n in nodes.values())
@@ -174,7 +197,9 @@ def b_sankey(P, b):
         extra = (f'<p class="fine"><b>Per-second basis:</b> {esc(b.get("period_text", ""))} The counters are projections from that average, not live sales. † = derived (calculated from filed figures, math in the note).</p>'
                  f'<details><summary>Every node and flow as text ({len(nodes)} nodes, {len(links)} flows)</summary><div class="tw"><table class="v"><thead><tr><th>Node</th><th class="r">Fiscal year</th><th class="r">Per second</th></tr></thead><tbody>{rows}</tbody></table></div>'
                  f'<div class="tw"><table class="v"><thead><tr><th>Flow</th><th class="r">Fiscal year</th><th class="r">Per second</th></tr></thead><tbody>{lrows}</tbody></table></div></details>')
-    return (f'<figure class="sk{" live" if live else ""}"><figcaption>{esc(b.get("title", ""))}{" <span class=\"badge ok\">live flow</span>" if live else ""}</figcaption><p class="skhint">Scroll sideways to follow the money →</p><div class="skw">{svg}</div>'
+    badge = ' <span class="badge warn">Acquired estimate</span>' if est else (' <span class="badge ok">live flow</span>' if live else "")
+    banner = f'<div class="banner">{P.rich(b["banner"])}</div>' if b.get("banner") else ""
+    return (f'<figure class="sk{" live" if live else ""}{" est" if est else ""}"><figcaption>{esc(b.get("title", ""))}{badge}</figcaption>{banner}<p class="skhint">Scroll sideways to follow the money →</p><div class="skw">{svg}</div>'
             f'<p class="fine">{P.rich(b.get("note", ""))}</p>{extra}</figure>')
 
 def b_stats(P, b):
@@ -267,7 +292,8 @@ def b_note(P, b): return f'<p class="note">{P.rich(b["text"])}</p>'
 
 def b_list(P, b):
     lis = "".join(f"<li>{P.rich(i['text'])}{P.badge(i)}</li>" for i in b["items"] if P.keep(i))
-    return f'<div class="card"><h3>{esc(b.get("title", ""))}</h3><ul class="plain">{lis}</ul></div>'
+    title = f'<h3>{esc(b["title"])}</h3>' if b.get("title") else ""
+    return f'<div class="card">{title}<ul class="plain">{lis}</ul></div>'
 
 def b_pending(P, b):
     return f'<div class="pending"><b>Data pending.</b> {esc(b.get("text", "This section will fill in when the sourced data is ready."))}</div>'
@@ -375,6 +401,58 @@ def b_waffle(P, b):
             f'<div class="wafw">{svg}</div><div class="tw"><table class="v"><thead><tr><th>Holder</th><th class="r">{esc(unit)}</th><th class="r">Share</th><th class="r">Squares</th></tr></thead><tbody>{rows}'
             f'<tr class="tot"><td>{esc(b.get("total_label", "Total shown"))}</td><td class="r num">{fmtv(tot)}</td><td class="r num">100%</td><td class="r num">{N}</td></tr></tbody></table></div>{note}</div>')
 
+def b_deals(P, b):
+    """Annotated deal chart. Priced rows are bars; a dashed line marks an estimate (the cost to make)."""
+    items = [i for i in b["items"] if P.keep(i)]
+    scale = b["scale"]
+    cost = b.get("cost")
+    cost_pct = (cost["value"] / scale * 100) if cost else None
+    rows = []
+    for i in items:
+        top = f'<div class="dtop"><span>{esc(i["label"])}</span><span class="num">{esc(i.get("value_label", ""))}</span></div>'
+        bar = ""
+        if i.get("value") is not None:
+            w = max(0, min(100, i["value"] / scale * 100))
+            mark = f'<span class="dcost" style="left:{cost_pct:.2f}%" title="{esc(cost.get("title", ""))}"></span>' if cost_pct is not None else ""
+            dash = " dash" if i.get("est") else ""
+            bar = f'<div class="dtrack" role="img" aria-label="{esc(i.get("value_label", ""))}"><i class="{dash.strip()}" style="width:{w:.2f}%"></i>{mark}</div>'
+        sub = f'<p class="dsub">{P.rich(i["text"])}{P.cites(i.get("src"))}{P.badge(i)}</p>' if i.get("text") else ""
+        rows.append(f'<div class="drow">{top}{bar}{sub}</div>')
+    legend = ""
+    if cost:
+        legend = f'<p class="dkey"><i class="dcostkey"></i> {P.rich(cost["label"])}{P.cites(cost.get("src"))}</p>'
+    note = f'<p class="fine">{P.rich(b["note"])}</p>' if b.get("note") else ""
+    return f'<div class="card deals">{"".join(rows)}{legend}{note}</div>'
+
+def b_steps(P, b):
+    lis = []
+    shown = [st for st in b["items"] if P.keep(st)]
+    for i, st in enumerate(shown, 1):
+        est = st.get("est")
+        badge = ' <span class="badge warn">Acquired estimate</span>' if est else ""
+        lis.append(f'<li class="{"est" if est else ""}"><div class="sn">{i}</div><div><b>{esc(st["title"])}</b>{badge}'
+                   f'<p>{P.rich(st["text"])}{P.cites(st.get("src"))}{P.badge(st)}</p></div></li>')
+    return f'<ol class="steps">{"".join(lis)}</ol>'
+
+def b_faq(P, b):
+    items = []
+    for q in b["items"]:
+        if not P.keep(q): continue
+        items.append(f'<details class="qa"><summary>{esc(q["q"])}</summary><p>{P.rich(q["a"])}{P.badge(q)}</p></details>')
+    return f'<div class="faqs">{"".join(items)}</div>'
+
+def plain_text(text):
+    s = re.sub(r"\[\[([\w-]+)\]\]", "", text)
+    s = re.sub(r"\*\*(.+?)\*\*", r"\1", s)
+    s = re.sub(r"\[([^\]]+)\]\([^)]+\)", r"\1", s)
+    return re.sub(r"\s+", " ", s).strip()
+
+def counter_payload(c, period):
+    item = {"id": c["id"], "unit": c["unit"], "rate": c["annual"] / period}
+    if c.get("base"): item["base"] = c["base"]
+    if c.get("since"): item["since"] = c["since"]
+    return item
+
 BLOCKS = {k[2:]: v for k, v in globals().items() if k.startswith("b_")}
 
 def section(P, sid):
@@ -399,7 +477,7 @@ def load_entries():
     es = []
     for p in sorted(glob.glob(os.path.join(ROOT, "data", "*.json"))):
         e = json.load(open(p, encoding="utf-8"))
-        assert e.get("type") in TYPES, f"{p}: type must be company or commodity"
+        assert e.get("type") in TYPES, f"{p}: type must be one of {', '.join(TYPES)}"
         assert re.fullmatch(r"[a-z0-9-]+", e["slug"]), f"{p}: bad slug"
         if e.get("live", True): es.append(e)
     return sorted(es, key=lambda e: (e.get("order", 50), e["name"]))
@@ -490,17 +568,28 @@ def entry_page(e):
     ids = re.findall(r'<section id="([\w-]+)"><div class="sh"><h2>([^<]+)</h2>', body)
     jump = '<nav class="jump">' + "".join(f'<a href="#{i}">{t}</a>' for i, t in ids) + "</nav>"
     tickers = [bl for s in e.get("sections", []) for bl in s["blocks"] if bl["type"] == "ticker"]
-    pj = json.dumps({"counters": [dict(id=c["id"], unit=c["unit"], rate=c["annual"] / t["period_seconds"]) for t in tickers for c in t["counters"]] + P.live})
+    pj = json.dumps({"counters": [counter_payload(c, t["period_seconds"]) for t in tickers for c in t["counters"]] + P.live})
     url = BASE_URL + url_of(e); hub = TYPES[e["type"]]
-    about = ({"@type": "Corporation", "name": e.get("legal_name", e["name"]), "tickerSymbol": e["ticker_symbol"]} if e.get("ticker_symbol") else {"@type": "Thing", "name": e["name"]})
-    ld = {"@context": "https://schema.org", "@graph": [
+    if e["type"] == "show":
+        about = {"@type": "TVSeries", "name": e["name"]}
+    elif e.get("ticker_symbol"):
+        about = {"@type": "Corporation", "name": e.get("legal_name", e["name"]), "tickerSymbol": e["ticker_symbol"]}
+    else:
+        about = {"@type": "Thing", "name": e["name"]}
+    graph = [
         {"@type": "WebPage", "@id": url + "#page", "url": url, "name": f'{e["title"]} | Flywheel Clock', "description": e["description"], "inLanguage": "en",
          "isPartOf": {"@type": "WebSite", "name": "Flywheel Clock", "url": BASE_URL + "/"}, "about": about,
          "publisher": {"@type": "Organization", "name": "Hypergame", "url": BASE_URL + "/"}, "dateModified": date.today().isoformat()},
         {"@type": "BreadcrumbList", "itemListElement": [
             {"@type": "ListItem", "position": 1, "name": "Flywheel Clock", "item": BASE_URL + "/"},
             {"@type": "ListItem", "position": 2, "name": hub[1], "item": f"{BASE_URL}/{hub[0]}/"},
-            {"@type": "ListItem", "position": 3, "name": e["name"], "item": url}]}]}
+            {"@type": "ListItem", "position": 3, "name": e["name"], "item": url}]}]
+    faqs = [q for s in e.get("sections", []) for bl in s.get("blocks", []) if bl.get("type") == "faq"
+            for q in bl.get("items", []) if not (LAUNCH and q.get("verify"))]
+    if faqs:
+        graph.append({"@type": "FAQPage", "@id": url + "#faq", "mainEntity": [
+            {"@type": "Question", "name": q["q"], "acceptedAnswer": {"@type": "Answer", "text": plain_text(q["a"])}} for q in faqs]})
+    ld = {"@context": "https://schema.org", "@graph": graph}
     jl = '<script type="application/ld+json">' + json.dumps(ld).replace("</", "<\\/") + '</script>\n'
     page(url_of(e), f'{e["title"]} | Flywheel Clock', e["description"], body, active=hub[0], jump=jump, page_json=pj, jsonld=jl)
 
@@ -508,7 +597,7 @@ def card(e):
     cs = e.get("card_stat", {})
     return (f'<a class="ecard" href="{url_of(e)}"><div class="et">{esc(e["name"])}<span>{esc(e.get("ticker_symbol") or e.get("symbol") or "")}</span></div>'
             f'<div class="es"><span class="l">{esc(cs.get("label", ""))}</span><span class="num v">{esc(cs.get("value", ""))}</span><span class="n">{esc(cs.get("note", ""))}</span></div>'
-            f'<p>{esc(e.get("tagline", ""))}</p><span class="go">Open →</span></a>')
+            f'<p>{esc(e.get("card_text") or e.get("tagline", ""))}</p><span class="go">Open →</span></a>')
 
 def build():
     for d, _ in TYPES.values(): shutil.rmtree(os.path.join(ROOT, d), ignore_errors=True)
@@ -520,7 +609,7 @@ def build():
         if not mine: continue        # no "coming soon" sections: only live entries are listed
         cards = "".join(card(e) for e in mine)
         groups += f'<section><div class="sh"><h2><a href="/{d}/">{lab}</a></h2></div><div class="ecards">{cards}</div></section>'
-        page(f"/{d}/", f"{lab} | Flywheel Clock", f"How the biggest {lab.lower()} make, move and hold money, with live clocks and sourced data.",
+        page(f"/{d}/", f"{lab} | Flywheel Clock", HUB_DESC.get(lab, f"How the biggest {lab.lower()} make, move and hold money, with live clocks and sourced data."),
              f'<h1>{lab}</h1><div class="ecards">{cards}</div>', active=d)
     home = place_summary_after_clocks(fill(read("templates/home.html"), groups=groups))
     page("/", "Flywheel Clock: how big companies and commodities really work",

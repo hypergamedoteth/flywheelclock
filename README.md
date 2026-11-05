@@ -14,7 +14,8 @@ Static site, no dependencies beyond Python 3. **Local draft only. Nothing is dep
 - `templates/company.html`, `templates/commodity.html`: section order (`{{section:<id>}}`); `base.html`, `home.html`
 - `assets/style.css`, `assets/clock.js` (tickers: annual ÷ period seconds × elapsed seconds)
 - `tools/seed_*.py`: scripts that write the data files (costco, companies (apple/amazon/american-express), gold, oil, bitcoin). `tools/add_visuals.py` then adds the paired bars, live Sankey, flywheel loop and gold waffle to the company/gold files. Run seeds first, then `python3 tools/add_visuals.py && python3 build.py`.
-- Optional entry keys: `"template"` (use `templates/<name>.html` instead of the type default) and `"order"` (sort order on hub and homepage). Ticker units: usd, gold, btc, bbl.
+- Optional entry keys: `"template"` (use `templates/<name>.html` instead of the type default) and `"order"` (sort order on hub and homepage). Ticker units: usd, gold, btc, bbl. A ticker counter can set `"base"` and `"since"` (ISO time) so the hero is base + rate × seconds after that instant, instead of since Jan 1.
+- Shows use `"type": "show"` and `templates/show.html`. See `data/seinfeld.json`.
 - Generated output (committed so it can be previewed): `index.html`, `companies/`, `commodities/`, `sitemap.xml`, `robots.txt`, `404.html`
 
 ## Add a company (one file)
