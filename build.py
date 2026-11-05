@@ -449,32 +449,36 @@ def place_ticker_first(body):
     return ticker + "\n" + (lede + "\n" if lede else "") + rest
 
 def place_summary_after_clocks(body):
-    """Homepage: the clock cards come first and the summary follows them directly.
+    """Homepage: compact title, then the clock cards, then the summary under the cards.
 
-    No-op when the template is already in that order. If a future edit puts the
-    summary back above the cards, the build still publishes the clock-first order.
+    No-op when the template is already in that order. A headline left under the
+    cards is moved back above them. A summary left above the cards is moved under them.
     """
+    hm = re.search(r"<h1>.*?</h1>", body, re.S)
     lm = re.search(r'<p class="lede">.*?</p>', body, re.S)
-    if not lm:
-        return body
+    first = re.search(r'<section><div class="sh">', body)
     last = None
     for last in re.finditer(r'<div class="ecards">.*?</div></section>', body, re.S):
         pass
-    if not last:
+    if not first or not last:
         return body
-    if lm.start() >= last.end() and body[last.end():lm.start()].strip() == "":
+    title_ok = hm is not None and body[:hm.start()].strip() == "" and hm.end() <= first.start() and body[hm.end():first.start()].strip() == ""
+    lede_ok = lm is not None and lm.start() >= last.end() and body[last.end():lm.start()].strip() == ""
+    if title_ok and lede_ok:
         return body
-    lede = lm.group(0)
-    rest = body[:lm.start()] + body[lm.end():]
+    title = hm.group(0) if hm else ""
+    lede = lm.group(0) if lm else ""
+    rest = body
+    for a, b in sorted(((m.start(), m.end()) for m in (hm, lm) if m), reverse=True):
+        rest = rest[:a] + rest[b:]
+    first = re.search(r'<section><div class="sh">', rest)
     last = None
     for last in re.finditer(r'<div class="ecards">.*?</div></section>', rest, re.S):
         pass
-    if not last:
+    if not first or not last:
         return body
-    tail = rest[last.end():]
-    if not tail.startswith("\n"):
-        tail = "\n" + tail
-    return rest[:last.end()] + "\n" + lede + tail
+    cards = rest[first.start():last.end()].strip("\n")
+    return "\n".join(p for p in (title, cards, lede) if p) + "\n"
 
 def entry_page(e):
     P = Page(e)
