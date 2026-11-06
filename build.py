@@ -261,9 +261,16 @@ def b_statemap(P, b):
             f'<p class="fine">{P.rich(b.get("note", ""))}</p></div>')
 
 def b_cards(P, b):
-    cs = "".join(f'<article class="story"><div class="kick">{esc(c["kicker"])}</div><div class="big num">{esc(c["big"])}</div>'
-                 f'<h3>{esc(c["title"])}</h3><p>{P.rich(c["text"])}{P.cites(c.get("src"))}</p></article>' for c in b["items"] if P.keep(c))
-    return f'<div class="stories">{cs}</div>'
+    bits = []
+    for c in b["items"]:
+        if not P.keep(c):
+            continue
+        title = esc(c["title"])
+        if c.get("href"):
+            title = f'<a href="{esc(c["href"])}" rel="noopener noreferrer" target="_blank">{title}</a>'
+        bits.append(f'<article class="story"><div class="kick">{esc(c["kicker"])}</div><div class="big num">{esc(c["big"])}</div>'
+                    f'<h3>{title}</h3><p>{P.rich(c["text"])}{P.cites(c.get("src"))}</p></article>')
+    return f'<div class="stories">{"".join(bits)}</div>'
 
 def b_timeline(P, b):
     lis = "".join(f'<li><div class="td">{esc(i["date"])}</div><div class="tx">{P.rich(i["text"])}{P.cites(i.get("src"))}{P.badge(i)}'
@@ -453,6 +460,255 @@ def counter_payload(c, period):
     if c.get("since"): item["since"] = c["since"]
     return item
 
+def _millions_text(m):
+    """Filing millions as $X.XXX billion or $X million. m is an int number of millions."""
+    sign = "−" if m < 0 else ""
+    a = abs(int(m))
+    if a >= 1000:
+        return f"{sign}${a / 1000:,.3f} billion"
+    return f"{sign}${a:,.0f} million"
+
+def _per_sec_text(millions, secs):
+    r = int(millions) * 1e6 / secs
+    if abs(r) >= 100:
+        return f"${r:,.0f}/s"
+    return f"${r:,.2f}/s"
+
+def b_synergy(P, b):
+    """Original circular synergy chart. Not a reproduction of the 1958 illustration."""
+    secs = b["period_seconds"]
+    default = next((e["id"] for e in b["eras"] if e.get("default")), b["eras"][-1]["id"])
+    if b.get("check_millions") is not None:
+        got = sum(n.get("millions") or 0 for e in b["eras"] if e.get("money") for n in e["nodes"])
+        if got != b["check_millions"]:
+            raise SystemExit(f"synergy revenue sum {got} != {b['check_millions']}")
+    tabs, hubs, nodes, panels, notes = [], [], [], [], []
+    max_oi = max((n.get("oi_millions") or 0) for e in b["eras"] for n in e["nodes"]) or 1
+
+    def polar(i, n, radius=36):
+        a = math.radians(-90 + i * 360 / n)
+        return 50 + math.cos(a) * radius, 50 + math.sin(a) * radius
+
+    for e in b["eras"]:
+        on = e["id"] == default
+        eid = esc(e["id"])
+        tabs.append(f'<button type="button" class="syn-tab{" on" if on else ""}" role="tab" data-era="{eid}" data-open="{esc(e.get("open", "hub"))}" aria-selected="{"true" if on else "false"}">{esc(e["label"])}</button>')
+        hubs.append(
+            f'<button type="button" class="syn-hub{" picked" if on and e.get("open", "hub") == "hub" else ""}" data-era="{eid}" data-pick="hub"'
+            f'{"" if on else " hidden"}><b>{esc(e["hub"])}</b><small>{esc(e.get("hubsub", ""))}</small></button>')
+        panels.append(
+            f'<div class="syn-panel" data-era="{eid}" data-pick="hub"{"" if on and e.get("open", "hub") == "hub" else " hidden"}>'
+            f'<h3>{esc(e["hub"])}</h3><p>{P.rich(e.get("hubtext", ""))}</p></div>')
+        notes.append(f'<p class="syn-note" data-era="{eid}"{"" if on else " hidden"}>{P.rich(e.get("note", ""))}</p>')
+        nn = len(e["nodes"])
+        for i, n in enumerate(e["nodes"]):
+            x, y = polar(i, nn)
+            pick = n["id"] == e.get("open")
+            millions = n.get("millions")
+            oi = n.get("oi_millions")
+            ring = 0 if not oi else 2 + 7 * (oi / max_oi)
+            ink = {"ent": "#8a4b12", "sports": "#0c5c56", "exp": "#145c38"}.get(n.get("group"), "#5c5346")
+            chip = f'<small class="num">{esc(n["chip"])}</small>' if n.get("chip") else ""
+            exact = _millions_text(millions) if millions else n.get("figure", "")
+            label = f'{esc(n["label"])}. {exact}' if exact else esc(n["label"])
+            nodes.append(
+                f'<button type="button" class="syn-node {esc(n.get("group", "other"))}{" picked" if on and pick else ""}" data-era="{eid}" data-pick="{esc(n["id"])}"'
+                f' data-group="{esc(n.get("group", "other"))}" data-millions="{int(millions or 0)}"'
+                f' style="left:{x:.2f}%;top:{y:.2f}%;--ring:{ring:.1f}px;--ink:{ink}"'
+                f' aria-label="{label}"{"" if on else " hidden"}><b>{esc(n["label"])}</b>{chip}</button>')
+            rate = ""
+            if millions:
+                cid = f'syn-{e["id"]}-{n["id"]}'
+                P.live.append({"id": cid, "unit": "usd", "rate": int(millions) * 1e6 / secs})
+                rate = (f'<p class="syn-rate"><span class="num">{_per_sec_text(millions, secs)}</span> at the FY2025 pace'
+                        f' · <span class="num" data-ctr="{cid}" data-mode="open">0</span> since you opened this page</p>')
+            fig = ""
+            if millions:
+                badges = ""
+                if n.get("derived"):
+                    badges += ' <span class="badge warn">derived</span>'
+                fig = f'<p class="syn-fig num">{_millions_text(millions)} revenue{badges}</p>'
+                if oi:
+                    ob = ' <span class="badge warn">derived</span>' if n.get("oi_derived") else ""
+                    fig += f'<p class="syn-oi">Operating income <span class="num">{_millions_text(oi)}</span>{ob}</p>'
+                elif n.get("oi_note"):
+                    fig += f'<p class="syn-oi">{esc(n["oi_note"])}</p>'
+            elif n.get("figure"):
+                fig = f'<p class="syn-fig">{esc(n["figure"])}</p>'
+            panels.append(
+                f'<div class="syn-panel" data-era="{eid}" data-pick="{esc(n["id"])}"{"" if on and pick else " hidden"}>'
+                f'<h3>{esc(n.get("title", n["label"]))}</h3>{fig}{rate}<p>{P.rich(n["text"])}</p></div>')
+    rows = []
+    for e in b["eras"]:
+        if not e.get("money"):
+            continue
+        for n in e["nodes"]:
+            m = n.get("millions")
+            oi = n.get("oi_millions")
+            rows.append(
+                "<tr><td>" + esc(n.get("title", n["label"]))
+                + (" <span class=\"badge warn\">derived</span>" if n.get("derived") else "")
+                + "</td><td class=\"r num\">" + (_millions_text(m) if m else "not disclosed")
+                + "</td><td class=\"r num\">" + (_millions_text(oi) if oi else "—")
+                + (" <span class=\"badge warn\">derived</span>" if oi and n.get("oi_derived") else "")
+                + "</td><td class=\"r num\">" + (_per_sec_text(m, secs) if m else "—")
+                + "</td></tr>")
+    quote = ""
+    if b.get("quote"):
+        quote = f'<blockquote class="pull"><p>{esc(b["quote"])}</p><footer>{P.rich(b.get("quote_by", ""))}</footer></blockquote>'
+    script = r"""<script>
+(function(){
+  var root = document.currentScript.parentElement;
+  var svg = root.querySelector('.syn-svg');
+  var g = root.querySelector('.syn-lines');
+  var RM = window.matchMedia && matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var NS = 'http://www.w3.org/2000/svg';
+  var segs = [], parts = [], loopOn = false;
+  function era(){ return root.getAttribute('data-show'); }
+  function show(id){
+    root.setAttribute('data-show', id);
+    root.querySelectorAll('[data-era]').forEach(function(el){
+      if (el.classList.contains('syn-tab')) return;
+      el.hidden = el.getAttribute('data-era') !== id;
+    });
+    root.querySelectorAll('.syn-tab').forEach(function(t){
+      var on = t.getAttribute('data-era') === id;
+      t.classList.toggle('on', on);
+      t.setAttribute('aria-selected', on ? 'true' : 'false');
+    });
+    var tab = root.querySelector('.syn-tab[data-era="'+id+'"]');
+    var open = tab ? tab.getAttribute('data-open') : 'hub';
+    var btn = root.querySelector('[data-era="'+id+'"][data-pick="'+open+'"]');
+    if (btn) pick(btn);
+    requestAnimationFrame(draw);
+  }
+  function pick(btn){
+    var id = btn.getAttribute('data-pick'), er = btn.getAttribute('data-era');
+    root.querySelectorAll('.syn-node,.syn-hub').forEach(function(n){
+      n.classList.toggle('picked', n === btn);
+    });
+    root.querySelectorAll('.syn-panel').forEach(function(p){
+      p.hidden = !(p.getAttribute('data-pick') === id && p.getAttribute('data-era') === er);
+    });
+  }
+  function center(el, box){
+    var r = el.getBoundingClientRect();
+    return [((r.left + r.width/2) - box.left) / box.width * 100, ((r.top + r.height/2) - box.top) / box.height * 100];
+  }
+  function draw(){
+    var box = svg.getBoundingClientRect();
+    if (!box.width) return;
+    var id = era();
+    var hub = root.querySelector('.syn-hub[data-era="'+id+'"]');
+    while (g.firstChild) g.removeChild(g.firstChild);
+    segs = []; parts = [];
+    if (!hub) return;
+    var hc = center(hub, box);
+    var hr = (hub.getBoundingClientRect().width/2) / box.width * 100 + 0.8;
+    var nodes = [].slice.call(root.querySelectorAll('.syn-node[data-era="'+id+'"]'));
+    var total = 0;
+    nodes.forEach(function(n){ total += +n.getAttribute('data-millions') || 0; });
+    nodes.forEach(function(n){
+      var c = center(n, box);
+      var dx = c[0]-hc[0], dy = c[1]-hc[1], len = Math.hypot(dx, dy) || 1;
+      var nr = (n.getBoundingClientRect().width/2) / box.width * 100 + 0.6;
+      var x1 = hc[0] + dx/len*hr, y1 = hc[1] + dy/len*hr;
+      var x2 = c[0] - dx/len*nr, y2 = c[1] - dy/len*nr;
+      var line = document.createElementNS(NS, 'line');
+      line.setAttribute('x1', x1); line.setAttribute('y1', y1);
+      line.setAttribute('x2', x2); line.setAttribute('y2', y2);
+      line.setAttribute('class', 'syn-line '+n.getAttribute('data-group'));
+      g.appendChild(line);
+      var m = +n.getAttribute('data-millions') || 0;
+      if (!m) return;
+      var share = total ? m/total : 0;
+      segs.push({x1:x1,y1:y1,x2:x2,y2:y2,share:share,group:n.getAttribute('data-group'),dots:Math.max(2, Math.round(share*24))});
+    });
+    if (RM) return;
+    segs.forEach(function(s){
+      for (var i=0;i<s.dots;i++){
+        var c = document.createElementNS(NS, 'circle');
+        c.setAttribute('r', 0.85); c.setAttribute('class', 'syn-dot '+s.group);
+        g.appendChild(c);
+        parts.push({el:c, seg:s, t:i/s.dots, back:false});
+      }
+      var b = document.createElementNS(NS, 'circle');
+      b.setAttribute('r', 0.55); b.setAttribute('class', 'syn-dot back '+s.group);
+      g.appendChild(b);
+      parts.push({el:b, seg:s, t:Math.random(), back:true});
+    });
+    if (!loopOn){ loopOn = true; requestAnimationFrame(step); }
+  }
+  var last = 0;
+  function step(ts){
+    if (ts-last > 30){
+      last = ts;
+      for (var i=0;i<parts.length;i++){
+        var p = parts[i];
+        p.t += p.back ? 0.004 : (0.006 + p.seg.share*0.012);
+        if (p.t > 1) p.t -= 1;
+        var t = p.back ? 1-p.t : p.t;
+        var s = p.seg;
+        p.el.setAttribute('cx', s.x1 + (s.x2-s.x1)*t);
+        p.el.setAttribute('cy', s.y1 + (s.y2-s.y1)*t);
+      }
+    }
+    if (!RM) requestAnimationFrame(step);
+  }
+  root.addEventListener('click', function(ev){
+    var tab = ev.target.closest('.syn-tab');
+    if (tab){ show(tab.getAttribute('data-era')); return; }
+    var btn = ev.target.closest('.syn-node,.syn-hub');
+    if (btn && !btn.hidden) pick(btn);
+  });
+  var rt;
+  addEventListener('resize', function(){ clearTimeout(rt); rt = setTimeout(draw, 80); });
+  show(root.getAttribute('data-show'));
+})();
+</script>"""
+    table = (f'<details><summary>Every FY2025 spoke as text</summary><div class="tw"><table class="v"><thead><tr>'
+             f'<th>Spoke</th><th class="r">Revenue</th><th class="r">Operating income</th><th class="r">Per second</th>'
+             f'</tr></thead><tbody>{"".join(rows)}</tbody></table></div>'
+             f'<p class="fine">{P.rich(b.get("table_note", ""))}</p></details>')
+    return (f'<figure class="syn" data-show="{esc(default)}"><div class="syn-bar"><figcaption>{esc(b.get("title", ""))}</figcaption>'
+            f'<div class="syn-tabs" role="tablist">{"".join(tabs)}</div></div>'
+            f'{"".join(notes)}'
+            f'<div class="syn-stage"><svg class="syn-svg" viewBox="0 0 100 100" role="img" aria-label="{esc(b.get("title", "Synergy chart"))}">'
+            f'<ellipse class="syn-ring" cx="50" cy="50" rx="47" ry="47"/><ellipse class="syn-ring thin" cx="50" cy="50" rx="45.2" ry="45.2"/>'
+            f'<g class="syn-lines"></g></svg>{"".join(hubs)}{"".join(nodes)}</div>'
+            f'<div class="syn-detail">{"".join(panels)}</div>{quote}'
+            f'<p class="fine">{P.rich(b.get("note", ""))}</p>{table}{script}</figure>')
+
+def b_eras(P, b):
+    lis = []
+    for it in b["items"]:
+        if not P.keep(it):
+            continue
+        stamps = "".join(f'<span class="stamp {esc(s.get("kind", "bad"))}">{esc(s["text"])}</span>' for s in it.get("stamps", []))
+        paras = "".join(f"<p>{P.rich(p)}</p>" for p in it.get("paras", []))
+        lis.append(f'<li class="era {esc(it.get("kind", ""))}"><div class="era-when"><b>{esc(it["years"])}</b><span>{esc(it["name"])}</span></div>'
+                   f'<div class="era-body"><div class="stamps">{stamps}</div>{paras}</div></li>')
+    return f'<ol class="eras">{"".join(lis)}</ol>'
+
+def b_orbs(P, b):
+    mx = max(i["price"] for i in b["items"]) or 1
+    bits = []
+    for i in b["items"]:
+        if not P.keep(i):
+            continue
+        d = 72 + 108 * math.sqrt(i["price"] / mx)
+        bits.append(f'<article class="orb"><div class="ob" style="width:{d:.0f}px;height:{d:.0f}px"><span class="num">{esc(i["price_label"])}</span></div>'
+                    f'<h3>{esc(i["name"])}</h3><p class="oy">{esc(i["year"])}</p><p>{P.rich(i["text"])}{P.cites(i.get("src"))}</p></article>')
+    note = f'<p class="fine">{P.rich(b["note"])}</p>' if b.get("note") else ""
+    return f'<div class="orbs">{"".join(bits)}</div>{note}'
+
+def b_split(P, b):
+    cols = []
+    for c in b["cols"]:
+        lis = "".join(f"<li>{P.rich(i)}</li>" for i in c["items"])
+        cols.append(f'<div><h3>{esc(c["title"])}</h3><ul class="plain">{lis}</ul></div>')
+    return f'<div class="split">{"".join(cols)}</div>'
+
 BLOCKS = {k[2:]: v for k, v in globals().items() if k.startswith("b_")}
 
 def section(P, sid):
@@ -591,7 +847,7 @@ def entry_page(e):
             {"@type": "Question", "name": q["q"], "acceptedAnswer": {"@type": "Answer", "text": plain_text(q["a"])}} for q in faqs]})
     ld = {"@context": "https://schema.org", "@graph": graph}
     jl = '<script type="application/ld+json">' + json.dumps(ld).replace("</", "<\\/") + '</script>\n'
-    page(url_of(e), f'{e["title"]} | Flywheel Clock', e["description"], body, active=hub[0], jump=jump, page_json=pj, jsonld=jl)
+    page(url_of(e), f'{e["title"]} | Flywheel Clock', e["description"], body, active=hub[0], jump=jump, page_json=pj, jsonld=jl, body_class=e.get("body_class", ""))
 
 def card(e):
     cs = e.get("card_stat", {})
